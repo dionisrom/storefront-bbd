@@ -1,0 +1,42 @@
+BODY {background-color : #FFFFFF; margin: 0px; }
+A.footer:link{FONT-WEIGHT: bolder; FONT-SIZE: 10px; COLOR: #888888; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; TEXT-DECORATION: none}
+
+A.footer:visited{FONT-WEIGHT: bolder; FONT-SIZE: 10px; COLOR: #888888; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; TEXT-DECORATION: none}
+
+A.footer:hover {FONT-WEIGHT: bolder; FONT-SIZE: 10px; COLOR: #888888; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; TEXT-DECORATION: underline}
+
+A.tNav:link {FONT-WEIGHT: bold; FONT-SIZE: 10px; COLOR: #ffffff; FONT-FAMILY: verdana,arial; TEXT-DECORATION: none}
+
+A.tNav:visited {FONT-WEIGHT: bold; FONT-SIZE: 10px; COLOR: #ffffff; FONT-FAMILY: verdana,arial; TEXT-DECORATION: none}
+
+A.tNav:hover {FONT-WEIGHT: bold; FONT-SIZE: 10px; COLOR: #ffffff; FONT-FAMILY: verdana,arial; TEXT-DECORATION: underline}
+
+A.expcscheadline:link{FONT-WEIGHT: bold; FONT-SIZE: 11px; COLOR: #666666; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; TEXT-DECORATION: none}
+
+A.expcscheadline:visited{FONT-WEIGHT: bold; FONT-SIZE: 11px; COLOR: #666666; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; TEXT-DECORATION: none}
+
+A.expcscheadline:hover{FONT-WEIGHT: bold; FONT-SIZE: 11px; COLOR: #666666; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; TEXT-DECORATION: underline}
+
+.headerlinkwhite {FONT-WEIGHT: bolder; FONT-SIZE: 10px; COLOR: #ffffff; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif}
+
+.expcsc{VERTICAL-ALIGN: top; TEXT-ALIGN: left}
+
+.infocustext {FONT-WEIGHT: bolder; FONT-SIZE: 10px; COLOR: #666666; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif}
+
+.infocusheadline {FONT-WEIGHT: bolder; FONT-SIZE: 12px; COLOR: #666666; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif}
+
+.linkgrey {FONT-WEIGHT: bolder; FONT-SIZE: 10px; COLOR: #888888; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif}
+
+.footer {FONT-WEIGHT: bolder; FONT-SIZE: 10px; COLOR: #888888; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif}
+
+.searchengine {font-family:arial,sans; font-size:11.5px; width:150px; height:16px;}
+
+a:link{FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; color:#000000}
+
+a:visited{FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; color:#000000} 
+
+a:hover {FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; COLOR: #000000; TEXT-DECORATION: underline}
+
+
+
+

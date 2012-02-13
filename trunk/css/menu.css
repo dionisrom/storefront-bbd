@@ -1,0 +1,85 @@
+/* A few IE bug fixes */
+		* { margin: 0; padding: 0; }
+		* html ul ul li a { height: 100%; }
+		* html ul li a { height: 100%; }
+		* html ul ul li { margin-bottom: -1px; }
+		
+		#theMenu { width: 210px; height: 330px; margin: 20px 0; padding: 0; }
+		
+		/* Some list and link styling */
+		ul li { width: 210px; }
+		ul ul li { text-indent:10px; padding: 0; width: 200px; margin-bottom: 0; }
+		ul ul li a { display:block; color: #C00; padding: 2px 2px; text-decoration: none; font-family:Trebuchet MS; font-size:14px;}
+		ul ul li a:hover { display:block; color: #C00; padding: 2px 2px; text-indent: 15px; font-family:Trebuchet MS; font-size:14px; }
+		/* For the xtra menu 
+		ul ul ul li { border-left:none;border-bottom: 1px solid #fff5f5; padding: 0; width: 200px; margin-bottom: 0; }
+		ul ul ul li a { display:block; color: #c00; padding: 2px 2px;  text-decoration: none; font-family:Trebuchet MS; font-size:14px;}
+		ul ul ul li a:hover { display:block; color: #C00; padding: 2px 2px; text-indent: 15px; font-family:Trebuchet MS; font-size:14px;}
+		*/
+		
+		li { list-style-type: none; }
+		h2 { margin-top: 1.5em; }
+		
+		/* Header links styling */
+		h3.head a { 
+		font-size:14px; text-decoration: none; font-family:Trebuchet MS;  text-indent: 10px; font-weight:bold;
+		color: #C00;
+		display:block; 
+		/*border-top: 1px solid #aa3c33;
+		border-right: 1px solid #aa3c33;*/
+		background: url(../images/menu/oplus.gif) no-repeat; 
+		background-position: 2px 50%;
+		padding: 2px 2px;
+		}
+		h3.head a:hover { 
+		color: #C00;
+		background: url(../images/menu/oplus.gif) no-repeat; 
+		background-position: 2px 50%;
+		padding: 2px 2px;
+		text-indent:15px;
+		}
+		h3.selected a {
+		font-size:14px; text-decoration: none; font-family:Trebuchet MS;  text-indent: 10px;  font-weight:bold;
+		background: url(../images/menu/ominus.gif) no-repeat; 
+		background-position:2px 50%;
+		color: #CC0000;
+		padding: 2px 2px;
+		}
+		h3.selected a:hover { 
+		background: url(../images/menu/ominus.gif) no-repeat; 
+		background-position:2px 50%;
+		color: #CC0000;
+		padding: 2px 2px;
+		}
+		
+		/* Xtra Header links styling */
+		h4.head a {
+		font-size:14px; text-decoration: none; font-family:Trebuchet MS; text-indent: 10px;  font-weight:bold; 
+		color: #990000;
+		display:block; 
+		/*border-bottom: 1px solid #CC0000;*/
+		background: url(../images/menu/oplus.gif) no-repeat; 
+		background-position: 2px 50%;
+		padding: 2px 2px;
+		}
+		h4.head a:hover {
+		font-size:14px; text-decoration: none; font-family:Trebuchet MS; text-indent: 10px;  font-weight:bold; 
+		color: #990000;
+		background: url(../images/menu/oplus.gif) no-repeat; 
+		background-position: 2px 50%;
+		}
+		h4.selected a { 
+		font-size:14px; text-decoration: none; font-family:Trebuchet MS; text-indent: 10px; font-weight:bold; 
+		/*border-top: 1px solid #fff;
+		border-left: 1px solid #fff; */
+		background: url(../images/menu/ominus.gif) no-repeat; 
+		background-position:2px 50%;
+		color: #CC0000;
+		padding: 2px 2px;
+		}
+		h4.selected a:hover {
+		font-size:14px; text-decoration: none; font-family:Trebuchet MS; text-indent: 10px;  font-weight:bold; 
+		background: url(../images/menu/ominus.gif) no-repeat; 
+		background-position:2px 50%;
+		color: #990000;
+		}
