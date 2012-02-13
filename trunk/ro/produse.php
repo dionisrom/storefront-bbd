@@ -160,10 +160,10 @@ if ( intval($mod) == 2 )
     }
     if ( isset($_REQUEST["id_catprod"]) )
     {
-        $filtru = "WHERE id_categorie=".$_REQUEST["id_catprod"]."";
+        $filtru = "WHERE produse.id_categorie=".$_REQUEST["id_catprod"]."";
         $inputs .= "
         <input type='hidden' id='id_catprod' name='id_catprod' value='".$_REQUEST["id_catprod"]."'>";
-        $sql_produse = "SELECT id, nume, descriere, pret, reducere FROM produse ".$filtru." ORDER BY nume"; 
+        $sql_produse = "SELECT produse.id, produse.nume, produse.descriere, produse.pret, produse.reducere, categorii.denumire FROM produse LEFT JOIN categorii ON categorii.id = produse.id_categorie ".$filtru." ORDER BY produse.nume"; 
     } 
     // --------------------- PAGINARE ----------------------
     
@@ -232,14 +232,12 @@ if ( intval($mod) == 2 )
         }
         $tabel .= "
              <div class='caseta_prod'>
-                <div style='text-align:center;' title='".strtoupper($rs_produse[1])."' onmouseover=\"this.style.cursor='pointer';\" onclick=\"top.document.getElementById('main_frame').src='ro/produse.php?mod=1&id_produs=".$rs_produse[0]."';\">".$image."</div>
-                <div class='nume_prod'>".strtoupper($rs_produse[1])."</div>
-                <div>pret <span class='pret'>".$pret."</span> Lei</div>
+				<div class='categorie_prod_top'>$rs_produse[5]</div>
+                <div style='text-align:center;' title='".$rs_produse[1]."' onmouseover=\"this.style.cursor='pointer';\" onclick=\"top.document.getElementById('main_frame').src='ro/produse.php?mod=1&id_produs=".$rs_produse[0]."';\">".$image."</div>
+                <div class='nume_prod'>".substr($rs_produse[1],0,20)."</div>
+                <div class='pret_div'>pret <span class='pret'>".$pret."</span> Lei <input type='button' onmouseover=\"this.style.cursor='pointer';\" title='Detalii despre produs' class='detalii_prod' onclick=\"top.document.getElementById('main_frame').src='ro/produse.php?mod=1&id_produs=".$rs_produse[0]."';\" /></div>
                 <div class='descript_prod'>".substr(trim($rs_produse[2]),0,70)."...</div>
-                <div>Cantitate: <input type='text' class='input' id='cant_".$rs_produse[0]."' id='cant_".$rs_produse[0]."' value='0' size=8></div>
-                <br />
-                <input type='button' title='Detalii despre produs' class='submit' value='Detalii' onclick=\"top.document.getElementById('main_frame').src='ro/produse.php?mod=1&id_produs=".$rs_produse[0]."';\" />
-                <input type='button' title='Adauga in cos' class='submit' value='Adauga in cos' onclick=\"if (document.getElementById('cant_".$rs_produse[0]."').value>0) {top.document.getElementById('cos_frame').src='cos.php?adauga_prod=1&cant_prod='+document.getElementById('cant_".$rs_produse[0]."').value+'&pret_prod=".$pret_ron."&id_prod=".$rs_produse[0]."';} else {alert('Nu ati completat cantitatea dorita ! ')};\" />
+                <div class='prod_in_cos'>Cantitate: <input type='text' class='input' id='cant_".$rs_produse[0]."' id='cant_".$rs_produse[0]."' value='0' size=4 /> <input type='button' title='Adauga in cos' class='add_to_cart' onmouseover=\"this.style.cursor='pointer';\" onclick=\"if (document.getElementById('cant_".$rs_produse[0]."').value>0) {top.document.getElementById('cos_frame').src='cos.php?adauga_prod=1&cant_prod='+document.getElementById('cant_".$rs_produse[0]."').value+'&pret_prod=".$pret_ron."&id_prod=".$rs_produse[0]."';} else {alert('Nu ati completat cantitatea dorita ! ')};\" /></div>
              </div>
             ";   
     }
