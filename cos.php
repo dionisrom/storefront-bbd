@@ -62,7 +62,7 @@
   {
   	 $tabel_cos = " 
   	 <script>
-  		top.document.getElementById('continut_cos').innerHTML=\"<br /><br />Cosul este gol!<br /><br />\";
+  		top.document.getElementById('continut_cos').innerHTML=\"<br />Cosul este gol!<br /><br />\";
   	 </script>
   	 ";
   }

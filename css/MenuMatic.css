@@ -9,7 +9,7 @@
 #nav a, #subMenusContainer a{
 	text-decoration:none;
 	display:block;
-	padding:5px 10px;
+	padding:5px 5px;
 	background-color:transparent ;
     opacity: 0.90;
 	-moz-opacity: 0.90;
@@ -42,7 +42,7 @@
 #nav li a:hover,
 #nav li a:focus{
 	background-color:#transparent ;
-	color:#FFF;
+	color:#FFFF00;
 }
 
 /* Parent Sub Menu Links ---[javascript users only]*/
@@ -75,7 +75,8 @@
 	/*the 2px left & right padding lets you have a 1px border 
 	  on the ul or ol inside since overflow is set to hidden*/
 	padding:0 2px;
-	margin:0 0 0 -2px;
+	margin:0 0 0 3px;
+	background: url(../img/submenu_bar.png) repeat-y transparent;
 }
 
 

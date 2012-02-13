@@ -62,27 +62,21 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
             {
 			    $head_content = "
 			    <!--Header Start-->
-			    <div style='float: right; margin-right: 20px;'>
-				    <form id='cautare' name='cautare' method='post' action='ro/cauta.php' >
-					    <table cellpadding='0' cellspacing='0' border='0'>
-						    <tr>
-							    <td title='Cauta' onmouseover=\"this.style.cursor='pointer';\" onclick=\"document.getElementById('cautare').submit();\">
-								    <img src='images/search.png' border=0><b>Cauta</b>:&nbsp;
-							    </td>
-							    <td>
-								    <input type='text' class='input' size='40' id='caut' name='caut'>
-							    </td>
-						    </tr>
-					    </table>
-				    </form>
-			    </div>
+				<form id='cautare' name='cautare' method='post' action='ro/cauta.php' >
+					<div class='search_div'>
+						<div id='search_icon'></div>
+						<input type='text' id='caut' name='caut'>
+						<input type='button' id='btn_caut' onmouseover=\"this.style.cursor='pointer';\" onclick=\"document.getElementById('cautare').submit();\" />
+					</div>
+				</form>
 			    ";
             }
             $myPage->setHeaderContent($head_content);
 			if ( !isset($_SESSION["tipusr"]) || $_SESSION["tipusr"] > 2 )
-				$arr_menu = array("Acasa","Despre noi","Cum cumpar","Cum platesc","Livrare","Asistenta","Parteneri","Contact");
+				//$arr_menu = array("Acasa","Despre noi","Cum cumpar","Cum platesc","Livrare","Asistenta","Parteneri","Contact");
+				$arr_menu = array("Acasa","Despre noi","Parteneri","Info","Contact","Noutati","Link-uri utile","Cautare","Cariere","Testimoniale","Kinetoterapie/Colaboratori");
 			else
-				$arr_menu = array("Introducere"=>array("Producator", "Categorie", "Subcategorie", "Produs"),"Modificare"=>array("Producator", "Categorie", "Subcategorie", "Produs"),"Administrare cosuri","Administrare useri","Rapoarte","Pagini web");
+				$arr_menu = array("Introducere&nbsp;&nbsp;&nbsp;"=>array("Producator", "Categorie", "Subcategorie", "Produs"),"Modificare&nbsp;&nbsp;&nbsp;"=>array("Producator", "Categorie", "Subcategorie", "Produs"),"Administrare cosuri","Administrare useri","Rapoarte","Pagini web");
             $myPage->setMenu($arr_menu);
             //$myPage->setLogo();
 			
@@ -99,6 +93,7 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
 			//-- IFRAME End--
 			
             // -- Setez partea din stanga a body-ului START --
+			// caseta categorii de produse - START -
             $myPage->body_left_content = "";
             $categories_list = "";
             $str_cat = "SELECT denumire,id FROM categorii ORDER BY denumire";
@@ -108,7 +103,7 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
                 $categories_list .= "<li onclick=\"document.getElementById('main_frame').src='ro/produse.php?mod=2&id_catprod=".$rs_cat[1]."'\">".$rs_cat[0]."</li>";
             }
             $produse_categorii = "
-            <div class='left_produse'>
+            <div class='left_caseta'>
                 <div class='header_produse'></div>
                 <div class='caseta_content'>
                     <ul>
@@ -118,9 +113,55 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
                 <div class='caseta_bottom'></div>
             </div>
             ";
-            $myPage->body_left_content .= $produse_categorii;
+			$myPage->body_left_content .= $produse_categorii;
+			// caseta categorii de produse - STOP -
+
+			// caseta de producatori - START -
+			$producatori_list = "";
+            $str_prod = "SELECT denumire,id FROM producatori ORDER BY denumire";
+            $q_prod = mysql_query($str_prod) or die("Eroare aparuta la preluarea producatorilor!");
+            while ( $rs_prod = mysql_fetch_array($q_prod) )
+            {
+                $producatori_list .= "<li onclick=\"document.getElementById('main_frame').src='ro/produse.php?mod=2&id_catprod=".$rs_prod[1]."'\">".$rs_prod[0]."</li>";
+            }
+            $producatori = "
+            <div class='left_caseta'>
+                <div class='header_producatori'></div>
+                <div class='caseta_content'>
+                    <ul>
+                        ".$producatori_list."
+                    </ul>
+                </div>
+                <div class='caseta_bottom'></div>
+            </div>
+            ";
+            $myPage->body_left_content .= $producatori;
+			// caseta de producatori - STOP -
+
+			// caseta de lin-uri utile - START -
+			$producatori_list = "";
+            $str_prod = "SELECT denumire,id FROM producatori ORDER BY denumire";
+            $q_prod = mysql_query($str_prod) or die("Eroare aparuta la preluarea producatorilor(link-ri utile)!");
+            while ( $rs_prod = mysql_fetch_array($q_prod) )
+            {
+                $producatori_list .= "<li onclick=\"document.getElementById('main_frame').src='ro/produse.php?mod=2&id_catprod=".$rs_prod[1]."'\">".$rs_prod[0]."</li>";
+            }
+            $producatori = "
+            <div class='left_caseta'>
+                <div class='header_linkuri_utile'></div>
+                <div class='caseta_content'>
+                    <ul>
+                        ".$producatori_list."
+                    </ul>
+                </div>
+                <div class='caseta_bottom'></div>
+            </div>
+            ";
+            $myPage->body_left_content .= $producatori;
+			// caseta de link-uri utile - STOP -
             // -- Setez partea din stanga a body-ului STOP --
             
+			// Setez partea din dreapta a body-ului -START -
             // Afisez caseta de cos - STOP
             $myPage->body_right_content .= '
             <div id="cos_div">
@@ -139,14 +180,14 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
             $myPage->body_right_content .= '
                 </div>
                 <div class="cos_div_footer">
-                    <input type="button" class="submit" value="Vezi cos" onclick="document.getElementById(\'main_frame\').src=\'ro/cos_det.php\';">
+                    <input type="button" id="btn_vezi_cos" onmouseover="this.style.cursor=\'pointer\';" onclick="document.getElementById(\'main_frame\').src=\'ro/cos_det.php\';">
                     <br />
-                    <input type="button" class="submit" value="Goleste cos" onclick="document.getElementById(\'cos_frame\').src=\'cos.php?reset_cos=1\';">
+                    <input type="button" id="btn_cumpara_acum"onmouseover="this.style.cursor=\'pointer\';" onclick="document.getElementById(\'cos_frame\').src=\'cos.php?reset_cos=1\';">
                 </div>
                 <!--
                 <p align=center>
-                    <input type="button" class="submit" value="Vezi cos" onclick="document.getElementById(\'main_frame\').src=\'ro/cos_det.php\';">
-                    <input type="button" class="submit" value="Goleste cos" onclick="document.getElementById(\'cos_frame\').src=\'cos.php?reset_cos=1\';">
+                    <input id="btn_vezi_cos" type="button" onclick="document.getElementById(\'main_frame\').src=\'ro/cos_det.php\';">
+                    <input id="btn_cumpara_acum" type="button" onclick="document.getElementById(\'cos_frame\').src=\'cos.php?reset_cos=1\';">
                 </p>
                 -->
             </div>    
@@ -158,12 +199,14 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
 			{	
 				$myPage->body_right_content .= '
 				<div id="login_div">
-						'.$_SESSION["mesaj_auth"].'
-						<br />
 						<form method="post" action="logout.php" target="_self" style="margin-top:5px;">
-								<a class="login" href="javascript:;" onclick="document.getElementById(\'main_frame\').src=\'modif_cont.php\';">&nbsp;Modificare detalii cont&nbsp;</a>
-								<br />
+							'.$_SESSION["mesaj_auth"].'
+							<br />
+							<a class="login" href="javascript:;" onclick="document.getElementById(\'main_frame\').src=\'modif_cont.php\';">&nbsp;Modificare detalii cont&nbsp;</a>
+							<br />
+							<div style="width: 100%; text-align: center;">
 								<input class="submit" style="margin-top:20px;" title="Deconectare utilizator" type="submit" value="Deconectati-va" style="margin-bottom:5px" onmouseover="this.style.cursor=\'pointer\';">
+							</div>
 						</form>
 				</div>
 				';
@@ -173,7 +216,7 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
 				$myPage->body_right_content .= '
 				<div id="login_div">
 					<form id="auth_usr" name="auth_usr" method="post" action="auth.php" target="_self">
-						<input type="text" value="utilizator" class="input" id="usrid" name="usrid" style="margin-top: 48px;" onblur="if(this.value==\'\') { this.value=\'utilizator\';}" onfocus="this.value=\'\';" />
+						<input type="text" value="utilizator" class="input" id="usrid" name="usrid" onblur="if(this.value==\'\') { this.value=\'utilizator\';}" onfocus="this.value=\'\';" />
 						<input type="text" value="parola" class="input" id="passwd" name="passwd" onblur="if(this.value==\'\') {this.type=\'text\'; this.value=\'parola\';}" onfocus="this.value=\'\'; this.type=\'password\';" />
 						<input type="hidden" id="sessid" name="sessid" value="'.session_id().'">
 						<input onmouseover="this.style.cursor=\'pointer\';" class="login_button" title="Autentificare utilizator" onsubmit="document.getElementById(\'auth_usr\').submit();" type="submit" value="">
@@ -190,8 +233,9 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
 			// Afisez caseta de login - STOP
 			if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" && $_SESSION["err"] == "fara" )
 			{
-				$myPage->body_right_content .= "<div align='center' title='Istoric cumparaturi' onmouseover=\"this.style.cursor='pointer';\" onclick=\"document.getElementById('main_frame').src='ro/istoric.php';\">Istoric cumparaturi</div>";
+				$myPage->body_right_content .= "<div id='istoric_div' align='center' title='Istoric cumparaturi' onmouseover=\"this.style.cursor='pointer';\" onclick=\"document.getElementById('main_frame').src='ro/istoric.php';\">Istoric cumparaturi</div>";
 			}
+			// Setez partea din dreapta a body-ului -STOP -
             $myPage->setBodyContent($body_content);
             echo $myPage->newPage();
         ?>
