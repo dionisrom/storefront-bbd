@@ -100,7 +100,7 @@ html, body
 {
     float:left;
     color: black;
-    width: 836px;
+    width: 632px;
 }
 .footer
 {
@@ -153,6 +153,57 @@ html, body
     background: url(../img/menu_bar.png) no-repeat center left transparent;
 }
 
+.search_div
+{
+    position: relative;
+    float: right;
+    top: 60px;
+    margin-right: 8px;
+    height:22px;
+	width: 270px;
+    background: url(../img/search_div_bg.png) no-repeat center right transparent;
+}
+
+#caut
+{
+	margin-top:2px;
+	float: right;
+	height:18px;
+	width: 130px;
+	overflow: none;
+	outline: none;
+	border:0;
+	margin-right: 50px;
+	z-index: 10;
+	padding-right: 40px;
+    background: url(../img/search_input.png) no-repeat left transparent;
+}
+#btn_caut
+{
+	position: absolute;
+	right: 10px;
+	height:18px;
+	width: 66px;
+	overflow: none;
+	outline: none;
+	margin-right: 10px;
+	margin-top:2px;
+	z-index: 11;
+    background: url(../img/search_btn.png) no-repeat transparent;
+}
+#search_icon
+{
+	float: left;
+	height:12px;
+	width: 12px;
+	border: 0;
+	margin: 0;
+	padding: 0;
+	margin-top: 5px;
+	margin-left: 25px;
+	z-index: 999;
+    background: url(../img/search_icon.png) no-repeat center transparent;
+}
 .logo
 {
     border:0;
@@ -187,7 +238,7 @@ h2
 /*
 * CSS for this particular StoreFront
 */
-.left_produse
+.left_caseta
 {
     width: 202px;
     float: left;
@@ -204,6 +255,24 @@ h2
     background: url('../img/left_produse.png') no-repeat top left;
     width: 202px; 
 }
+.header_producatori
+{
+    width:100%;
+    height: 46px;
+    margin: 0;
+    padding: 0;
+    background: url('../img/left_producatori_top.png') no-repeat top left;
+    width: 202px; 
+}
+.header_linkuri_utile
+{
+    width:100%;
+    height: 46px;
+    margin: 0;
+    padding: 0;
+    background: url('../img/left_legaturi_utile_top.png') no-repeat top left;
+    width: 202px; 
+}
 .caseta_content
 {
     background: url('../img/bg_detalii_caseta.png') repeat-y center left;
@@ -217,6 +286,7 @@ h2
     padding: 0;
     width: 202px;
     height: 7px;
+	margin-bottom: 10px;
 }
 
 .caseta_content ul
@@ -252,7 +322,8 @@ h2
 
 #produse
 {
-    width: 836px;
+    width: 632px;
+	font-size: 11px;
     
 }
 .caseta_prod
@@ -293,8 +364,13 @@ h2
 	margin-top: 5px;
 	background: url("../img/caseta_login.png") no-repeat center top transparent;
 	text-align: left;
+	padding-top: 48px;
+	margin-bottom: 10px;
 }
-
+#login_div form
+{
+	margin-left: 5px;
+}
 #login_div input[type=text], #login_div input[type=password]
 {
 	background: url("../img/input_login.png") no-repeat center transparent;
@@ -306,12 +382,10 @@ h2
 	font-size: 11px;
 	float: left;
 	margin: 0;
-	margin-left: 5px;
 	overflow: hidden;
 }
 #login_div .login_button
 {
-	margin-left: 5px;
     background: url("../img/button_intra.png") no-repeat center transparent;
 	width: 106px;
 	height: 26px;
@@ -327,13 +401,14 @@ h2
 	color: #1c72af;
     font-weight: bold;
     text-decoration: none;
+	margin-left: -3px;
 }
 
 #login_div .help
 {
 	float: left;
 	text-align: left;
-	margin-left: 10px;
+	margin-left: 5px;
 }
 
 #cos_div
@@ -360,6 +435,7 @@ h2
     background: url("../img/caseta_cos_bottom_1.png") no-repeat center transparent;
     margin:0;
     padding:0;
+	margin-bottom: 10px;
 }
 #continut_cos
 {
@@ -367,4 +443,32 @@ h2
     background: url("../img/caseta_cos_middle.png") repeat-y center transparent;
     margin:0;
     padding:0;
+}
+#istoric_div
+{
+    float: left;
+    width:160px;
+    margin:0;
+    padding:0;
+    font-size: 11px;
+}
+
+#btn_vezi_cos
+{
+	background: url(../img/btn_detalii_cos.png) no-repeat transparent;
+	width: 152px;
+	height: 26px;
+	overflow: hidden;
+	border: 0;
+	outline: none;
+}
+
+#btn_cumpara_acum
+{
+	background: url(../img/btn_cumpara_acum.png) no-repeat transparent;
+	overflow: hidden;
+	width: 152px;
+	height: 26px;
+	border: 0;
+	outline: none;
 }
