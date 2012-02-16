@@ -68,7 +68,7 @@ if ( intval($mod) == 1 )
                             <td class='trans'>Producator:</td><td class='trans'>".$rs_prod[($num-2)]."</td>
                         </tr>
                         <tr>
-                            <td class='trans'>Pret:</td><td class='trans'>".$pret." RON</td>
+                            <td class='trans'>Pret:</td><td class='trans'>".$pret." Lei</td>
                         </tr>
                         <tr>
                             <td class='trans'>Categorie:</td><td class='trans'>".$rs_prod[($num-3)]."</td>

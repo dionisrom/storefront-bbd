@@ -3,9 +3,10 @@ session_start();
 include("../inc/global.php");
 if ( isset($_REQUEST["salvez"]) && $_REQUEST["salvez"] == "da" && ( $_SESSION["tipusr"] == 1 || $_SESSION["tipusr"] == 2 ) )
 {
-    $sql_prod = "INSERT INTO produse (nume,descriere,pret,id_categorie,id_producator,id_subcategorie,reducere,prima_pagina,super_oferta) VALUES (";
+    $sql_prod = "INSERT INTO produse (nume,descriere,indicatii,pret,id_categorie,id_producator,id_subcategorie,reducere,prima_pagina,super_oferta) VALUES (";
 	$sql_prod .= " '".trim($_REQUEST['nume'])."', ";
 	$sql_prod .= " '".trim($_REQUEST['descriere'])."', ";
+	$sql_prod .= " '".trim($_REQUEST['indicatii'])."', ";
 	$sql_prod .= " ".trim($_REQUEST['pret']).", ";
 	$sql_prod .= " ".trim($_REQUEST['categorie']).", ";
 	$sql_prod .= " ".trim($_REQUEST['producator']).", ";
@@ -112,6 +113,11 @@ else
 					<td>Descriere :</td>
             		<td><textarea name="descriere" id="descriere" cols="30" rows="5" class="input" ></textarea></td>
             		<td id='err_descriere' class="eroare_text"></td>
+				</tr>
+				<tr>
+					<td>Indicatii :</td>
+            		<td><textarea name="indicatii" id="indicatii" cols="30" rows="5" class="input" ></textarea></td>
+            		<td id='err_indicatii' class="eroare_text"></td>
 				</tr>
 				<tr>
 					<td>Poza produs :</td>

@@ -12,15 +12,10 @@ case "cat":
     $pag = 'mod_categorii.php';
     $mesaj_del = 'Categoria de produse a fost stearsa';
     break;
-case "af":
-    $db = "afectiuni";
-    $pag = 'mod_afectiuni.php';
-    $mesaj_del = 'Afectiunea a fost stearsa';
-    break;
-case "caf":
-    $db = "categorii_afectiuni";
-    $pag = 'mod_cat_afectiuni.php';
-    $mesaj_del = 'Categoria de afectiuni a fost stearsa';
+case "subcat":
+    $db = "subcategorii";
+    $pag = 'mod_subcategorii.php';
+    $mesaj_del = 'Subcategoria a fost stearsa';
     break;
 case "pr":
     $db = "producatori";
@@ -44,7 +39,7 @@ case "prod":
 mysql_query("DELETE FROM ".$db." WHERE id = ".$_REQUEST["id"]);
 echo "
 <script>
-    alert('".$mesaj_del." !');
+    alert('".$mesaj_del." cu succes !');
     parent.document.getElementById('frm').src='';
     parent.location.href='".$pag."';
 </script>

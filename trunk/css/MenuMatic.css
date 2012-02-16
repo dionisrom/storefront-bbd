@@ -15,17 +15,20 @@
 	-moz-opacity: 0.90;
 	filter: alpha(opacity=90);
 	border:0;
+	color: #FFF;
 }
 
 /* Just main menu links --[for non-javascript users this applies to submenu links as well]*/
 #nav a{
 	margin:0;
-	float:left;	
+	float:left;
+	color: #FFF;
 }
 
 /* Just sub menu links */
 #subMenusContainer a, #nav li li a{
 	text-align:left;
+	color: #FFF;
 }
 
 /* All menu links on hover or focus */

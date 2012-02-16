@@ -15,15 +15,23 @@ html, body
     font-size: 12px;
 	height: 100%;
 }
+
+table
+{
+	margin-right: 10px;
+}
 table td 
 {
 	font-size: 12px;
 	color: #000;
 	font-weight: bold;
+	padding-left: 5px;
+	padding-right: 5px;
 }
 #main_frame
 {
 	height: 100%;
+	overflow: hidden;
     padding: 10px;
 }
 #content, .body, .footer, .header
@@ -517,4 +525,50 @@ h2
 	height: 26px;
 	border: 0;
 	outline: none;
+}
+
+/*Din vechiul css*/
+.titlu_cap
+{
+	font-size: 15px;
+	font-style: italic;
+	text-decoration: underline;
+	font-weight: bold;
+	text-indent: 15px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+.titlu_pag
+{
+	padding-left: 40px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-size: 18px;
+	font-weight: bold;
+	text-decoration: underline;	
+}
+.titlu
+{
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 30px;
+	font-size: 17px;
+	color: #FF0000;
+	font-weight: bold;
+}
+.titlu_mic
+{
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 20px;
+	font-size: 15px;
+	color: #000;
+	font-weight: bold;
+    vertical-align: middle;
+}
+.eroare_text
+{
+	font-size:12px;
+	font-weight: 700;
+	color: #CC0000;	
 }
