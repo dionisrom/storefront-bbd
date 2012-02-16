@@ -10,13 +10,9 @@ case "cat":
     $db = "categorii";
     mysql_query("UPDATE ".$db." SET denumire = '".$_REQUEST["val"]."' WHERE id = ".$_REQUEST["id"]);
     break;
-case "af":
-    $db = "afectiuni";
-    mysql_query("UPDATE ".$db." SET denumire = '".$_REQUEST["val"]."', id_cat_afectiune = ".$_REQUEST["id_cat"]." WHERE id = ".$_REQUEST["id"]);
-    break;
-case "caf":
-    $db = "categorii_afectiuni";
-    mysql_query("UPDATE ".$db." SET denumire = '".$_REQUEST["val"]."' WHERE id = ".$_REQUEST["id"]);
+case "subcat":
+    $db = "subcategorii";
+    mysql_query("UPDATE ".$db." SET denumire = '".$_REQUEST["val"]."', id_categ = ".$_REQUEST["id_cat"]." WHERE id = ".$_REQUEST["id"]);
     break;
 case "pr":
     $db = "producatori";
@@ -70,15 +66,6 @@ case "pr":
     break;
 case "prod":
     $db = "produse";
-    $af=$_REQUEST['afectiune'];
-    $afectiuni = "";
-    if ($af)
-    {
-        foreach ($af as $t)
-        {
-            $afectiuni .= $t.',';
-        }
-    }
     $sql = "UPDATE ".$db." SET ";
     $sql .= " nume = '".$_REQUEST["nume"]."', ";
     $sql .= " descriere = '".$_REQUEST["descriere"]."', ";
@@ -86,8 +73,7 @@ case "prod":
     $sql .= " indicatii = '".$_REQUEST["indicatii"]."', ";
     $sql .= " pret = ".$_REQUEST["pret"].", ";
     $sql .= " id_producator = ".$_REQUEST["producator"].", ";
-    $sql .= " id_afectiune = '".$afectiuni."', ";
-    $sql .= " copii = '".$_REQUEST["ptcopii"]."', ";
+    $sql .= " id_subcategorie = '".$_REQUEST["subcategorie"]."', ";
     $sql .= " reducere = ".$_REQUEST["reducere"].", "; 
     $sql .= " prima_pagina = '".$_REQUEST["prima_pagina"]."', ";
     $sql .= " super_oferta = '".$_REQUEST["super_oferta"]."' ";

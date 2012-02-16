@@ -17,7 +17,7 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Test</title>
+        <title>ORTOPROTETICA</title>
         <?php
             include_once("inc/BBDWebSite.php");
             $myPage = new BBDWebSite();
@@ -47,7 +47,9 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
             elem="main_frame";
             var h = (document.getElementById(elem).contentDocument.body.scrollHeight);
             jQuery("#"+elem).height(h + 30);
-            //setTimeOut($(this).contents().find('body').width($('.body').width()-20),2000);
+            //jQuery("#"+elem).contents().find('body').width(jQuery('.body').width()-20);
+			document.getElementById(elem).style.height = document.getElementById(elem).contentWindow.document.body.offsetHeight + 'px';
+			document.getElementById(elem).contentWindow.document.body.offsetWidth = jQuery("#"+elem).width();
         }
         </script>
     </head>
@@ -88,7 +90,7 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
 			}
 			
 			$body_content = '
-				<iframe name="main_frame" id="main_frame" allowtransparency="true" onload="ResizeIframe();" style="width: 100%; height:100%;" frameborder="no" marginwidth="0" marginheight="0" src="'.$pag.'" scrolling="auto"></iframe>
+				<iframe name="main_frame" id="main_frame" allowtransparency="true" onload="ResizeIframe();" onchange="ResizeIframe();" style="width: 100%; height:100%;" frameborder="no" marginwidth="0" marginheight="0" src="'.$pag.'" scrolling="no"></iframe>
 			';
 			//-- IFRAME End--
 			

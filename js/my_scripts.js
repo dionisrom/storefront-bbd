@@ -3,12 +3,14 @@ jQuery(document).ready(function(){
     jQuery('#nav li').click(function() {
 		if (jQuery(this).find("a").hasClass("subMenuBtn"))
 		{
-			menu_text = jQuery(this).find("a").attr("title");
+			menu_text = jQuery(this).find("a").attr("title").toLowerCase();
 		}
 		else
 		{
-			menu_text = jQuery(this).find("a").text();
+			menu_text = jQuery(this).find("a").text().toLowerCase();
 		}
+		menu_text = menu_text.replace(" ","_");
+		menu_text = menu_text.replace("/","_");
         jQuery.ajax({ 
             url: './inc/ajax_functions.php',
             data: {
@@ -29,13 +31,13 @@ jQuery(document).ready(function(){
 */
 
 function toggleClassname (el, newClassname, defaultClassname) {
-
+		var re;
         if (hasClass( el, defaultClassname)){
-        var re = new RegExp("(^|s)" + defaultClassname + "(s|$)");
+        re = new RegExp("(^|s)" + defaultClassname + "(s|$)");
         el.className = el.className.replace(re, ' '+ newClassname +' ');
 
         } else if (hasClass( el, newClassname)){
-        var re = new RegExp("(^|s)" + newClassname + "(s|$)");
+        re = new RegExp("(^|s)" + newClassname + "(s|$)");
         el.className = el.className.replace(re, ' '+ defaultClassname +' ');
 
         } else
@@ -92,7 +94,7 @@ function hasClass (obj, className) {
         return re.test(obj.className);
         }
         return false;
-};
+}
 
 function autoResize(id){
     var newheight;
