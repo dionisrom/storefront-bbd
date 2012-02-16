@@ -84,7 +84,7 @@ if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" && ( $_SESSION["tipus
 	    <form target="date_prod" action="edit.php" method="post" enctype="multipart/form-data" id="form_prod" name="form_prod">
             <table cellpadding="2" cellspacing="0" border="0" style="white-space:nowrap;" width="100%">
                 <tr>
-                    <td colspan="3" align="right" onclick="document.getElementById('product_box').style.display='none';" onmouseover="this.style.cursor='pointer';">Inchide</td>
+                    <td colspan="3" align="right" onclick="document.getElementById('product_box').style.display='none';" onmouseover="this.style.cursor='pointer';"  style="padding-right:20px;">Inchide</td>
                 </tr>
                 <tr>
                     <td>Denumire *:</td>
@@ -103,7 +103,7 @@ if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" && ( $_SESSION["tipus
                 </tr>
                 <tr>
                     <td>Poza produs :</td>
-                    <td>
+                    <td valign=""><img id="poza_existenta" src='' border="0" alt="" height="60" /> &nbsp;
                     <input type="file" name="poza" id="poza" value="" class="input" name="MAX_FILE_SIZE" value="50000"/>
                     </td>
                     <td></td>
@@ -146,33 +146,6 @@ if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" && ( $_SESSION["tipus
                         </select>
                     </td>
                     <td id='err_producator' class="eroare_text"></td>
-                </tr>
-                <tr>
-                    <td>Afectiune :</td>
-                    <td>
-                        <select name="afectiune[]" id="afectiune[]" multiple="multiple" size="5" class="input" />
-                            <option>- ALEGE -</option>
-                            <?
-                            $str_cat = "SELECT id, denumire FROM afectiuni ORDER BY denumire";
-                            $q_cat = mysql_query($str_cat) or die("Eroare aparuta la preluarea afectiunilor!");
-                            while ( $rs_cat = mysql_fetch_array($q_cat) )
-                            {
-                                echo "<option value='".$rs_cat[0]."'>".$rs_cat[1]."</option>\n";
-                            }
-                            ?>
-                        </select>
-                    </td>
-                    <td id='err_afectiune' class="eroare_text"></td>
-                </tr>
-                <tr>
-                    <td>Produs pentru copii ?</td>
-                    <td>
-                        <select name="ptcopii" id="ptcopii" class="input" />
-                            <option value="nu">NU</option>
-                            <option value="da">DA</option>
-                        </select>
-                    </td>
-                    <td id='err_ptcopii' class="eroare_text"></td>
                 </tr>
                 <tr>
                     <td>Apare pe prima pagina ?</td>
