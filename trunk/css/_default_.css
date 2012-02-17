@@ -420,12 +420,12 @@ h2
 	margin-top: 5px;
 	background: url("../img/caseta_login.png") no-repeat center top transparent;
 	text-align: left;
-	padding-top: 48px;
 	margin-bottom: 10px;
 }
 #login_div form
 {
 	margin-left: 5px;
+	margin-top: 48px;
 }
 #login_div input[type=text], #login_div input[type=password]
 {
@@ -528,6 +528,38 @@ h2
 	border: 0;
 	outline: none;
 }
+
+#cele_mai_vandute_div
+{
+	float: left;
+	width:$this->rightWidthpx;
+    height: 182px;
+    margin: 0;
+    padding: 0;
+    background: url('../img/cele_mai_vandute.png') no-repeat top left;
+	margin-bottom: 10px;
+}
+
+#cele_mai_vizitate_div
+{
+	float: left;
+	width:$this->rightWidthpx;
+    height: 182px;
+    margin: 0;
+    padding: 0;
+    background: url('../img/cele_mai_vizitate.png') no-repeat top left;
+	margin-bottom: 10px;
+}
+
+
+/*Diverse css*/
+#up_small_menu
+{
+	position: absolute;
+	width: $this->widthpx;
+	top: 5px;
+}
+
 
 /*Din vechiul css*/
 .titlu_cap
