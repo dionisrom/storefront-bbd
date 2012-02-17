@@ -24,6 +24,7 @@
 		position:relative;
 		text-align:left;
 		width:696px;
+		height: 241px  !important;
 		background:#fff;		
 		margin-bottom:2em;
         line-height:180%;
@@ -34,17 +35,23 @@
 		background:#5DC9E1;
 		color:#fff;
 		}				
-	#content{
+	#content_slider{
 		position:relative;
+		height: 241px  !important;
 		}			
 
 /* Easy Slider */
-
+	#slider 
+	{
+		height: 241px;
+	}
 	#slider ul, #slider li,
 	#slider2 ul, #slider2 li{
 		margin:0;
 		padding:0;
 		list-style:none;
+		min-height: 241px;
+		height: 290px  !important;
 		}
 	#slider2{margin-top:1em;}
 	#slider li, #slider2 li{ 
@@ -53,7 +60,6 @@
 			entire slider area will adjust according to the parameters provided here
 		*/ 
 		width:696px;
-		height:241px;
 		overflow:hidden; 
 		}	
 	#prevBtn, #nextBtn,
@@ -86,7 +92,7 @@
 	ol#controls{
 		margin:1em 0;
 		padding:0;
-		height:28px;	
+		height:28px;
 		}
 	ol#controls li{
 		margin:0 10px 0 0; 

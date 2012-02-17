@@ -62,7 +62,8 @@
 			var obj = $(this); 				
 			var s = $("li", obj).length;
 			var w = $("li", obj).width(); 
-			var h = $("li", obj).height(); 
+			//var h = $("li", obj).height();
+			var h = 290;
 			var clickable = true;
 			obj.width(w); 
 			obj.height(h); 

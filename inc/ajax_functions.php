@@ -41,7 +41,11 @@ function adm_content($file)
 function getPage($page)
 {
     $return = array();
-	$return["continut"] = "ro/".$page.".html";
+	if ($page == "acasa")
+		$ext = "php";
+	else
+		$ext = "html";
+	$return["continut"] = "ro/".$page.".".$ext;
     echo json_encode($return);
 }
 
