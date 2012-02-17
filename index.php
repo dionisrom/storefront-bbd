@@ -74,6 +74,11 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
             {
 			    $head_content = "
 			    <!--Header Start-->
+				<div id='up_small_menu'>
+					<div style='margin-right: 10px; float: right; font-size: 24px; color: #6897bd; white-space: nowrap;'>021 316 96 05</div>
+					<div style='margin-right: 10px; width: 80%; float: right; font-size: 10px; text-align: right; white-space: nowrap; color: #7d7d7d;'>Pentru informatii<br />si comenzi telefonice</div>
+					<div style='width:100%; text-align: right; margin-right: 10px; float: right; font-weight: bold; font-size: 11px; color: #6897bd; white-space: nowrap;'>Acasa | Ajutor Clienti | Harta Site | Contact</div>
+				</div>
 				<form id='cautare' name='cautare' method='post' action='ro/cauta.php' >
 					<div class='search_div'>
 						<div id='search_icon'></div>
@@ -237,10 +242,27 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
 				';
 			}
 			// Afisez caseta de login - STOP
+			/*
 			if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" && $_SESSION["err"] == "fara" )
 			{
 				$myPage->body_right_content .= "<div id='istoric_div' align='center' title='Istoric cumparaturi' onmouseover=\"this.style.cursor='pointer';\" onclick=\"document.getElementById('main_frame').src='ro/istoric.php';\">Istoric cumparaturi</div>";
-			}
+			}*/
+			
+			// Afisez caseta de cele mai vandute - START
+			$myPage->body_right_content .= '
+				<div id="cele_mai_vandute_div">
+					
+				</div>
+				';
+			// Afisez caseta de cele mai vandute - STOP
+			
+			// Afisez caseta de cele mai vizitate - START
+			$myPage->body_right_content .= '
+				<div id="cele_mai_vizitate_div">
+					
+				</div>
+				';
+			// Afisez caseta de cele mai vizitate - STOP
 			// Setez partea din dreapta a body-ului -STOP -
             $myPage->setBodyContent($body_content);
             echo $myPage->newPage();
