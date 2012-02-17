@@ -19,9 +19,8 @@
             });
         });    
     </script>
-    <link href="../css/easyslider.css" rel="stylesheet" type="text/css" media="screen" />
-	<LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css">
-    
+	<LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css" />
+    <link href="../css/easyslider.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 
@@ -33,8 +32,7 @@
     $tabel = "
     <!-- slider -->
     <div id='container'>
-
-        <div id='content'>
+        <div id='content_slider'>
             <div id='slider'>
                 <ul>                
                     <li><a href=''><img src='../images/slider/01.jpg' alt='Css Template Preview' /></a></li>
@@ -47,7 +45,7 @@
         </div>
     </div>
     <!-- slider -->
-    <br />
+    <div class='.clearfix'></div>
     <div id='produse'>";
     while ($rs_produse = mysql_fetch_array($q_produse))
     {
