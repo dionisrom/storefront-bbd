@@ -3,7 +3,7 @@ session_start();
 include("../inc/global.php");
 if ( isset($_REQUEST["salvez"]) && $_REQUEST["salvez"] == "da" && ( $_SESSION["tipusr"] == 1 || $_SESSION["tipusr"] == 2 ) )
 {
-	$sql_prod = 'INSERT INTO producatori (denumire) VALUES ("'.str_replace("\'","'",$_REQUEST["denumire"]).'")';
+	$sql_prod = 'INSERT INTO producatori (denumire,link) VALUES ("'.str_replace("\'","'",$_REQUEST["denumire"]).'","'.$_REQUEST["link"].'")';
 	
 	mysql_query($sql_prod) or die("Eroare aparuta la introducerea unui producator nou! Va rugam contactati administratorul site-ului.<br>".$sql_prod);	
 	$lastid = mysql_insert_id();
@@ -56,7 +56,7 @@ else
 ?>
 <html>
 	<head>
-		<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+		<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
 		<title>Inserare producator nou</title>
         <meta http-equiv="Pragma" content="no-cache">
         <meta http-equiv="Cache-Control" content="no-cache">
@@ -75,6 +75,11 @@ else
             		<td id='err_nume' class="eroare_text"></td>
 				</tr>
 				<tr>
+					<td>Link:</td>
+            		<td><input type="text" name="link" id="link" value="" size="30" class="input" /></td>
+            		<td id='err_link' class="eroare_text"></td>
+				</tr>
+				<tr>
 					<td>Sigla producator :</td>
             		<td>
             			<input type="file" name="sigla" id="sigla" value="" class="input"/>
@@ -85,7 +90,7 @@ else
 				<tr>
 			        <td colspan="3" align="center">
 			            <input type="hidden" id="salvez" name="salvez" value="da">
-			            <input type="submit" onclick="if (document.getElementById('denumire').value==null || document.getElementById('denumire').value=='' ) {document.getElementById('err_denumire').innerHTML='Va rog introduceti denumirea producatorului!';return false;} else {document.getElementById('form_prod').submit();}" name="creaza_cont" id="creaza_cont" value="Adauga producator" class="submit" />
+			            <input type="submit" onclick="if (document.getElementById('denumire').value==null || document.getElementById('denumire').value=='' ) {document.getElementById('err_denumire').innerHTML='Va rog introduceti denumirea producatorului!';return false;} else {document.getElementById('form_prod').submit();}" id="add_producator" value="Adauga producator" class="submit" />
 			        </td>
 				</tr>
 			</table>

@@ -22,12 +22,13 @@ if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" && ( $_SESSION["tipus
         <table cellpadding="2" cellspacing="0" border="0" style="white-space:nowrap;">
             <tr>
                 <th>Denumire producator</th>
+                <th>Link</th>
                 <th>Foto</th>
                 <th width="60">Operatiuni</th>
                 <th>&nbsp;</th>
             </tr>
             <?
-            $str_categ = "SELECT id, denumire FROM producatori ORDER BY denumire";
+            $str_categ = "SELECT id, denumire, link FROM producatori ORDER BY denumire";
             $q_categ = mysql_query($str_categ) or die("Eroare preluare producatori!");
             $linie = 0;
             while ( $rs = mysql_fetch_array($q_categ) )
@@ -43,7 +44,10 @@ if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" && ( $_SESSION["tipus
             ?>
             <tr class="<?=$class?>">
                 <td>
-                    <input onblur="this.className='edit';this.setAttribute('readonly','readonly');document.getElementById('frm').src='edit.php?db=pr&id=<?=$rs[0]?>&val='+this.value;" class="edit" type="text" readonly="readonly" name="denumire_<?=$rs[0]?>" id="denumire_<?=$rs[0]?>" value="<?=$rs[1]?>" style="width:350px;"/>
+                    <input onblur="this.className='edit';this.setAttribute('readonly','readonly');document.getElementById('frm').src='edit.php?db=pr&id=<?=$rs[0]?>&den='+this.value;" class="edit" type="text" readonly="readonly" name="denumire_<?=$rs[0]?>" id="denumire_<?=$rs[0]?>" value="<?=$rs["denumire"]?>" style="width:350px;"/>
+                </td>
+                <td>
+                    <input onblur="this.className='edit';this.setAttribute('readonly','readonly');document.getElementById('frm').src='edit.php?db=pr&id=<?=$rs[0]?>&link='+this.value;" class="edit" type="text" readonly="readonly" name="link_<?=$rs[0]?>" id="link_<?=$rs[0]?>" value="<?=$rs["link"]?>" style="width:350px;"/>
                 </td>
                 <td id="poza_<?=$rs[0]?>">
                     <?
@@ -57,17 +61,6 @@ if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" && ( $_SESSION["tipus
                     	{
                     		echo "<img border=0 src='../images/producatori/".$rs[0].".gif' height=40px width=40px class='corner iradius10 ishadow25'>";
                     	}
-                    	else
-                    	{
-                    		/*echo '
-                    		<form id="frm_'.$rs[0].'" name="frm_'.$rs[0].'" method="post" enctype="multipart/form-data" target="frm" action="edit.php">
-                    			<input type="file" name="sigla_'.$rs[0].'" id="sigla_'.$rs[0].'" value="" class="input"/>
-                    			<input type="hidden" id="db" name="db" value="pr">
-                    			<input type="hidden" id="id" name="id" value="'.$rs[0].'">
-                    			<input type="hidden" id="fis" name="fis" value="sigla_'.$rs[0].'">
-                    		';
-                            */
-                    	}
                     }
                     $form_ = '
                     <form id="frm_'.$rs[0].'" name="frm_'.$rs[0].'" method="post" enctype="multipart/form-data" action="edit.php">
@@ -75,7 +68,6 @@ if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" && ( $_SESSION["tipus
                         <input type="hidden" id="db" name="db" value="pr">
                         <input type="hidden" id="id" name="id" value="'.$rs[0].'">
                         <input type="hidden" id="fis" name="fis" value="sigla_'.$rs[0].'">
-                        <!--<input type="button" class="submit" onmouseover=\'this.style.cursor="pointer";\' onclick="document.getElementById(\'frm_'.$rs[0].'\').submit();" value="Modifica foto">-->
                     ';
                     ?>
                 </td>
