@@ -16,9 +16,13 @@ case "subcat":
     break;
 case "pr":
     $db = "producatori";
-    if ( isset($_REQUEST["val"]) && $_REQUEST["val"] != null && $_REQUEST["val"] != "" ) 
+    if ( isset($_REQUEST["den"]) && $_REQUEST["den"] != null && $_REQUEST["den"] != "" ) 
     {
-    	mysql_query("UPDATE ".$db." SET denumire = '".$_REQUEST["val"]."' WHERE id = ".$_REQUEST["id"]);
+    	mysql_query("UPDATE ".$db." SET denumire = '".$_REQUEST["den"]."' WHERE id = ".$_REQUEST["id"]);
+	}
+    if ( isset($_REQUEST["link"]) && $_REQUEST["link"] != null && $_REQUEST["link"] != "" ) 
+    {
+    	mysql_query("UPDATE ".$db." SET link = '".$_REQUEST["link"]."' WHERE id = ".$_REQUEST["id"]);
 	}
     if ( isset($_REQUEST["fis"]) && $_REQUEST["fis"] != "")
     {

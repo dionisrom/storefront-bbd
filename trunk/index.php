@@ -13,7 +13,7 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
     session_unregister("merge");
 }
 ?>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -42,15 +42,25 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
         	}
         </style>
         <script>
-        function ResizeIframe()
-        {
-            elem="main_frame";
-            var h = (document.getElementById(elem).contentDocument.body.scrollHeight);
-            jQuery("#"+elem).height(h + 30);
-            //jQuery("#"+elem).contents().find('body').width(jQuery('.body').width()-20);
-			document.getElementById(elem).style.height = document.getElementById(elem).contentWindow.document.body.offsetHeight + 'px';
-			document.getElementById(elem).contentWindow.document.body.offsetWidth = jQuery("#"+elem).width();
-        }
+			jQuery(function()
+			{
+				var iFrames = jQuery('#main_frame');
+				var innerDoc = (iFrames.get(0).contentDocument) ? iFrames.get(0).contentDocument : iFrames.get(0).contentWindow.document;
+				function iResize() 
+				{
+					iFrames.height(0);
+					if (document.getElementById("main_frame").contentWindow.document.readyState=="complete")
+					{
+						innerDoc = (iFrames.get(0).contentDocument) ? iFrames.get(0).contentDocument : iFrames.get(0).contentWindow.document;
+						iFrames.height(innerDoc.body.scrollHeight + 35);
+					}
+					else
+					{
+						iResize();
+					}
+				}
+				iFrames.load(iResize);
+			});
         </script>
     </head>
     <body>
@@ -90,7 +100,7 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
 			}
 			
 			$body_content = '
-				<iframe name="main_frame" id="main_frame" allowtransparency="true" onload="ResizeIframe();" onchange="ResizeIframe();" style="width: 100%; height:100%;" frameborder="no" marginwidth="0" marginheight="0" src="'.$pag.'" scrolling="no"></iframe>
+				<iframe name="main_frame" id="main_frame" allowtransparency="true" style="width:100%;" frameborder="0" marginwidth="0" marginheight="0" src="'.$pag.'" scrolling="no"></iframe>
 			';
 			//-- IFRAME End--
 			
@@ -102,7 +112,7 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
             $q_cat = mysql_query($str_cat) or die("Eroare aparuta la preluarea categoriilor de produse!");
             while ( $rs_cat = mysql_fetch_array($q_cat) )
             {
-                $categories_list .= "<li onclick=\"document.getElementById('main_frame').src='ro/produse.php?mod=2&id_catprod=".$rs_cat[1]."'\">".$rs_cat[0]."</li>";
+                $categories_list .= "<li onclick=\"document.getElementById('main_frame').src='ro/produse.php?mod=2&id_catprod=".$rs_cat["id"]."'\">".$rs_cat["denumire"]."</li>";
             }
             $produse_categorii = "
             <div class='left_caseta'>
@@ -124,7 +134,7 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
             $q_prod = mysql_query($str_prod) or die("Eroare aparuta la preluarea producatorilor!");
             while ( $rs_prod = mysql_fetch_array($q_prod) )
             {
-                $producatori_list .= "<li onclick=\"document.getElementById('main_frame').src='ro/produse.php?mod=2&id_catprod=".$rs_prod[1]."'\">".$rs_prod[0]."</li>";
+                $producatori_list .= "<li onclick=\"document.getElementById('main_frame').src='ro/produse.php?mod=2&id_pr=".$rs_prod["id"]."'\">".$rs_prod["denumire"]."</li>";
             }
             $producatori = "
             <div class='left_caseta'>
@@ -140,13 +150,13 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
             $myPage->body_left_content .= $producatori;
 			// caseta de producatori - STOP -
 
-			// caseta de lin-uri utile - START -
+			// caseta de link-uri utile - START -
 			$producatori_list = "";
-            $str_prod = "SELECT denumire,id FROM producatori ORDER BY denumire";
+            $str_prod = "SELECT denumire,link FROM producatori ORDER BY denumire";
             $q_prod = mysql_query($str_prod) or die("Eroare aparuta la preluarea producatorilor(link-ri utile)!");
             while ( $rs_prod = mysql_fetch_array($q_prod) )
             {
-                $producatori_list .= "<li onclick=\"document.getElementById('main_frame').src='ro/produse.php?mod=2&id_catprod=".$rs_prod[1]."'\">".$rs_prod[0]."</li>";
+                $producatori_list .= "<li onclick=\"window.open('".$rs_prod["link"]."')\">".$rs_prod["denumire"]."</li>";
             }
             $producatori = "
             <div class='left_caseta'>
