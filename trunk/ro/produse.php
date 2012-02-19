@@ -1,6 +1,6 @@
 <?
 session_start();
-include("../inc/global.php");
+include_once("../inc/global.php");
 if ( isset($_REQUEST["mod"]) && $_REQUEST["mod"] != null && $_REQUEST["mod"] != "" )
 {
     $mod = $_REQUEST["mod"];
@@ -15,9 +15,19 @@ if ( intval($mod) == 1 )
     $q_prod = mysql_query($str_prod) or die ("Eroare preluare produse. ".mysql_error());
     $num = mysql_num_fields($q_prod);
     $table = "";
-    while ( $rs_prod = mysql_fetch_array($q_prod) )
+    if (mysql_num_rows($q_prod) > 0 )
     {
-        $imagine = "<img src='../images/no_foto.jpg' border=0 width=100 height=160 />";
+		// Introducere vizionare pentru articolul curent - START
+		if (isset($_SESSION["id_user"]))
+			$id_user = $_SESSION["id_user"];
+		else
+			$id_user = 0;
+		$sql_vizionare = "INSERT INTO vizionari (id_prod, id_user) VALUES (".$_REQUEST["id_produs"].",".$id_user.")";
+		$q_ins_viz = mysql_query($sql_vizionare) or die ("Eroare introducere vizionare. ".mysql_error($q_ins_viz)."<br />".$sql_vizionare);
+		// Introducere vizionare pentru articolul curent - STOP
+		
+		$rs_prod = mysql_fetch_array($q_prod);
+		$imagine = "<img src='../images/no_foto.jpg' border=0 width=100 height=160 />";
         if( file_exists("../images/produse/".$rs_prod["id"].".jpg") )
             $imagine = "<img src='../images/produse/".$rs_prod["id"].".jpg' title='Apasati pentru a mari imaginea !' onclick=\"window.open(this.src);\" border=0 width=100 height=160 />";
         if( file_exists("../images/produse/".$rs_prod["id"].".gif") )

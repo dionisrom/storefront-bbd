@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("inc/global.php"); 
+include_once("inc/global.php"); 
 if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
 {
     session_unregister("user");
@@ -16,7 +16,7 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>ORTOPROTETICA</title>
         <?php
             include_once("inc/BBDWebSite.php");
@@ -51,6 +51,25 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
 					iFrames.height(0);
 					if (document.getElementById("main_frame").contentWindow.document.readyState=="complete")
 					{
+						if (document.getElementById("main_frame").src.search("produse") > 0)
+						{
+							jQuery.ajax({ 
+								url: 'inc/ajax_functions.php',
+								data: {
+									action : "statistici"
+								},
+								type: 'post',
+								dataType : 'json',
+								success: function(output) {
+									jQuery("#cele_mai_vizitate_div").html(output.continut_vizitate);
+									jQuery("#cele_mai_vandute_div").html(output.continut_vandute);
+									
+								},
+								errors: function(output) {
+									alert(output.error_msg);
+								}
+							});
+						}
 						innerDoc = (iFrames.get(0).contentDocument) ? iFrames.get(0).contentDocument : iFrames.get(0).contentWindow.document;
 						iFrames.height(innerDoc.body.scrollHeight + 35);
 					}
