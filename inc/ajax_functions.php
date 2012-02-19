@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 if(isset($_POST['action']) && !empty($_POST['action'])) {
     $action = strtolower($_POST['action']);
@@ -26,6 +27,7 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
 		case 'administrare cosuri'	: adm_content("adm_cosuri");break;
 		case 'administrare useri'	: adm_content("adm_users");break;
 		case 'pagini web'			: adm_content("adm_pagini");break;
+		case 'statistici'			: getStatistici();break;
 		default						: getPage($action); break;
     }
     
@@ -49,4 +51,26 @@ function getPage($page)
     echo json_encode($return);
 }
 
+function getStatistici()
+{
+	$return = array();
+	$output_vandute = "<ol>";
+	$output_vandute .= "</ol>";
+	$return["error_msg"] = "";
+	include_once("../inc/global.php");
+	$sql_vizitate = "SELECT count(a.id) as vizite, b.nume as produs FROM vizionari a, produse b WHERE b.id = a.id_prod GROUP BY a.id_prod ORDER BY vizite desc LIMIT 0,5";
+	//$return["error_msg"] = ;
+	$q_vizitate = mysql_query($sql_vizitate) or die("Eroare preluare cele mai vizitate produse!". mysql_error());
+	$output_vizitate = "<ol>";
+	while ($row_vizitate = mysql_fetch_array($q_vizitate))
+	{
+		$output_vizitate .= "<li>".substr(ucfirst($row_vizitate[1]),0,20)."</li>";
+	}
+	$output_vizitate .= "</ol>";
+	$return["continut_vizitate"] = $output_vizitate;
+	
+	$return["continut_vandute"] = $output_vandute;
+    echo json_encode($return);
+	
+}
 ?>

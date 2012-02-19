@@ -538,6 +538,8 @@ h2
     padding: 0;
     background: url('../img/cele_mai_vandute.png') no-repeat top left;
 	margin-bottom: 10px;
+	font-size: 11px;
+	text-align: left;
 }
 
 #cele_mai_vizitate_div
@@ -549,8 +551,14 @@ h2
     padding: 0;
     background: url('../img/cele_mai_vizitate.png') no-repeat top left;
 	margin-bottom: 10px;
+	font-size: 11px;
+	text-align: left;
 }
 
+#cele_mai_vandute_div ol, #cele_mai_vizitate_div ol
+{
+	margin-top: 48px;
+}
 
 /*Diverse css*/
 #up_small_menu
