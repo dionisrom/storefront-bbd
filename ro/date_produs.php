@@ -6,11 +6,12 @@ if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" )
      $sql_date = "SELECT * FROM produse WHERE id=".$_REQUEST["id"];
      $q_date = mysql_query($sql_date);
      $rs_date = mysql_fetch_array($q_date);
-     $str_arr = split("\r",$rs_date["descriere"]) ;
-     $str_des = "";
-     for ($i=0; $i<count($str_arr); $i++)
-        $str_des .= $str_arr[$i]."\\n\\";
-     $str_des = substr($str_des,0,(strlen($str_des)-3));
+     //$str_arr = split("\r",$rs_date["descriere"]) ;
+//     $str_des = "";
+     //for ($i=0; $i<count($str_arr); $i++)
+        //$str_des .= $str_arr[$i]."\\n\\";
+     //$str_des = substr($str_des,0,(strlen($str_des)-3));
+	 $str_des = str_replace("\n", "\\n", $rs_date["descriere"]);
      $str_arr1 = split("\r",$rs_date["indicatii"]) ;
      $str_ind = "";
      for ($i=0; $i<count($str_arr1); $i++)

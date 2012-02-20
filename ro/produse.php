@@ -27,11 +27,11 @@ if ( intval($mod) == 1 )
 		// Introducere vizionare pentru articolul curent - STOP
 		
 		$rs_prod = mysql_fetch_array($q_prod);
-		$imagine = "<img src='../images/produse/no_foto.jpg' border=0 width=100 height=160 />";
+		$imagine = "<img src='../images/produse/no_foto.jpg' border=0 height=160 />";
         if( file_exists("../images/produse/".$rs_prod["id"].".jpg") )
-            $imagine = "<img src='../images/produse/".$rs_prod["id"].".jpg' title='Apasati pentru a mari imaginea !' onclick=\"window.open(this.src);\" border=0 width=100 height=160 />";
+            $imagine = "<img src='../images/produse/".$rs_prod["id"].".jpg' title='Apasati pentru a mari imaginea !' onclick=\"window.open(this.src);\" border=0 height=160 />";
         if( file_exists("../images/produse/".$rs_prod["id"].".gif") )
-            $imagine = "<img src='../images/produse/".$rs_prod["id"].".gif' title='Apasati pentru a mari imaginea !' onclick=\"window.open(this.src);\" border=0 width=100 height=160 />";
+            $imagine = "<img src='../images/produse/".$rs_prod["id"].".gif' title='Apasati pentru a mari imaginea !' onclick=\"window.open(this.src);\" border=0 height=160 />";
         if ( $rs_prod["reducere"] > 0 )
         {
             $pret = "<font style='text-decoration: line-through;'>".$rs_prod["pret"]."</font>&nbsp;&nbsp;".$rs_prod["pret"]*((100-$rs_prod["reducere"])/100);
@@ -72,7 +72,7 @@ if ( intval($mod) == 1 )
                             <td class='trans'>Cantitate:</td>
                             <td class='trans'>
                             	<input type='text' class='input' id='cant_".$rs_prod["id"]."' id='cant_".$rs_prod["id"]."' value='0' size=8>
-                            	<input type='button' title='Adauga in cos' class='submit' value='Adauga in cos' onclick=\"if (document.getElementById('cant_".$rs_prod["id"]."').value>0) {top.document.getElementById('cos_frame').src='cos.php?adauga_prod=1&cant_prod='+document.getElementById('cant_".$rs_prod["id"]."').value+'&pret_prod=".$pret."&id_prod=".$rs_prod["id"]."';} else {alert('Nu ati completat cantitatea dorita ! ')};\">
+                            	<input type='button' title='Adauga in cos' class='add_to_cart' onmouseover=\"this.style.cursor='pointer';\" onclick=\"if (document.getElementById('cant_".$rs_prod["id"]."').value>0) {top.document.getElementById('cos_frame').src='cos.php?adauga_prod=1&cant_prod='+document.getElementById('cant_".$rs_prod["id"]."').value+'&pret_prod=".$pret."&id_prod=".$rs_prod["id"]."';} else {alert('Nu ati completat cantitatea dorita ! ')};\">
                             </td>
                         </tr>
                     </table>
@@ -238,7 +238,7 @@ $table .= "</table>";
             font-size: 12px;
             font-weight: 200;
             vertical-align: top;
-            background: url(../images/bg_galben.png);
+            background: url(../img/gray_bg_tr.png);
             background-repeat: repeat;
             color:#000;
             text-align: justify;

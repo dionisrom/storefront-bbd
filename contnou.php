@@ -34,7 +34,7 @@ if ( isset($_REQUEST["salvez"]) )
         'Reply-To: webmaster@pretuimsanatatea.ro' . "\n" .
         'X-Mailer: PHP/' . phpversion().
         'MIME-Version: 1.0' . "\n".
-        'Content-type: text/html; charset=iso-8859-1' . "\n";
+        'Content-type: text/html; charset=utf-8' . "\n";
         $rezultmail = mail($_REQUEST["email"],"Validare cont utilizator nou site Ortoprotetica","Bine ati venit pe site-ul firmei SC Ortoprotetica .<br>Pentru a finaliza autentificarea folositi urmatorul link <a href='http://www.pretuimsanatatea.ro/?validare=1&username=".$_REQUEST["username"]."&cod_validare=".$cod."'>VALIDARE (http://www.pretuimsanatatea.ro/?validare=1&username=".$_REQUEST["username"]."&cod_validare=".$cod.")</a>.<br> Va multumim !",$headers) ;
         if ( $rezultmail )
         {

@@ -26,7 +26,7 @@ $tabel .= "</tabel>";
 
 <html>
 	<head>
-		<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+		<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
 		<title>Afisare categorii de produse</title>
         <meta http-equiv="Pragma" content="no-cache">
         <meta http-equiv="Cache-Control" content="no-cache">

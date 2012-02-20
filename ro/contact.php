@@ -22,7 +22,7 @@ if ( isset($_REQUEST["salvez"]) && $_REQUEST["salvez"] == "da" && $verif_cod )
     'Reply-To: webmaster@pretuimsanatatea.ro' . "\r\n" .
     'X-Mailer: PHP/' . phpversion().
     'MIME-Version: 1.0' . "\r\n".
-    'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+    'Content-type: text/html; charset=utf-8' . "\r\n";
     mail("webmaster@pretuimsanatatea.ro","Mesaj din pagina de contact ".date("d.m.Y H:i:s",time()),"De la: ".$_REQUEST["nume"]."<br>Email: ".$_REQUEST["email"]."<br>Telefon: ".$_REQUEST["telefon"]."<hr>Mesaj:<br>".$_REQUEST["mesaj"],$headers);
        	
     echo '
@@ -54,7 +54,7 @@ else
 ?>
 <html>
 	<head>
-		<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+		<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
 		<title>Pagina de contact</title>
         <meta http-equiv="Pragma" content="no-cache">
         <meta http-equiv="Cache-Control" content="no-cache">

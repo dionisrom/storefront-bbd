@@ -60,10 +60,10 @@ if ( isset($_REQUEST["passwdnou"]) && $_REQUEST["passwdnou"] == "da" && isset($_
 	    'Reply-To: webmaster@pretuimsanatatea.ro' . "\n" .
 	    'X-Mailer: PHP/' . phpversion().
 	    'MIME-Version: 1.0' . "\n".
-		'Content-type: text/html; charset=iso-8859-1' . "\n";
+		'Content-type: text/html; charset=utf-8' . "\n";
 		$header1 =  'X-Mailer: PHP/' . phpversion().
 	    'MIME-Version: 1.0' . "\n".
-		'Content-type: text/html; charset=iso-8859-1' . "\n";
+		'Content-type: text/html; charset=utf-8' . "\n";
 		mail($_REQUEST["email"],"Resetare parola site Ortoprotetica (www.pretuimsanatatea.ro)","Noua parola pentru a va putea autentifica pe site-ul www.pretuimsanatatea.ro este <b><i>".$parola."</i></b>",$headers) ;
 		mail("webmaster@pretuimsanatatea.ro","Resetare parola site Ortoprotetica (www.pretuimsanatatea.ro)","Userul cu emailul <b><i>".$_REQUEST["email"]." si-a schimbat parola ".date("d.m.Y H:i:s", time() )." ! ",$header1) ;
 		echo'

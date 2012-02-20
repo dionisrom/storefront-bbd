@@ -6,7 +6,7 @@ if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" && ( $_SESSION["tipus
 ?>
 <html>
     <head>
-        <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+        <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
         <title>Modificare producator</title>
         <meta http-equiv="Pragma" content="no-cache">
         <meta http-equiv="Cache-Control" content="no-cache">
@@ -44,10 +44,10 @@ if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" && ( $_SESSION["tipus
             ?>
             <tr class="<?=$class?>">
                 <td>
-                    <input onblur="this.className='edit';this.setAttribute('readonly','readonly');document.getElementById('frm').src='edit.php?db=pr&id=<?=$rs[0]?>&den='+this.value;" class="edit" type="text" readonly="readonly" name="denumire_<?=$rs[0]?>" id="denumire_<?=$rs[0]?>" value="<?=$rs["denumire"]?>" style="width:350px;"/>
+                    <input onblur="this.className='edit';this.setAttribute('readonly','readonly');document.getElementById('frm').src='edit.php?db=pr&id=<?=$rs[0]?>&den='+this.value;" class="edit" type="text" readonly="readonly" name="denumire_<?=$rs[0]?>" id="denumire_<?=$rs[0]?>" value="<?=$rs["denumire"]?>" style="width:200px;"/>
                 </td>
                 <td>
-                    <input onblur="this.className='edit';this.setAttribute('readonly','readonly');document.getElementById('frm').src='edit.php?db=pr&id=<?=$rs[0]?>&link='+this.value;" class="edit" type="text" readonly="readonly" name="link_<?=$rs[0]?>" id="link_<?=$rs[0]?>" value="<?=$rs["link"]?>" style="width:350px;"/>
+                    <input onblur="this.className='edit';this.setAttribute('readonly','readonly');document.getElementById('frm').src='edit.php?db=pr&id=<?=$rs[0]?>&link='+this.value;" class="edit" type="text" readonly="readonly" name="link_<?=$rs[0]?>" id="link_<?=$rs[0]?>" value="<?=$rs["link"]?>" style="width:200px;"/>
                 </td>
                 <td id="poza_<?=$rs[0]?>">
                     <?

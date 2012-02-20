@@ -474,6 +474,7 @@ h2
     margin:0;
     padding:0;
     font-size: 11px;
+	margin-top: 5px;
 }
 
 .cos_div_header
@@ -560,12 +561,81 @@ h2
 	margin-top: 48px;
 }
 
+#last_prods_container
+{
+	margin-top: 10px;
+	height: 180px;
+	background: url('../img/ultimele_produse.png') no-repeat left top transparent;
+	width: 580px;
+	float: left;
+}
+.last_prod
+{
+	float: left;
+	text-align: center;
+	margin-top: 38px;
+	padding-left: 5px;
+	width: 110px;
+	height: 124px;
+	background: url('../img/last_prod.png') no-repeat left top transparent;
+}
+.last_prod img
+{
+	margin-top: 5px;
+	border: 0;
+	height: 60px;
+}
+.last_prod .info
+{
+	width: 110px;
+	float: left;
+	text-align: left;
+	font-size: normal;
+	color: #898989;
+	font-size: 12px;
+	padding-left: 5px;
+	margin-top: 27px;
+}
+.red
+{
+	color: #d41503;
+	font-weight: bold;
+}
+.blue
+{
+	color: #1672b5;
+	font-weight: bold;
+}
+
+
+
 /*Diverse css*/
 #up_small_menu
 {
 	position: absolute;
 	width: $this->widthpx;
 	top: 5px;
+	padding-right: 10px;
+}
+
+#up_small_menu ul
+{
+	padding: 0;
+	margin: 0;
+	margin-top: 5px;
+}
+#up_small_menu ul li
+{
+	margin-bottom: 10px;
+	display: inline;
+	padding-left: 6px;
+	color: #898989;
+	font-size: 12px;
+}
+#up_small_menu ul li:hover
+{
+	color: #2f6393;
+	cursor: pointer;
 }
 
 
