@@ -78,7 +78,7 @@
 			if (mysql_num_rows($q_cosuri))
 			{
                 ?>
-                <table border="0" cellpadding="5" cellspacing="0">
+                <table border="0" cellpadding="5" cellspacing="0" style="padding-bottom: 600px;">
                     <tr>
                         <th>Operatiuni</th>
                         <th>Data si ora</th>
@@ -105,7 +105,7 @@
 					echo "
 					<tr ".$class.">
 						<td".$span." align=center>
-							<img border=1 src='../ico/flag-finish.png' title='Finalizeaza cosul!' onmouseover=\"this.style.cursor='pointer';\" onclick=\"document.getElementById('detalii_cos_".$rs_cos[7]."').style.display='block';\">
+							<img border=1 src='../ico/flag-finish.png' title='Finalizeaza cosul!' onmouseover=\"this.style.cursor='pointer';\" onclick=\"document.getElementById('detalii_cos_".$rs_cos[7]."').style.visibility='block';\">
                             <img border=1 src='../ico/edit_cos.png' title='Editeaza cosul' onmouseover=\"this.style.cursor='pointer';\" onclick=\"document.getElementById('editeaza_cos_".$rs_cos[7]."').style.display='block';\">
                             <br><img border=1 src='../ico/delete_cos.png' title='Sterge cosul' onmouseover=\"this.style.cursor='pointer';\" onclick=\"if ( confirm('Sunteti sigur ca doriti sa stergeti acest cos?') ) document.getElementById('modif_cos').src='sterg_cos.php?idcos=".$rs_cos[7]."';\">
 						</td>
@@ -117,7 +117,7 @@
 					$j = 0;
 					$total=0;
                     $edit_cosuri .= "
-                    <div id='editeaza_cos_".$rs_cos[7]."' class='detalii' style='display:none; padding:10px;' align=center>
+                    <div id='editeaza_cos_".$rs_cos[7]."' class='detalii' style='margin-top:-600px; z-index:999; display:none; padding:10px;' align=center>
                         <form method='post' target='modif_cos' action='salvez_modif_cos.php' id='form_cos_".$rs_cos[7]."' name='form_cos_".$rs_cos[7]."'>
                             <input type='hidden' id='idcos' name='idcos' value=".$rs_cos[7].">
                             <table cellpadding=5 cellspacing=0 border=0 style='color: #000; border-collapse: collapse;'>
@@ -218,7 +218,7 @@
 					echo "<tr><td colspan=7 align=center style='border-top:1px solid #CCC; font-size:15px; color: #900; font-weight:bold;'>TOTAL</td><td align=right style='border-top:1px solid #CCC; font-size:15px; color: #900; font-weight:bold;'>".$total."</td></tr>";
                     $linie++;
 					$detalii_cosuri .= "
-					<div id='detalii_cos_".$rs_cos[7]."' class='detalii' style='display:none; padding:10px;' align=center>
+					<div id='detalii_cos_".$rs_cos[7]."' class='detalii' style='margin-top:-600px; z-index:999; display:none; padding:10px;' align=center>
 						<table cellpadding=5 cellspacing=0 border=0 style='color: #000; border-collapse: collapse;'>
 							<tr>
 								<td colspan=2 align=right><p valign=middle onmouseover=\"this.style.cursor='pointer'\" onclick=\"document.getElementById('detalii_cos_".$rs_cos[7]."').style.display='none';\"><img title='Inchide fereastra' border=0 src='../ico/exit.png'></p></td>
