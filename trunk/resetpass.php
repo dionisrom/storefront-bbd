@@ -64,16 +64,16 @@ if ( isset($_REQUEST["passwdnou"]) && $_REQUEST["passwdnou"] == "da" && isset($_
 		$header1 =  'X-Mailer: PHP/' . phpversion().
 	    'MIME-Version: 1.0' . "\n".
 		'Content-type: text/html; charset=iso-8859-1' . "\n";
-		mail($_REQUEST["email"],"Resetare parola site Medical Active (www.pretuimsanatatea.ro)","Noua parola pentru a va putea autentifica pe site-ul www.pretuimsanatatea.ro este <b><i>".$parola."</i></b>",$headers) ;
-		mail("webmaster@pretuimsanatatea.ro","Resetare parola site Medical Active (www.pretuimsanatatea.ro)","Userul cu emailul <b><i>".$_REQUEST["email"]." si-a schimbat parola ".date("d.m.Y H:i:s", time() )." ! ",$header1) ;
+		mail($_REQUEST["email"],"Resetare parola site Ortoprotetica (www.pretuimsanatatea.ro)","Noua parola pentru a va putea autentifica pe site-ul www.pretuimsanatatea.ro este <b><i>".$parola."</i></b>",$headers) ;
+		mail("webmaster@pretuimsanatatea.ro","Resetare parola site Ortoprotetica (www.pretuimsanatatea.ro)","Userul cu emailul <b><i>".$_REQUEST["email"]." si-a schimbat parola ".date("d.m.Y H:i:s", time() )." ! ",$header1) ;
 		echo'
 		<html>
 		<head>
 			<title>Resetare parola utilizator</title>
 		    <meta http-equiv="Pragma" content="no-cache">
 		    <meta http-equiv="Cache-Control" content="no-cache">
-		    <meta name="description" content="Medical Active - Resetare parola utilizator">
-		    <meta name="copyright" content="&copy; 2009 Medical Active SRL" />
+		    <meta name="description" content="Ortoprotetica - Resetare parola utilizator">
+		    <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
 		    <LINK HREF="css/default.css" REL="stylesheet" TYPE="text/css">	
 		</head>
 		<body>
@@ -91,8 +91,8 @@ else
 	<title>Resetare parola utilizator</title>
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Cache-Control" content="no-cache">
-    <meta name="description" content="Medical Active - Resetare parola utilizator">
-    <meta name="copyright" content="&copy; 2009 Medical Active SRL" />
+    <meta name="description" content="Ortoprotetica - Resetare parola utilizator">
+    <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
     <LINK HREF="css/default.css" REL="stylesheet" TYPE="text/css">
 </head>
 <body>

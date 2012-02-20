@@ -28,8 +28,8 @@ if ( isset($_REQUEST["salvez"]) && $_REQUEST["salvez"] == "da" )
             <title>Modificare informatii cont utilizator</title>
             <meta http-equiv="Pragma" content="no-cache">
             <meta http-equiv="Cache-Control" content="no-cache">
-            <meta name="description" content="Medical Active - Modificare informatii cont utilizator">
-            <meta name="copyright" content="&copy; 2009 Medical Active SRL" />
+            <meta name="description" content="Ortoprotetica - Modificare informatii cont utilizator">
+            <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
             <LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css">    
         </head>
         <body>
@@ -54,8 +54,8 @@ if ( !isset($_REQUEST["salvez"]) && !isset($_REQUEST["cauta"]) )
             <title>Modificare informatii cont utilizator</title>
             <meta http-equiv="Pragma" content="no-cache">
             <meta http-equiv="Cache-Control" content="no-cache">
-            <meta name="description" content="Medical Active - Modificare informatii cont utilizator">
-            <meta name="copyright" content="&copy; 2009 Medical Active SRL" />
+            <meta name="description" content="Ortoprotetica - Modificare informatii cont utilizator">
+            <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
             <LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css">    
         </head>
         <body>
@@ -90,8 +90,8 @@ $rsi = mysql_fetch_array($qmodif);
     <title>Modificare cont utilizator</title>
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Cache-Control" content="no-cache">
-    <meta name="description" content="Medical Active - Modificare cont utilizator">
-    <meta name="copyright" content="&copy; 2009 Medical Active SRL" />
+    <meta name="description" content="Ortoprotetica - Modificare cont utilizator">
+    <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
     <LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css">
     <script>
         function toggleContainer(id)

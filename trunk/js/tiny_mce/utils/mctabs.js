@@ -1,7 +1,7 @@
 /**
  * mctabs.js
  *
- * Copyright 2009, Moxiecode Systems AB
+ * Copyright 2012, Moxiecode Systems AB
  * Released under LGPL License.
  *
  * License: http://tinymce.moxiecode.com/license

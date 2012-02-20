@@ -45,8 +45,8 @@ $tabel .= "</tabel>";
         <meta http-equiv="Pragma" content="no-cache">
         <meta http-equiv="Cache-Control" content="no-cache">
         <meta name="author" content="Bajanica Bogdan Dionisie">
-        <meta name="description" content="Medical Active - afisare producatori">
-        <meta name="copyright" content="&copy; 2009 Medical Active SRL" />
+        <meta name="description" content="Ortoprotetica - afisare producatori">
+        <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
         <LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css">
         <script type="text/javascript" src="../js/corner.js"></script> 
 	</head>

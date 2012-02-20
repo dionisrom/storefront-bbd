@@ -31,8 +31,8 @@ if ( isset($_REQUEST["salvez"]) && $_REQUEST["salvez"] == "da" && $verif_cod )
         <title>Contact</title>
         <meta http-equiv="Pragma" content="no-cache">
         <meta http-equiv="Cache-Control" content="no-cache">
-        <meta name="description" content="Medical Active - Contact">
-        <meta name="copyright" content="&copy; 2009 Medical Active SRL" />
+        <meta name="description" content="Ortoprotetica - Contact">
+        <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
         <LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css">    
     </head>
     <body>
@@ -58,8 +58,8 @@ else
 		<title>Pagina de contact</title>
         <meta http-equiv="Pragma" content="no-cache">
         <meta http-equiv="Cache-Control" content="no-cache">
-        <meta name="description" content="Medical Active - Pagina de contact">
-        <meta name="copyright" content="&copy; 2009 Medical Active SRL" />
+        <meta name="description" content="Ortoprotetica - Pagina de contact">
+        <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
         <LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css">
         <script language="JavaScript" src="../js/formValidator.js"></script>
         <script language="JavaScript">
@@ -159,7 +159,7 @@ else
 	</head>
 	<body style="background:transparent;">
 	<div class="titlu_pag">Contact</div>
-	<div class="titlu">SC MEDICAL ACTIVE SRL</div>
+	<div class="titlu">SC Ortoprotetica</div>
 	<form target="_self" method="post" id="form_mes" name="form_mes">
 			<table cellpadding="2" cellspacing="0" border="0" style="white-space:nowrap;">
 				<tr>

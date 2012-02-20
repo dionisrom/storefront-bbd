@@ -6,8 +6,8 @@
 	<title>Validare cosuri de cumparaturi</title>
 	<meta http-equiv="Pragma" content="no-cache">
 	<meta http-equiv="Cache-Control" content="no-cache">
-	<meta name="description" content="Medical Active - Validare cosuri de cumparaturi">
-	<meta name="copyright" content="&copy; 2009 Medical Active SRL" />
+	<meta name="description" content="Ortoprotetica - Validare cosuri de cumparaturi">
+	<meta name="copyright" content="&copy; 2012 Ortoprotetica" />
 	<LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css">	
 </head>
 <body>
@@ -217,7 +217,7 @@
 	// email stuff (change data below)
 	$to=$_REQUEST["email"];
 	$from = "webmaster@pretuimsanatatea.ro";
-	$subject = "Factura proforma - Medical Active SRL";
+	$subject = "Factura proforma - Ortoprotetica";
 	$message = "<p>Va multumim pentru comanda facuta si va trimitem atasat FACTURA PROFORMA !</p>";
 	// a random hash will be necessary to send mixed content
 	$separator = md5(time());

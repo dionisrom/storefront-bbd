@@ -27,7 +27,7 @@ if ( intval($mod) == 1 )
 		// Introducere vizionare pentru articolul curent - STOP
 		
 		$rs_prod = mysql_fetch_array($q_prod);
-		$imagine = "<img src='../images/no_foto.jpg' border=0 width=100 height=160 />";
+		$imagine = "<img src='../images/produse/no_foto.jpg' border=0 width=100 height=160 />";
         if( file_exists("../images/produse/".$rs_prod["id"].".jpg") )
             $imagine = "<img src='../images/produse/".$rs_prod["id"].".jpg' title='Apasati pentru a mari imaginea !' onclick=\"window.open(this.src);\" border=0 width=100 height=160 />";
         if( file_exists("../images/produse/".$rs_prod["id"].".gif") )
@@ -184,7 +184,7 @@ if ( intval($mod) == 2 )
     while ($rs_produse = mysql_fetch_array($q_produse))
     {
         $image = "&nbsp;";
-        $image = "<img src='../images/no_foto.jpg' class='img_caseta_prod' alt='' />";
+        $image = "<img src='../images/produse/no_foto.jpg' class='img_caseta_prod' alt='' />";
         if ( file_exists("../images/produse/".$rs_produse["id"].".jpg") )
         {
             $image = "<img src='../images/produse/".$rs_produse["id"].".jpg' class='img_caseta_prod' alt='' />";
@@ -207,7 +207,7 @@ if ( intval($mod) == 2 )
              <div class='caseta_prod'>
 				<div class='categorie_prod_top'>".$rs_produse["categorie"]."</div>
                 <div style='text-align:center;' title='".$rs_produse["nume"]."' onmouseover=\"this.style.cursor='pointer';\" onclick=\"top.document.getElementById('main_frame').src='ro/produse.php?mod=1&id_produs=".$rs_produse["id"]."';\">".$image."</div>
-                <div class='nume_prod'>".substr($rs_produse["nume"],0,20)."</div>
+                <div class='nume_prod'>".$rs_produse["nume"]."</div>
                 <div class='pret_div'>pret <span class='pret'>".$pret."</span> Lei <input type='button' onmouseover=\"this.style.cursor='pointer';\" title='Detalii despre produs' class='detalii_prod' onclick=\"top.document.getElementById('main_frame').src='ro/produse.php?mod=1&id_produs=".$rs_produse["id"]."';\" /></div>
                 <div class='descript_prod'>".substr(trim($rs_produse["descriere"]),0,70)."...</div>
                 <div class='prod_in_cos'>Cantitate: <input type='text' class='input' id='cant_".$rs_produse["id"]."' id='cant_".$rs_produse["id"]."' value='0' size=4 /> <input type='button' title='Adauga in cos' class='add_to_cart' onmouseover=\"this.style.cursor='pointer';\" onclick=\"if (document.getElementById('cant_".$rs_produse["id"]."').value>0) {top.document.getElementById('cos_frame').src='cos.php?adauga_prod=1&cant_prod='+document.getElementById('cant_".$rs_produse["id"]."').value+'&pret_prod=".$pret_ron."&id_prod=".$rs_produse["id"]."';} else {alert('Nu ati completat cantitatea dorita ! ')};\" /></div>
@@ -220,15 +220,16 @@ if ( intval($mod) == 2 )
 }
 $table .= "</table>";
 ?>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ro">
     <head>
-        <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+        <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
         <title>Afisare produse</title>
-        <meta http-equiv="Pragma" content="no-cache">
-        <meta http-equiv="Cache-Control" content="no-cache">
-        <meta name="description" content="Medical Active - Afisare produse">
-        <meta name="copyright" content="&copy; 2009 Medical Active SRL" />
-        <LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css">
+        <meta http-equiv="Pragma" content="no-cache" />
+        <meta http-equiv="Cache-Control" content="no-cache" />
+        <meta name="description" content="Ortoprotetica - Afisare produse" />
+        <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
+        <LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css" />
         <script type="text/javascript" src="../js/corner.js"></script>
         <style>
         .trans
