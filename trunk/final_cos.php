@@ -22,10 +22,11 @@
     <body>
   		<script>
             alert("Cosul dumneavostra a fost salvat!\nUrmeaza sa primiti confirmarea din partea noastra !\nVa multumim");
-  			top.document.getElementById("continut_cos").innerHTML="<p align=center>Cosul este gol!</p>";
-  			top.document.getElementById("main_frame").src = "ro/acasa.htm";
+  			top.document.getElementById("continut_cos").innerHTML="<br \>Cosul este gol!<br \><br \>";
+  			top.document.getElementById("main_frame").src = "ro/acasa.php";
   		</script>
     </body>
     </html>
   ';
+  
 ?>

@@ -424,8 +424,8 @@ h2
 }
 #login_div form
 {
-	margin-left: 5px;
-	margin-top: 48px;
+	margin-left: 5px !important;
+	margin-top: 48px !important;
 }
 #login_div input[type=text], #login_div input[type=password]
 {

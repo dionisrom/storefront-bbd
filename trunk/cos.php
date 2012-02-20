@@ -52,8 +52,8 @@
 	  {
           $total += $_SESSION["cant_produse"][$i]*$_SESSION["pret_produse"][$i] ;
 	  }
-      $tabel_cos_div = "<div align='left' style='padding-left: 7px;'>Produse in cos: ".$_SESSION["nr_produse"];
-      $tabel_cos_div .= "<br />Total cumparaturi: ".$total." Lei</div>";
+      $tabel_cos_div = "<div align='left' style='padding-left: 7px;'><br />Produse in cos: ".$_SESSION["nr_produse"];
+      $tabel_cos_div .= "<br />Total cumparaturi: ".$total." Lei<br /></div>";
 	  $tabel_cos .= "     top.document.getElementById('continut_cos').innerHTML = \"".$tabel_cos_div."\";
       </script>
 	  ";

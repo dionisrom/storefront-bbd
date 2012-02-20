@@ -7,7 +7,7 @@
 */
 *
 {
-    font-family: arial;
+    font-family: "Arial";
 }
 html, body
 {
@@ -108,7 +108,7 @@ table td
 {
     float:left;
     color: black;
-    width: 632px;
+    width: 836px;
 }
 .footer
 {
@@ -330,7 +330,7 @@ h2
 
 #produse
 {
-    width: 632px;
+    width: 836px;
 	font-size: 11px;
 	float: left;
 	margin-top: 8px;
@@ -424,8 +424,8 @@ h2
 }
 #login_div form
 {
-	margin-left: 5px;
-	margin-top: 48px;
+	margin-left: 5px !important;
+	margin-top: 48px !important;
 }
 #login_div input[type=text], #login_div input[type=password]
 {

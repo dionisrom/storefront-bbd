@@ -218,7 +218,8 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
                 <div class="cos_div_footer">
                     <input type="button" id="btn_vezi_cos" onmouseover="this.style.cursor=\'pointer\';" onclick="document.getElementById(\'main_frame\').src=\'ro/cos_det.php\';">
                     <br />
-                    <input type="button" id="btn_cumpara_acum" onmouseover="this.style.cursor=\'pointer\';" onclick="document.getElementById(\'cos_frame\').src=\'cos.php?reset_cos=1\';">
+                    <input type="button" id="btn_cumpara_acum" onmouseover="this.style.cursor=\'pointer\';" onclick="top.document.getElementById(\'main_frame\').src=\'final_cos.php?curier=\'+document.getElementById(\'curier\').value;">
+                    <!--<input type="button" id="reset_cos" onmouseover="this.style.cursor=\'pointer\';" onclick="document.getElementById(\'cos_frame\').src=\'cos.php?reset_cos=1;">-->
                 </div>
             </div>    
             ';
