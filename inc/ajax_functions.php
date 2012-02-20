@@ -24,9 +24,9 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
 		case 'categorie'			: adm_content($prefix."categorii");break;
 		case 'subcategorie'			: adm_content($prefix."subcategorii");break;
 		case 'produs'				: adm_content($prefix."produs");break;
-		case 'administrare cosuri'	: adm_content("adm_cosuri");break;
-		case 'administrare useri'	: adm_content("adm_users");break;
-		case 'pagini web'			: adm_content("adm_pagini");break;
+		case 'administrare_cosuri'	: adm_content("adm_cosuri");break;
+		case 'administrare_useri'	: adm_content("adm_users");break;
+		case 'pagini_web'			: adm_content("adm_pagini");break;
 		case 'statistici'			: getStatistici();break;
 		default						: getPage($action); break;
     }
@@ -36,7 +36,7 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
 function adm_content($file)
 {
 	$return = array();
-	$return["continut"] = "ro/".$file.".php";
+	$return["continut"] = "./ro/".$file.".php";
     echo json_encode($return);
 }
 

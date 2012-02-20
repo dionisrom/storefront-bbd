@@ -120,7 +120,7 @@
                     <div id='editeaza_cos_".$rs_cos[7]."' class='detalii' style='display:none; padding:10px;' align=center>
                         <form method='post' target='modif_cos' action='salvez_modif_cos.php' id='form_cos_".$rs_cos[7]."' name='form_cos_".$rs_cos[7]."'>
                             <input type='hidden' id='idcos' name='idcos' value=".$rs_cos[7].">
-                            <table cellpadding=5 cellspacing=0 border=0 style='color: #FFF; border-collapse: collapse;'>
+                            <table cellpadding=5 cellspacing=0 border=0 style='color: #000; border-collapse: collapse;'>
                             <tr>
                                 <td colspan=4 align=right><p valign=middle onmouseover=\"this.style.cursor='pointer'\" onclick=\"document.getElementById('editeaza_cos_".$rs_cos[7]."').style.display='none';\"><img title='Inchide fereastra' border=0 src='../ico/exit.png'></p></td>
                             </tr>                                                                                    
@@ -219,7 +219,7 @@
                     $linie++;
 					$detalii_cosuri .= "
 					<div id='detalii_cos_".$rs_cos[7]."' class='detalii' style='display:none; padding:10px;' align=center>
-						<table cellpadding=5 cellspacing=0 border=0 style='color: #FFF; border-collapse: collapse;'>
+						<table cellpadding=5 cellspacing=0 border=0 style='color: #000; border-collapse: collapse;'>
 							<tr>
 								<td colspan=2 align=right><p valign=middle onmouseover=\"this.style.cursor='pointer'\" onclick=\"document.getElementById('detalii_cos_".$rs_cos[7]."').style.display='none';\"><img title='Inchide fereastra' border=0 src='../ico/exit.png'></p></td>
 							</tr>
