@@ -66,7 +66,7 @@ else
 ?>
 <html>
 	<head>
-		<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+		<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
 		<title>Inserare produs nou</title>
         <meta http-equiv="Pragma" content="no-cache">
         <meta http-equiv="Cache-Control" content="no-cache">

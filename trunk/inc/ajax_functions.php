@@ -7,13 +7,13 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
 	if ( strpos($action,"introducere") !== false )
 	{
 		$prefix = "introd_";
-		$arr_temp = explode(" ", $action);
+		$arr_temp = explode("_", $action);
 		$action = $arr_temp[1];
 	}
 	if ( strpos($action,"modificare") !== false )
 	{
 		$prefix = "mod_";
-		$arr_temp = explode(" ", $action);
+		$arr_temp = explode("_", $action);
 		$action = $arr_temp[1];
 	}
     switch($action) {

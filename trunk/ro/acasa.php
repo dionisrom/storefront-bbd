@@ -86,6 +86,38 @@
         </div>
     ";
     echo $tabel;
+	$sql_last_prods = "SELECT id, nume, pret, reducere FROM produse ORDER BY id desc LIMIT 0,5";
+	$q_last_prods = mysql_query($sql_last_prods) or die("Eroare la preluarea ultimelor produse adaugate");
+	$prods = "";
+	while ($row = mysql_fetch_array($q_last_prods))
+	{
+		$imagine = "<img src='../images/produse/no_foto.jpg' height=60 alt='' />";
+		if( file_exists("../images/produse/".$row["id"].".jpg") )
+			$imagine = "<img src='../images/produse/".$row["id"].".jpg' height=60 alt='' />";
+		if( file_exists("../images/produse/".$row["id"].".gif") )
+			$imagine = "<img src='../images/produse/".$row["id"].".gif' height=60 alt='' />";
+		if ( $row["reducere"] > 0 )
+		{
+			$pret = $row["pret"]*((100-$row["reducere"])/100);
+		}
+		else
+		{
+			$pret = $row["pret"];
+		}
+		$prods .= '
+			<div class="last_prod" onmouseover="this.style.cursor=\'pointer\';" onclick="top.document.getElementById(\'main_frame\').src=\'ro/produse.php?mod=1&id_produs='.$row["id"].'\'" >
+				'.$imagine.'
+				<div class="info">	
+					<span class="blue">'.substr($row["nume"],0,18).'</span><br />
+					pret: <span class="red"> '.$pret.' Lei</span>
+				</div>
+			</div>';
+	}
+	echo '
+			<div id="last_prods_container">
+				'.$prods.'
+			</div>
+		';
 ?>
     
 </body>

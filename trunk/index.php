@@ -96,7 +96,9 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
 				<div id='up_small_menu'>
 					<div style='margin-right: 10px; float: right; font-size: 24px; color: #6897bd; white-space: nowrap;'>021 316 96 05</div>
 					<div style='margin-right: 10px; width: 80%; float: right; font-size: 10px; text-align: right; white-space: nowrap; color: #7d7d7d;'>Pentru informatii<br />si comenzi telefonice</div>
-					<div style='width:100%; text-align: right; margin-right: 10px; float: right; font-weight: bold; font-size: 11px; color: #6897bd; white-space: nowrap;'>Acasa | Ajutor Clienti | Harta Site | Contact</div>
+					<div style=' padding: 0; margin: 0; width:99%; text-align: right; margin-right: 10px; float: right; font-weight: bold; white-space: nowrap; height: 15px;'>
+						<ul><li>Acasa</li><li>Ajutor Clienti</li><li>Harta Site</li><li>Contact</li></ul>
+					</div>
 				</div>
 				<form id='cautare' name='cautare' method='post' action='ro/cauta.php' >
 					<div class='search_div'>
