@@ -6,8 +6,8 @@
 		<title>Detalii cos</title>
 		<meta http-equiv="Pragma" content="no-cache">
 		<meta http-equiv="Cache-Control" content="no-cache">
-		<meta name="description" content="Medical Active - Detalii cos">
-		<meta name="copyright" content="&copy; 2009 Medical Active SRL" />
+		<meta name="description" content="Ortoprotetica - Detalii cos">
+		<meta name="copyright" content="&copy; 2012 Ortoprotetica" />
 		<LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css">
 		<script>
 			function adaug_tr(tip,total)

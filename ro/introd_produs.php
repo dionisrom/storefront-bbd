@@ -48,8 +48,8 @@ if ( isset($_REQUEST["salvez"]) && $_REQUEST["salvez"] == "da" && ( $_SESSION["t
 			<title>Adaugare produs nou</title>
 		    <meta http-equiv="Pragma" content="no-cache">
 		    <meta http-equiv="Cache-Control" content="no-cache">
-		    <meta name="description" content="Medical Active - Adaugare produs nou">
-		    <meta name="copyright" content="&copy; 2009 Medical Active SRL" />
+		    <meta name="description" content="Ortoprotetica - Adaugare produs nou">
+		    <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
 		    <LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css">	
 		</head>
 		<body>
@@ -70,8 +70,8 @@ else
 		<title>Inserare produs nou</title>
         <meta http-equiv="Pragma" content="no-cache">
         <meta http-equiv="Cache-Control" content="no-cache">
-        <meta name="description" content="Medical Active - inserare produs nou">
-        <meta name="copyright" content="&copy; 2009 Medical Active SRL" />
+        <meta name="description" content="Ortoprotetica - inserare produs nou">
+        <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
         <LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css">
 		<script type="text/javascript" src="../js/jquery.js"></script>
 		<script>

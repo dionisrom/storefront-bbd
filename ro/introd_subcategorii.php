@@ -13,8 +13,8 @@ if ( isset($_REQUEST["salvez"]) && $_REQUEST["salvez"] == "da" && ( $_SESSION["t
 		    <meta http-equiv="Pragma" content="no-cache">
 		    <meta http-equiv="Cache-Control" content="no-cache">
 		    <meta name="author" content="Bajanica Bogdan Dionisie">
-		    <meta name="description" content="Medical Active - Adaugare afectiune noua">
-		    <meta name="copyright" content="&copy; 2009 Medical Active SRL" />
+		    <meta name="description" content="Ortoprotetica - Adaugare afectiune noua">
+		    <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
 		    <LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css">	
 		</head>
 		<body>
@@ -35,8 +35,8 @@ else
         <meta http-equiv="Pragma" content="no-cache">
         <meta http-equiv="Cache-Control" content="no-cache">
         <meta name="author" content="Bajanica Bogdan Dionisie">
-        <meta name="description" content="Medical Active - inserare subcategorie noua">
-        <meta name="copyright" content="&copy; 2009 Medical Active SRL" />
+        <meta name="description" content="Ortoprotetica - inserare subcategorie noua">
+        <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
         <LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css">
 	</head>
 	<body>

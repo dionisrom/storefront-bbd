@@ -6,8 +6,8 @@
     <title>Istoric cumparaturi</title>
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Cache-Control" content="no-cache">
-    <meta name="description" content="Medical Active - Istoric cumparaturi">
-    <meta name="copyright" content="&copy; 2009 Medical Active SRL" />
+    <meta name="description" content="Ortoprotetica - Istoric cumparaturi">
+    <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
     <LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css">    
 </head>
 <body>

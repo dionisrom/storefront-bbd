@@ -28,14 +28,14 @@ if ( isset($_REQUEST["salvez"]) )
         $str .= ")";
         mysql_query($str) or die ("Sistemul a generat o eroare la introducerea contului in baza de date!<br>".$str."<br>".mysql_error());
         //echo $str;
-        $mesaj = "Bine ati venit pe site-ul firmei SC Medical Active SRL .<br>Pentru a finaliza crearea contului dumneavoastra va rugam sa verificati emailul. Sistemul a trimis un email ce contine un link pentru a valida contul dumneavoastra. Va rugam sa verificati in INBOX sau in SPAM / JUNK . Folositi link-ul din continutul mail-ului pentru validarea contului.<br> Va multumim !";
+        $mesaj = "Bine ati venit pe site-ul firmei SC Ortoprotetica .<br>Pentru a finaliza crearea contului dumneavoastra va rugam sa verificati emailul. Sistemul a trimis un email ce contine un link pentru a valida contul dumneavoastra. Va rugam sa verificati in INBOX sau in SPAM / JUNK . Folositi link-ul din continutul mail-ului pentru validarea contului.<br> Va multumim !";
         
         $headers = 'From: webmaster@pretuimsanatatea.ro' . "\n" .
         'Reply-To: webmaster@pretuimsanatatea.ro' . "\n" .
         'X-Mailer: PHP/' . phpversion().
         'MIME-Version: 1.0' . "\n".
         'Content-type: text/html; charset=iso-8859-1' . "\n";
-        $rezultmail = mail($_REQUEST["email"],"Validare cont utilizator nou site Medical Active","Bine ati venit pe site-ul firmei SC Medical Active SRL .<br>Pentru a finaliza autentificarea folositi urmatorul link <a href='http://www.pretuimsanatatea.ro/?validare=1&username=".$_REQUEST["username"]."&cod_validare=".$cod."'>VALIDARE (http://www.pretuimsanatatea.ro/?validare=1&username=".$_REQUEST["username"]."&cod_validare=".$cod.")</a>.<br> Va multumim !",$headers) ;
+        $rezultmail = mail($_REQUEST["email"],"Validare cont utilizator nou site Ortoprotetica","Bine ati venit pe site-ul firmei SC Ortoprotetica .<br>Pentru a finaliza autentificarea folositi urmatorul link <a href='http://www.pretuimsanatatea.ro/?validare=1&username=".$_REQUEST["username"]."&cod_validare=".$cod."'>VALIDARE (http://www.pretuimsanatatea.ro/?validare=1&username=".$_REQUEST["username"]."&cod_validare=".$cod.")</a>.<br> Va multumim !",$headers) ;
         if ( $rezultmail )
         {
             echo '
@@ -44,8 +44,8 @@ if ( isset($_REQUEST["salvez"]) )
                 <title>Creare cont nou utilizator</title>
                 <meta http-equiv="Pragma" content="no-cache">
                 <meta http-equiv="Cache-Control" content="no-cache">
-                <meta name="description" content="Medical Active - Creare cont utilizator nou">
-                <meta name="copyright" content="&copy; 2009 Medical Active SRL" />
+                <meta name="description" content="Ortoprotetica - Creare cont utilizator nou">
+                <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
                 <LINK HREF="css/default.css" REL="stylesheet" TYPE="text/css">    
             </head>
             <body>
@@ -62,8 +62,8 @@ if ( isset($_REQUEST["salvez"]) )
                 <title>Creare cont nou utilizator</title>
                 <meta http-equiv="Pragma" content="no-cache">
                 <meta http-equiv="Cache-Control" content="no-cache">
-                <meta name="description" content="Medical Active - Creare cont utilizator nou">
-                <meta name="copyright" content="&copy; 2009 Medical Active SRL" />
+                <meta name="description" content="Ortoprotetica - Creare cont utilizator nou">
+                <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
                 <LINK HREF="css/default.css" REL="stylesheet" TYPE="text/css">    
             </head>
             <body>
@@ -81,8 +81,8 @@ if ( isset($_REQUEST["salvez"]) )
             <title>Creare cont nou utilizator</title>
             <meta http-equiv="Pragma" content="no-cache">
             <meta http-equiv="Cache-Control" content="no-cache">
-            <meta name="description" content="Medical Active - Resetare parola utilizator">
-            <meta name="copyright" content="&copy; 2009 Medical Active SRL" />
+            <meta name="description" content="Ortoprotetica - Resetare parola utilizator">
+            <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
             <LINK HREF="css/default.css" REL="stylesheet" TYPE="text/css">    
         </head>
         <body>
@@ -102,8 +102,8 @@ else
 	<title>Creare utilizator nou</title>
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Cache-Control" content="no-cache">
-    <meta name="description" content="Medical Active - Creare utilizator nou">
-    <meta name="copyright" content="&copy; 2009 Medical Active SRL" />
+    <meta name="description" content="Ortoprotetica - Creare utilizator nou">
+    <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
     <LINK HREF="css/default.css" REL="stylesheet" TYPE="text/css">
     <script>
         function toggleContainer(id)
