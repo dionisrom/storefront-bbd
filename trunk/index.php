@@ -107,6 +107,7 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
 						<input type='button' id='btn_caut' onmouseover=\"this.style.cursor='pointer';\" onclick=\"document.getElementById('cautare').submit();\" />
 					</div>
 				</form>
+				<!--Header Stop-->
 			    ";
             }
             $myPage->setHeaderContent($head_content);
