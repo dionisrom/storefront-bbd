@@ -45,7 +45,7 @@
 #nav li a:hover,
 #nav li a:focus{
 	background-color:#transparent ;
-	color:#CFCFCF;
+	color:#EAEAEA;
 }
 
 /* Parent Sub Menu Links ---[javascript users only]*/
@@ -102,7 +102,6 @@
 	filter: alpha(opacity=90);
 }
 
-
 /* List items in main menu --[for non-javascript users this applies to submenus as well]  */
 #nav li { 
 	/*great place to use a background image as a divider*/
@@ -110,7 +109,8 @@
 	list-style:none;
 	position:relative;
 	float:left;
-	background: url("../img/menu_splitter.png") no-repeat right center transparent;
+	height:32px;
+	background: url("../img/menu_splitter.png") no-repeat right 0 transparent;
 }
 
 #subMenusContainer li{
@@ -130,7 +130,6 @@
 }
 
 #subMenusContainer{	display:block; 	position:absolute;	top:0;	left:0;	width:100%;	height:0;	overflow:visible;	z-index:1000000000; }
-
 
 /* --------------------------[ The below is just for non-javscript users ]--------------------------*/
 #nav li li{	float:none; }
@@ -162,3 +161,10 @@
 #nav li li li a:focus {left:0; margin-left: 2010em; width: 10em;  margin-top:-1em;}
 #nav li:hover a:focus{ margin-left: 0; }
 #nav li li:hover a:focus + ul { margin-left: 10em; }
+
+
+#nav a
+{
+	margin: 4px !important;
+	
+}

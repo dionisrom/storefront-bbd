@@ -11,7 +11,13 @@
 	<meta name="author" content="Bajanica Bogdan Dionisie">
 	<meta name="description" content="Ortoprotetica - Administrare cosuri">
 	<meta name="copyright" content="&copy; 2012 Ortoprotetica" />
-	<LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css">	
+	<LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css">
+	<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script> 
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#main_frame",window.parent.document).height($(document).height()+10);
+		});    
+	</script>
     <script>
         function ch_tr(id, elem, total)
         {
@@ -105,7 +111,7 @@
 					echo "
 					<tr ".$class.">
 						<td".$span." align=center>
-							<img border=1 src='../ico/flag-finish.png' title='Finalizeaza cosul!' onmouseover=\"this.style.cursor='pointer';\" onclick=\"document.getElementById('detalii_cos_".$rs_cos[7]."').style.visibility='block';\">
+							<img border=1 src='../ico/flag-finish.png' title='Finalizeaza cosul!' onmouseover=\"this.style.cursor='pointer';\" onclick=\"document.getElementById('detalii_cos_".$rs_cos[7]."').style.display='block';\">
                             <img border=1 src='../ico/edit_cos.png' title='Editeaza cosul' onmouseover=\"this.style.cursor='pointer';\" onclick=\"document.getElementById('editeaza_cos_".$rs_cos[7]."').style.display='block';\">
                             <br><img border=1 src='../ico/delete_cos.png' title='Sterge cosul' onmouseover=\"this.style.cursor='pointer';\" onclick=\"if ( confirm('Sunteti sigur ca doriti sa stergeti acest cos?') ) document.getElementById('modif_cos').src='sterg_cos.php?idcos=".$rs_cos[7]."';\">
 						</td>

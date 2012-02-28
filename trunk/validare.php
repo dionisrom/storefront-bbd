@@ -21,12 +21,18 @@
         <meta name="author" content="Bajanica Bogdan Dionisie">
         <meta name="description" content="Ortoprotetica - Validare cont utilizator">
         <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
-        <LINK HREF="css/default.css" REL="stylesheet" TYPE="text/css">    
+        <LINK HREF="css/default.css" REL="stylesheet" TYPE="text/css">
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script> 
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("#main_frame",window.parent.document).height($(document).height()+10);
+			});    
+		</script>
     </head>
     <body>
         <script>
         	alert("Validarea a fost facuta cu succes.");
-        	parent.location.href="http://www.pretuimsanatatea.ro/";
+        	parent.location.href="http://www.ortoprotetica.ro/";
         </script>
     </body>
     </html>

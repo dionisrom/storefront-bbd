@@ -3,7 +3,7 @@ session_start();
 if (isset($_REQUEST["usrid"]) && isset($_REQUEST["passwd"]) )
 {
 	include ('inc/global.php');
-	$sql = "SELECT * FROM useri WHERE usr like '".$_REQUEST["usrid"]."' and par like md5('".$_REQUEST["passwd"]."')";
+	$sql = "SELECT * FROM useri WHERE usr = '".$_REQUEST["usrid"]."' and par like md5('".$_REQUEST["passwd"]."')";
 	$query = mysql_query($sql) or die("<script>alert('Eroare preluare date utilizator.!');</script>");
 	$path = substr($_SERVER['REQUEST_URI'],0,strrpos($_SERVER['REQUEST_URI'],"/"));
 	//echo "<script>alert('http://".$_SERVER['SERVER_NAME'].$path."');</script>";
@@ -28,13 +28,13 @@ if (isset($_REQUEST["usrid"]) && isset($_REQUEST["passwd"]) )
         else
         {
             $_SESSION["merge"] = 1;
-            $_SESSION["user"] = $rs[9];
+            $_SESSION["user"] = $rs["usr"];
             $_SESSION["id_user"] = $rs[0];
-            $_SESSION["nume"] = $rs[1]." ".$rs[2];
-            $_SESSION["mesaj_auth"]= "Bine ai revenit <br>".$rs[1]." ".$rs[2]." !";
+            $_SESSION["nume"] = $rs["nume"]." ".$rs["prenume"];
+            $_SESSION["mesaj_auth"]= "Bine ai revenit <br>".$rs["nume"]." ".$rs["prenume"]." !";
             $_SESSION["id"] = $_REQUEST["sessid"];
             $_SESSION["auth"] = "da";
-            $_SESSION["tipusr"] = $rs[7];
+            $_SESSION["tipusr"] = $rs["id_tip"];
             echo "
             <script>
                 top.location.replace('http://".$_SERVER['SERVER_NAME'].$path."');

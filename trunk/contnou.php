@@ -28,14 +28,14 @@ if ( isset($_REQUEST["salvez"]) )
         $str .= ")";
         mysql_query($str) or die ("Sistemul a generat o eroare la introducerea contului in baza de date!<br>".$str."<br>".mysql_error());
         //echo $str;
-        $mesaj = "Bine ati venit pe site-ul firmei SC Ortoprotetica .<br>Pentru a finaliza crearea contului dumneavoastra va rugam sa verificati emailul. Sistemul a trimis un email ce contine un link pentru a valida contul dumneavoastra. Va rugam sa verificati in INBOX sau in SPAM / JUNK . Folositi link-ul din continutul mail-ului pentru validarea contului.<br> Va multumim !";
+        $mesaj = "Bine ati venit pe site-ul firmei Ortoprotetica .<br>Pentru a finaliza crearea contului dumneavoastra va rugam sa verificati emailul. Sistemul a trimis un email ce contine un link pentru a valida contul dumneavoastra. Va rugam sa verificati in INBOX sau in SPAM / JUNK . Folositi link-ul din continutul mail-ului pentru validarea contului.<br> Va multumim !";
         
-        $headers = 'From: webmaster@pretuimsanatatea.ro' . "\n" .
-        'Reply-To: webmaster@pretuimsanatatea.ro' . "\n" .
+        $headers = 'From: webmaster@ortoprotetica.ro' . "\n" .
+        'Reply-To: webmaster@ortoprotetica.ro' . "\n" .
         'X-Mailer: PHP/' . phpversion().
         'MIME-Version: 1.0' . "\n".
         'Content-type: text/html; charset=utf-8' . "\n";
-        $rezultmail = mail($_REQUEST["email"],"Validare cont utilizator nou site Ortoprotetica","Bine ati venit pe site-ul firmei SC Ortoprotetica .<br>Pentru a finaliza autentificarea folositi urmatorul link <a href='http://www.pretuimsanatatea.ro/?validare=1&username=".$_REQUEST["username"]."&cod_validare=".$cod."'>VALIDARE (http://www.pretuimsanatatea.ro/?validare=1&username=".$_REQUEST["username"]."&cod_validare=".$cod.")</a>.<br> Va multumim !",$headers) ;
+        $rezultmail = mail($_REQUEST["email"],"Validare cont utilizator nou site Ortoprotetica","Bine ati venit pe site-ul firmei SC Ortoprotetica .<br>Pentru a finaliza autentificarea folositi urmatorul link <a href='http://www.ortoprotetica.ro/dev/?validare=1&username=".$_REQUEST["username"]."&cod_validare=".$cod."'>VALIDARE (http://www.ortoprotetica.ro/?validare=1&username=".$_REQUEST["username"]."&cod_validare=".$cod.")</a>.<br> Va multumim !",$headers) ;
         if ( $rezultmail )
         {
             echo '
@@ -46,7 +46,13 @@ if ( isset($_REQUEST["salvez"]) )
                 <meta http-equiv="Cache-Control" content="no-cache">
                 <meta name="description" content="Ortoprotetica - Creare cont utilizator nou">
                 <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
-                <LINK HREF="css/default.css" REL="stylesheet" TYPE="text/css">    
+                <LINK HREF="css/default.css" REL="stylesheet" TYPE="text/css"> 
+				<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script> 
+				<script type="text/javascript">
+					$(document).ready(function(){
+						$("#main_frame",window.parent.document).height($(document).height()+10);
+					});    
+				</script>
             </head>
             <body>
                 <div class="titlu_mic">'.$mesaj.'</div>
@@ -64,7 +70,13 @@ if ( isset($_REQUEST["salvez"]) )
                 <meta http-equiv="Cache-Control" content="no-cache">
                 <meta name="description" content="Ortoprotetica - Creare cont utilizator nou">
                 <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
-                <LINK HREF="css/default.css" REL="stylesheet" TYPE="text/css">    
+                <LINK HREF="css/default.css" REL="stylesheet" TYPE="text/css">
+				<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script> 
+				<script type="text/javascript">
+					$(document).ready(function(){
+						$("#main_frame",window.parent.document).height($(document).height()+10);
+					});    
+				</script>
             </head>
             <body>
                 <div class="titlu_mic">Emailul nu a fost trimis catra utilizator!</div>
@@ -83,7 +95,13 @@ if ( isset($_REQUEST["salvez"]) )
             <meta http-equiv="Cache-Control" content="no-cache">
             <meta name="description" content="Ortoprotetica - Resetare parola utilizator">
             <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
-            <LINK HREF="css/default.css" REL="stylesheet" TYPE="text/css">    
+            <LINK HREF="css/default.css" REL="stylesheet" TYPE="text/css">
+			<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script> 
+			<script type="text/javascript">
+				$(document).ready(function(){
+					$("#main_frame",window.parent.document).height($(document).height()+10);
+				});    
+			</script>
         </head>
         <body>
             <div class="titlu_mic">
@@ -105,6 +123,12 @@ else
     <meta name="description" content="Ortoprotetica - Creare utilizator nou">
     <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
     <LINK HREF="css/default.css" REL="stylesheet" TYPE="text/css">
+	<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script> 
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#main_frame",window.parent.document).height($(document).height()+10);
+		});    
+	</script>
     <script>
         function toggleContainer(id)
         {

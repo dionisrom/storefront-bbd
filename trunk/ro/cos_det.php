@@ -9,6 +9,12 @@
 		<meta name="description" content="Ortoprotetica - Detalii cos">
 		<meta name="copyright" content="&copy; 2012 Ortoprotetica" />
 		<LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css">
+		<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script> 
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("#main_frame",window.parent.document).height($(document).height()+10);
+			});    
+		</script>
 		<script>
 			function adaug_tr(tip,total)
 			{

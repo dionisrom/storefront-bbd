@@ -18,12 +18,12 @@ if ( isset($_REQUEST["salvez"]) && $_REQUEST["salvez"] == "da" && $verif_cod )
     $sql_mesaj .= " '".date("d.m.Y H:i:s",time())."' ";
     $sql_mesaj .= ") ";
     mysql_query($sql_mesaj) or die ("Eroare salvare mesaj!");
-    $headers = 'From: webmaster@pretuimsanatatea.ro' . "\r\n" .
-    'Reply-To: webmaster@pretuimsanatatea.ro' . "\r\n" .
+    $headers = 'From: webmaster@ortoprotetica.ro' . "\r\n" .
+    'Reply-To: webmaster@ortoprotetica.ro' . "\r\n" .
     'X-Mailer: PHP/' . phpversion().
     'MIME-Version: 1.0' . "\r\n".
     'Content-type: text/html; charset=utf-8' . "\r\n";
-    mail("webmaster@pretuimsanatatea.ro","Mesaj din pagina de contact ".date("d.m.Y H:i:s",time()),"De la: ".$_REQUEST["nume"]."<br>Email: ".$_REQUEST["email"]."<br>Telefon: ".$_REQUEST["telefon"]."<hr>Mesaj:<br>".$_REQUEST["mesaj"],$headers);
+    mail("webmaster@ortoprotetica.ro","Mesaj din pagina de contact ".date("d.m.Y H:i:s",time()),"De la: ".$_REQUEST["nume"]."<br>Email: ".$_REQUEST["email"]."<br>Telefon: ".$_REQUEST["telefon"]."<hr>Mesaj:<br>".$_REQUEST["mesaj"],$headers);
        	
     echo '
     <html>
@@ -33,7 +33,13 @@ if ( isset($_REQUEST["salvez"]) && $_REQUEST["salvez"] == "da" && $verif_cod )
         <meta http-equiv="Cache-Control" content="no-cache">
         <meta name="description" content="Ortoprotetica - Contact">
         <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
-        <LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css">    
+        <LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css">
+		<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script> 
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("#main_frame",window.parent.document).height($(document).height()+10);
+			});    
+		</script>
     </head>
     <body>
         <div class="titlu_mic">Mesajul a fost trimis cu succes !</div>

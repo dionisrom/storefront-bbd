@@ -15,7 +15,13 @@ if ( isset($_REQUEST["salvez"]) && $_REQUEST["salvez"] == "da" && ( $_SESSION["t
 		    <meta name="author" content="Bajanica Bogdan Dionisie">
 		    <meta name="description" content="Ortoprotetica - Adaugare categorie noua">
 		    <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
-		    <LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css">	
+		    <LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css">
+			<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script> 
+			<script type="text/javascript">
+				$(document).ready(function(){
+					$("#main_frame",window.parent.document).height($(document).height()+10);
+				});    
+			</script>
 		</head>
 		<body>
 			<div class="titlu_mic">
@@ -38,6 +44,12 @@ else
         <meta name="description" content="Ortoprotetica - inserare categorie noua">
         <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
         <LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css">
+		<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script> 
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("#main_frame",window.parent.document).height($(document).height()+10);
+			});    
+		</script>
 	</head>
 	<body>
 	<div class="titlu_pag">Inserare categorie noua</div>

@@ -12,9 +12,9 @@
  */
 class BBDWebSite {
     
-    var $width = 1000;
-    var $leftWidth = 200;
-    var $rightWidth = 160;
+    var $width = 1012;
+    var $leftWidth = 206;
+    var $rightWidth = 166;
     var $EOF = "\n";
     var $content = "";
     var $headInclude = "";
@@ -49,11 +49,11 @@ class BBDWebSite {
         if ( $leftWidth == 0 )
             $leftWidth = $this->leftWidth;
         if ( $rightWidth == 0 )
-            $rightWidth = $this->rightWidth+2;
+            $rightWidth = $this->rightWidth;
         
         $this->width = $custom_width;
         $this->leftWidth = $leftWidth+2;
-        $this->rightWidth = $rightWidth;
+        $this->rightWidth = $rightWidth+2;
     }
     
     public function setHeaderContent($content)
@@ -107,7 +107,14 @@ class BBDWebSite {
             $bottom_right_div = "<div id='bottom_right' class='fr'></div>".$this->EOF;
         
         $body = "<div id='body' class='body'>".$this->bodyContent."</div>".$this->EOF;
-        $footer = "<div id='footer' class='footer'><div class='date_created'>Copyright &copy; Ortoprotetica 2012. Toate drepturile rezervate.</div><div class='center'></div><div class='created'>Creat de: Bajanica Bogdan-Dionisie</div></div>".$this->EOF;
+        $footer = "
+			<div id='footer' class='footer'>
+				<div style=' padding: 0; margin: 0; width:99%; text-align: left; float: left; font-weight: bold; white-space: nowrap; height: 15px;'>
+					<ul><li>Acasa</li><li>Despre noi</li><li>Livrare</li><li>Cum cumpar</li><li>Harta Site</li><li>Contact</li></ul>
+				</div>
+				<div class='date_created'>Copyright &copy; Ortoprotetica 2012. Toate drepturile rezervate.</div><div class='center'></div>
+				<div class='created'></div>
+			</div>".$this->EOF;
         
         $content .= $head_left_div . $header . $head_right_div;
         $content .= "<div class='clearfix'><div>";
@@ -151,8 +158,8 @@ class BBDWebSite {
 		if ($this->top_left) $headerWidth -= $this->leftWidth+2;
 		if ($this->top_right) $headerWidth -= $this->rightWidth+2;
 		$bodyWidth = $this->width;
-		if ($this->body_left) $bodyWidth -= $this->leftWidth+2;
-		if ($this->body_right) $bodyWidth -= $this->rightWidth+2;
+		if ($this->body_left) $bodyWidth -= $this->leftWidth+8;
+		if ($this->body_right) $bodyWidth -= $this->rightWidth+8;
 		$footerWidth = $this->width;
 		if ($this->bottom_left) $footerWidth -= $this->leftWidth+2;
 		if ($this->bottom_right) $footerWidth -= $this->rightWidth+2;
@@ -163,7 +170,7 @@ class BBDWebSite {
         //if ( $menu_pos[0] == "right" )
         $css_content = str_replace('$this->navfloat', "float: ".$menu_pos[0].";", $css_content);
         if (count($menu_pos)>0 && $menu_pos[1] == "bottom")
-            $css_content = str_replace('$this->navmargintop', "60", $css_content);
+            $css_content = str_replace('$this->navmargintop', "81", $css_content);
         if ( file_exists($css_compiled) == TRUE )
         {
             unlink($css_compiled);
