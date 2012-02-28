@@ -141,7 +141,8 @@ class BBDWebSite {
     
     public function setCSS()
     {
-        $css_content = file_get_contents("css/_default_.css");
+		/*
+		$css_content = file_get_contents("css/_default_.css");
         $css_compiled = "css/default_compiled.css";
         $css_content = str_replace('$this->width',  $this->width, $css_content);
         $css_content = str_replace('$this->leftWidth',  $this->leftWidth, $css_content);
@@ -170,6 +171,7 @@ class BBDWebSite {
         }
         file_put_contents($css_compiled, $css_content);
         file_put_contents("css/default.css", $css_content);
+		*/
         $this->css = "<link rel='stylesheet' type='text/css' href='css/default_compiled.css' />".$this->EOF;
         return $this->css;
     }

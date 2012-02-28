@@ -8,6 +8,7 @@
 *
 {
     font-family: "Arial";
+	outline: none;
 }
 html, body
 {
@@ -324,6 +325,16 @@ h2
     cursor: pointer;
 }
 
+.left_caseta li
+{
+	line-height: 18px;	
+}
+
+#categorii_produse li:hover
+{
+	background-color: #ECECEC;
+}
+
 /*
 * CSS caseta produs
 */
@@ -559,6 +570,10 @@ h2
 #cele_mai_vandute_div ol, #cele_mai_vizitate_div ol
 {
 	margin-top: 48px;
+}
+#cele_mai_vandute_div li, #cele_mai_vizitate_div li
+{
+	line-height: 18px;
 }
 
 #last_prods_container
