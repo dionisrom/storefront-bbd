@@ -8,7 +8,13 @@
 	<meta http-equiv="Cache-Control" content="no-cache">
 	<meta name="description" content="Ortoprotetica - Validare cosuri de cumparaturi">
 	<meta name="copyright" content="&copy; 2012 Ortoprotetica" />
-	<LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css">	
+	<LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css">
+	<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script> 
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#main_frame",window.parent.document).height($(document).height()+10);
+		});    
+	</script>
 </head>
 <body>
 	<div class="titlu_mic">Validare cosuri de cumparaturi</div>
@@ -23,7 +29,7 @@
 	$pdf = new HTML2FPDF($orientation='P',$unit='mm',$format='A4');
 	$pdf->AddPage();
 	$pdf->temporaire("Factura proforma");
-    $pdf->Image('../images/sigla_fact.jpg',20,8,75);
+    $pdf->Image('../img/sigla_fact.jpg',20,8,75);
     $pdf->SetFont('Arial','B');
     $pdf->SetFontSize(14);
     $pdf->Text(120,13,"FACTURA PROFORMA");
@@ -197,7 +203,7 @@
     //$pdf->Text(22,247,"Top Menu TPS: 868138496 RT001");
     //$pdf->Text(22,253,"Top Menu TVQ: 1020951032 TQ001");
     $pdf->Text(22,259,"Comentarii: MULTUMIM !");
-    $pdf->Text(22,265,"Vandut de: dr. CRETU PAUL");
+    $pdf->Text(22,265,"");
     if (file_exists("../fact_proforma/proforma_".$_REQUEST["idcos"].".pdf"))
     {
 		unlink("../fact_proforma/proforma_".$_REQUEST["idcos"].".pdf");
@@ -207,8 +213,8 @@
 	// ----------------------------- FINAL CREARE FACTURA PROFORMA ---------------------------------
 	
     
-	/*$headers = 	'From: webmaster@pretuimsanatatea.ro' . "\r\n" .
-				'Reply-To: webmaster@pretuimsanatatea.ro' . "\r\n" .
+	/*$headers = 	'From: webmaster@ortoprotetica.ro' . "\r\n" .
+				'Reply-To: webmaster@ortoprotetica.ro' . "\r\n" .
 				'Content-Type: multipart/mixed; boundary=\"PHP-mixed-'.$random_hash.'\"'. "\r\n";
 	$attachment = chunk_split(base64_encode(file_get_contents("../fact_proforma/proforma_".$_REQUEST["idcos"].".pdf")));
 	Va multumim pentru comanda facuta si va trimitem atasat factura proforma!
@@ -216,7 +222,7 @@
 
 	// email stuff (change data below)
 	$to=$_REQUEST["email"];
-	$from = "webmaster@pretuimsanatatea.ro";
+	$from = "webmaster@ortoprotetica.ro";
 	$subject = "Factura proforma - Ortoprotetica";
 	$message = "<p>Va multumim pentru comanda facuta si va trimitem atasat FACTURA PROFORMA !</p>";
 	// a random hash will be necessary to send mixed content

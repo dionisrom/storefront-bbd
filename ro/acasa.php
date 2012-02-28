@@ -13,12 +13,13 @@
     <script type="text/javascript" src="../js/easyslider/jquery.js"></script> 
     <script type="text/javascript" src="../js/easyslider/easySlider1.7.js"></script>
     <script type="text/javascript">
-        $(document).ready(function(){    
-            $("#slider").easySlider({
+        jQuery(document).ready(function(){    
+            jQuery("#slider").easySlider({
                 auto: true, 
                 continuous: true,
                 numeric: true
             });
+			jQuery("#main_frame",window.parent.document).height(jQuery(document).height()+10);
         });    
     </script>
 	<LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css" />
@@ -37,11 +38,11 @@
         <div id='content_slider'>
             <div id='slider'>
                 <ul>                
-                    <li><a href=''><img src='../images/slider/01.jpg' alt='Css Template Preview' /></a></li>
-                    <li><a href=''><img src='../images/slider/02.jpg' alt='Css Template Preview' /></a></li>
-                    <li><a href=''><img src='../images/slider/03.jpg' alt='Css Template Preview' /></a></li>
-                    <li><a href=''><img src='../images/slider/04.jpg' alt='Css Template Preview' /></a></li>
-                    <li><a href=''><img src='../images/slider/05.jpg' alt='Css Template Preview' /></a></li>            
+                    <li><a href=''><img src='../images/slider/slider1.jpg' alt='Css Template Preview' /></a></li>
+                    <li><a href=''><img src='../images/slider/slider2.jpg' alt='Css Template Preview' /></a></li>
+                    <li><a href=''><img src='../images/slider/slider3.jpg' alt='Css Template Preview' /></a></li>
+                    <li><a href=''><img src='../images/slider/slider4.jpg' alt='Css Template Preview' /></a></li>
+                    <li><a href=''><img src='../images/slider/slider5.jpg' alt='Css Template Preview' /></a></li>            
                 </ul>
             </div>
         </div>

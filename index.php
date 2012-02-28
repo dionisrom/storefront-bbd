@@ -38,7 +38,7 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
         <style>
         	html, body, body center
         	{
-				background-color: lightgray;
+				background-color: #eceeef;
         	}
         </style>
         <script>
@@ -46,9 +46,9 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
 			{
 				var iFrames = jQuery('#main_frame');
 				var innerDoc = (iFrames.get(0).contentDocument) ? iFrames.get(0).contentDocument : iFrames.get(0).contentWindow.document;
+				iFrames.height(0);
 				function iResize() 
 				{
-					iFrames.height(0);
 					if (document.getElementById("main_frame").contentWindow.document.readyState=="complete")
 					{
 						if (document.getElementById("main_frame").src.search("produse") > 0)
@@ -71,7 +71,7 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
 							});
 						}
 						innerDoc = (iFrames.get(0).contentDocument) ? iFrames.get(0).contentDocument : iFrames.get(0).contentWindow.document;
-						iFrames.height(innerDoc.body.scrollHeight + 35);
+						//iFrames.height(innerDoc.body.scrollHeight + 35);
 					}
 					else
 					{
@@ -113,7 +113,7 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
             $myPage->setHeaderContent($head_content);
 			if ( !isset($_SESSION["tipusr"]) || $_SESSION["tipusr"] > 2 )
 				//$arr_menu = array("Acasa","Despre noi","Cum cumpar","Cum platesc","Livrare","Asistenta","Parteneri","Contact");
-				$arr_menu = array("Acasa","Despre noi","Parteneri","Info","Contact","Noutati","Link-uri utile","Cautare","Cariere","Testimoniale","Kinetoterapie/Colaboratori");
+				$arr_menu = array("Acasa","Despre noi","Parteneri","Info","Contact","Noutati","Link-uri utile","Cariere","Testimoniale","Kinetoterapie/Colaboratori");
 			else
 				$arr_menu = array("Introducere&nbsp;&nbsp;&nbsp;"=>array("Producator", "Categorie", "Subcategorie", "Produs"),"Modificare&nbsp;&nbsp;&nbsp;"=>array("Producator", "Categorie", "Subcategorie", "Produs"),"Administrare cosuri","Administrare useri","Rapoarte","Pagini web");
             $myPage->setMenu($arr_menu);
@@ -127,7 +127,7 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
 			}
 			
 			$body_content = '
-				<iframe name="main_frame" id="main_frame" allowtransparency="true" style="width:100%;" frameborder="0" marginwidth="0" marginheight="0" src="'.$pag.'" scrolling="no"></iframe>
+				<iframe name="main_frame" id="main_frame" allowtransparency="true" style="width:97%;" frameborder="0" marginwidth="0" marginheight="0" src="'.$pag.'" scrolling="no"></iframe>
 			';
 			//-- IFRAME End--
 			
@@ -202,30 +202,33 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
             
 			// Setez partea din dreapta a body-ului -START -
             // Afisez caseta de cos - STOP
-            $myPage->body_right_content .= '
-            <div id="cos_div">
-                <iframe name="cos_frame" id="cos_frame" width=0 height=0 frameborder=no src="" style="display: hidden;"></iframe>
-                <div class="cos_div_header"></div>
-                <div id="continut_cos" align="center">
-            ';
-            if ( !isset($_SESSION["cos"]) || ( isset($_SESSION["cos"]) && $_SESSION["cos"] != "plin") )
+			if (!isset($_SESSION["tipusr"]) || $_SESSION["tipusr"] > 2)
             {
-                $myPage->body_right_content .= "<br \>Cosul este gol!<br \><br \>";
-            }
-            else
-            {
-                $myPage->body_right_content .= "<script>document.getElementById('cos_frame').src='cos.php';</script>";
-            }
-            $myPage->body_right_content .= '
-                </div>
-                <div class="cos_div_footer">
-                    <input type="button" id="btn_vezi_cos" onmouseover="this.style.cursor=\'pointer\';" onclick="document.getElementById(\'main_frame\').src=\'ro/cos_det.php\';">
-                    <br />
-                    <input type="button" id="btn_cumpara_acum" onmouseover="this.style.cursor=\'pointer\';" onclick="top.document.getElementById(\'main_frame\').src=\'final_cos.php?curier=\'+document.getElementById(\'curier\').value;">
-                    <!--<input type="button" id="reset_cos" onmouseover="this.style.cursor=\'pointer\';" onclick="document.getElementById(\'cos_frame\').src=\'cos.php?reset_cos=1;">-->
-                </div>
-            </div>    
-            ';
+				$myPage->body_right_content .= '
+				<div id="cos_div">
+					<iframe name="cos_frame" id="cos_frame" width=0 height=0 frameborder=no src="" style="display: hidden;"></iframe>
+					<div class="cos_div_header"></div>
+					<div id="continut_cos" align="center">
+				';
+				if ( !isset($_SESSION["cos"]) || ( isset($_SESSION["cos"]) && $_SESSION["cos"] != "plin") )
+				{
+					$myPage->body_right_content .= "<br \>Cosul este gol!<br \><br \>";
+				}
+				else
+				{
+					$myPage->body_right_content .= "<script>document.getElementById('cos_frame').src='cos.php';</script>";
+				}
+				$myPage->body_right_content .= '
+					</div>
+					<div class="cos_div_footer">
+						<input type="button" id="btn_vezi_cos" onmouseover="this.style.cursor=\'pointer\';" onclick="document.getElementById(\'main_frame\').src=\'ro/cos_det.php\';">
+						<br />
+						<!--<input type="button" id="btn_cumpara_acum" onmouseover="this.style.cursor=\'pointer\';" onclick="top.document.getElementById(\'main_frame\').src=\'final_cos.php?curier=\'+document.getElementById(\'curier\').value;">-->
+						<input type="button" id="btn_reset_cos" onmouseover="this.style.cursor=\'pointer\';" onclick="document.getElementById(\'cos_frame\').src=\'cos.php?reset_cos=1;\';">
+					</div>
+				</div>    
+				';
+			}
             // Afisez caseta de cos - STOP
             
             // Afisez caseta de login - START
@@ -271,23 +274,26 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
 				$myPage->body_right_content .= "<div id='istoric_div' align='center' title='Istoric cumparaturi' onmouseover=\"this.style.cursor='pointer';\" onclick=\"document.getElementById('main_frame').src='ro/istoric.php';\">Istoric cumparaturi</div>";
 			}*/
 			
-			// Afisez caseta de cele mai vandute - START
-			$myPage->body_right_content .= '
-				<div id="cele_mai_vandute_div">
-					
-				</div>
-				';
-			// Afisez caseta de cele mai vandute - STOP
-			
-			// Afisez caseta de cele mai vizitate - START
-			$myPage->body_right_content .= '
-				<div id="cele_mai_vizitate_div">
-					
-				</div>
-				';
-			// Afisez caseta de cele mai vizitate - STOP
-			// Setez partea din dreapta a body-ului -STOP -
-            $myPage->setBodyContent($body_content);
+			if (!isset($_SESSION["tipusr"]) || $_SESSION["tipusr"] > 2)
+            {
+				// Afisez caseta de cele mai vandute - START
+				$myPage->body_right_content .= '
+					<div id="cele_mai_vandute_div">
+
+					</div>
+					';
+				// Afisez caseta de cele mai vandute - STOP
+
+				// Afisez caseta de cele mai vizitate - START
+				$myPage->body_right_content .= '
+					<div id="cele_mai_vizitate_div">
+
+					</div>
+					';
+				// Afisez caseta de cele mai vizitate - STOP
+				// Setez partea din dreapta a body-ului -STOP -
+			}
+			$myPage->setBodyContent($body_content);
             echo $myPage->newPage();
         ?>
         </center>

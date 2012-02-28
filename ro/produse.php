@@ -144,13 +144,13 @@ if ( intval($mod) == 2 )
 	$num = $rs_nr_prod[0];
     $nr_pags = ceil($rs_nr_prod[0] / $el_in_pag);
     //echo $nr_pag.", ".$nr_pags.", ".$rs_nr_prod[0];
-    $tabel_pag = "Pagina";
+    $tabel_pag = "<td align='right'>Pagina</td>";
     for ( $e=1; $e<=$nr_pags; $e++ )
     {
         if ( $e == $nr_pag )
-            $tabel_pag .= "<td onmouseover=\"this.style.cursor='pointer'; this.style.backgroundColor='#ff0';\" onclick=\"document.getElementById('pagina').value='".$e."';document.getElementById('mod_pags').submit();\">".$e."</td>";
+            $tabel_pag .= "<td onmouseover=\"this.style.cursor='pointer'; this.style.backgroundColor='#EAEAEA';\" onclick=\"document.getElementById('pagina').value='".$e."';document.getElementById('mod_pags').submit();\">".$e."</td>";
         else
-            $tabel_pag .= "<td onmouseover=\"this.style.cursor='pointer'; this.style.backgroundColor='#ff0';\" onmouseout=\"this.style.backgroundColor='transparent';\" onclick=\"document.getElementById('pagina').value='".$e."';document.getElementById('mod_pags').submit();\">".$e."</td>";
+            $tabel_pag .= "<td onmouseover=\"this.style.cursor='pointer'; this.style.backgroundColor='#EAEAEA';\" onmouseout=\"this.style.backgroundColor='transparent';\" onclick=\"document.getElementById('pagina').value='".$e."';document.getElementById('mod_pags').submit();\">".$e."</td>";
     }
     $sel = "
     
@@ -172,7 +172,7 @@ if ( intval($mod) == 2 )
         }
     </script>
     ";
-    $tabel_pag .= $sel;
+    $tabel_pag .= "<td>".$sel."</td>";
     // --------------------- PAGINARE ----------------------
 	//echo $sql_produse."<br>";
     $sql_produse .= $limit;
@@ -230,7 +230,12 @@ $table .= "</table>";
         <meta name="description" content="Ortoprotetica - Afisare produse" />
         <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
         <LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css" />
-        <script type="text/javascript" src="../js/corner.js"></script>
+        <script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script> 
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("#main_frame",window.parent.document).height($(document).height()+10);
+			});    
+		</script>
         <style>
         .trans
         {
@@ -260,7 +265,7 @@ $table .= "</table>";
 	        if ( $num > 0 )
 	        {
 	        ?>
-	            <div align=center><form id='mod_pags'><table border=0 cellspacing=3 cellpadding=2 style='white-space: nowrap; height: 15px;'><tr><td></td><?=$tabel_pag?></tr></table></form></div>
+	            <div align=center><form id='mod_pags'><table border=0 cellspacing=2 cellpadding=0 style='white-space: nowrap;'><tr><?=$tabel_pag?></tr></table></form></div>
 	        <?php
 	        }
 	        else

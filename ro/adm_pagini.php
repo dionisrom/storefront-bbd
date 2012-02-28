@@ -88,6 +88,11 @@ include("../inc/global.php");
 			};
 		</script>
 		<!-- /TinyMCE -->
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("#main_frame",window.parent.document).height($(document).height()+10);
+			});    
+		</script>
 	</head>
 	<body role="application">
 		<form id="page_frm" method="post">

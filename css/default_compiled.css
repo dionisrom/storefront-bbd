@@ -8,7 +8,6 @@
 *
 {
     font-family: "Arial";
-	outline: none;
 }
 html, body
 {
@@ -37,7 +36,7 @@ table td
 }
 #content, .body, .footer, .header
 {
-    width: 1000px;
+    width: 1012px;
     background-color: #FFFFFF;
 }
 .hidden
@@ -51,15 +50,15 @@ table td
 }
 .hl, .bl, .fl
 {
-    width: 202px;
+    width: 208px;
 }
 .hr, .br, .fr
 {
-    width: 162px;
+    width: 168px;
 }
 .header, .hl, .hr
 {
-    height: 100px;
+    height: 120px;
     border-bottom: 1px solid lightgray;
 }
 .body, .bl, .br
@@ -68,8 +67,8 @@ table td
 }
 .footer, .fl, .fr
 {
-    height: 20px;
-	border-top: 1px solid lightgray;
+    height: 50px;
+	border-top: 5px solid #cdcdcd;
 }
 .hl{
     float:left;
@@ -81,7 +80,8 @@ table td
 }
 .bl{
     float:left;
-    border-right: 1px solid transparent;
+    border-right: 1px solid transparent; 
+	padding-left: 6px;
 }
 .br{
     float:left;
@@ -99,7 +99,7 @@ table td
 {
     float:left;
     color: black;
-    width: 1000px;
+    width: 1012px;
 }
 .clearfix
 {
@@ -109,13 +109,13 @@ table td
 {
     float:left;
     color: black;
-    width: 632px;
+    width: 620px;
 }
 .footer
 {
     float:left;
     color: black;
-    width: 1000px;
+    width: 1012px;
 }
 .created
 {
@@ -135,7 +135,19 @@ table td
     display: inline;
     float: left;
     position: relative;
-    top: 0;
+    top: 15px;
+    left: 30px;
+    font-family:"Trebuchet MS";
+    font-size: 10px;
+    color: gray;
+}
+.footer_menu
+{
+    height: inherit;
+    display: inline;
+    float: left;
+    position: relative;
+    top: 50px;
     left: 10px;
     font-family:"Trebuchet MS";
     font-size: 10px;
@@ -156,9 +168,9 @@ table td
 {
     position: absolute;
     float: left;;
-    top: 60px;
+    top: 81px;
     margin-left: 8px;
-    height:22px;
+    height:32px;
     background: url(../img/menu_bar.png) no-repeat center left transparent;
 }
 
@@ -166,39 +178,42 @@ table td
 {
     position: relative;
     float: right;
-    top: 60px;
-    margin-right: 8px;
-    height:22px;
+    top: 81px;
+    margin-right: 5px;
+    height:32px;
 	width: 270px;
     background: url(../img/search_div_bg.png) no-repeat center right transparent;
 }
 
 #caut
 {
-	margin-top:2px;
+	margin-top:8px;
 	float: right;
 	height:18px;
 	width: 130px;
 	overflow: none;
 	outline: none;
 	border:0;
-	margin-right: 50px;
+	margin-right: 40px;
 	z-index: 10;
 	padding-right: 40px;
+	padding-left: 3px;
     background: url(../img/search_input.png) no-repeat left transparent;
 }
 #btn_caut
 {
 	position: absolute;
-	right: 10px;
-	height:18px;
+	right: 0;
+	height: 18px;
 	width: 66px;
 	overflow: none;
 	outline: none;
 	margin-right: 10px;
-	margin-top:2px;
+	margin-top:8px;
 	z-index: 11;
     background: url(../img/search_btn.png) no-repeat transparent;
+	border: 0;
+	overflow: none;
 }
 #search_icon
 {
@@ -208,8 +223,8 @@ table td
 	border: 0;
 	margin: 0;
 	padding: 0;
-	margin-top: 5px;
-	margin-left: 25px;
+	margin-top: 9px;
+	margin-left: 40px;
 	z-index: 999;
     background: url(../img/search_icon.png) no-repeat center transparent;
 }
@@ -249,7 +264,7 @@ h2
 */
 .left_caseta
 {
-    width: 202px;
+    width: 200px;
     float: left;
     margin-top: 5px;
     font-size: 11px;
@@ -262,7 +277,7 @@ h2
     margin: 0;
     padding: 0;
     background: url('../img/left_produse.png') no-repeat top left;
-    width: 202px; 
+    width: 208px; 
 }
 .header_producatori
 {
@@ -271,7 +286,7 @@ h2
     margin: 0;
     padding: 0;
     background: url('../img/left_producatori_top.png') no-repeat top left;
-    width: 202px; 
+    width: 200px; 
 }
 .header_linkuri_utile
 {
@@ -280,7 +295,7 @@ h2
     margin: 0;
     padding: 0;
     background: url('../img/left_legaturi_utile_top.png') no-repeat top left;
-    width: 202px; 
+    width: 200px; 
 }
 .caseta_content
 {
@@ -293,7 +308,7 @@ h2
     background: url('../img/caseta_jos.png') no-repeat bottom left;
     margin: 0;
     padding: 0;
-    width: 202px;
+    width: 200px;
     height: 7px;
 	margin-bottom: 10px;
 }
@@ -311,28 +326,19 @@ h2
     text-align: left;
     list-style-type: none;
     width: fill-available;
+	line-height: 18px;
 }
 .caseta_content ul li:hover
 {
     margin-left: 8px;
     padding-left: 7px;
     padding-right: 8px;
-    background: url('../img/small_arrow_right.png') no-repeat 97% center transparent;
+    background: url('../img/small_arrow_right.png') no-repeat 97% center #eceeef;
     text-align: left;
     list-style-type: none;
     color: #1c72af;
     font-weight: bold;
     cursor: pointer;
-}
-
-.left_caseta li
-{
-	line-height: 18px;	
-}
-
-#categorii_produse li:hover
-{
-	background-color: #ECECEC;
 }
 
 /*
@@ -341,7 +347,7 @@ h2
 
 #produse
 {
-    width: 632px;
+    width: 620px;
 	font-size: 11px;
 	float: left;
 	margin-top: 8px;
@@ -388,15 +394,24 @@ h2
 	padding: 5px;
 	vertical-align: top;
 	text-align: left;
+	color:#464646;
 }
 .pret_div
 {
-	width:100%;
+	width:95%;
 	text-align: left;
+	border-top: 1px solid #eceeef;
+	border-bottom: 1px solid #eceeef;
+	padding-top: 2px;
+	padding-bottom: 4px;
+}
+.descript_prod
+{
+	color:#707070;
 }
 .prod_in_cos
 {
-	width:100%;
+	width:95%;
 	text-align: left;
 }
 .caseta_prod div
@@ -407,11 +422,11 @@ h2
 .img_caseta_prod
 {
     border: 0;
-    height: 115px;
+    height: 125px;
 }
 .nume_prod
 {
-    color: #1c72af;
+    color: #1672b5;
     font-weight: bold;
 }
 .pret
@@ -541,10 +556,20 @@ h2
 	outline: none;
 }
 
+#btn_reset_cos
+{
+	background: url(../img/btn_goleste_cos.png) no-repeat transparent;
+	overflow: hidden;
+	width: 152px;
+	height: 26px;
+	border: 0;
+	outline: none;
+}
+
 #cele_mai_vandute_div
 {
 	float: left;
-	width:162px;
+	width: 160px;
     height: 182px;
     margin: 0;
     padding: 0;
@@ -557,12 +582,13 @@ h2
 #cele_mai_vizitate_div
 {
 	float: left;
-	width:162px;
+	width: 160px;
     height: 182px;
     margin: 0;
     padding: 0;
     background: url('../img/cele_mai_vizitate.png') no-repeat top left;
 	margin-bottom: 10px;
+	padding-left: 9px;
 	font-size: 11px;
 	text-align: left;
 }
@@ -571,11 +597,16 @@ h2
 {
 	margin-top: 48px;
 }
-#cele_mai_vandute_div li, #cele_mai_vizitate_div li
+
+#cele_mai_vandute_div ol li, #cele_mai_vizitate_div ol li
 {
 	line-height: 18px;
 }
-
+#cele_mai_vandute_div ol li:hover, #cele_mai_vizitate_div ol li:hover
+{
+	cursor: pointer;
+	color: #6897BD;
+}
 #last_prods_container
 {
 	margin-top: 10px;
@@ -628,7 +659,7 @@ h2
 #up_small_menu
 {
 	position: absolute;
-	width: 1000px;
+	width: 1012px;
 	top: 5px;
 	padding-right: 10px;
 }
@@ -639,7 +670,7 @@ h2
 	margin: 0;
 	margin-top: 5px;
 }
-#up_small_menu ul li
+#up_small_menu ul li, #footer ul li
 {
 	margin-bottom: 10px;
 	display: inline;
@@ -647,7 +678,7 @@ h2
 	color: #898989;
 	font-size: 12px;
 }
-#up_small_menu ul li:hover
+#up_small_menu ul li:hover, #footer ul li:hover
 {
 	color: #2f6393;
 	cursor: pointer;

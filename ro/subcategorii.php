@@ -49,16 +49,22 @@ $tabel .= "</tabel>";
 <html>
 	<head>
 		<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
-		<title>Afisare afectiuni</title>
+		<title>Afisare subcategorii</title>
         <meta http-equiv="Pragma" content="no-cache">
         <meta http-equiv="Cache-Control" content="no-cache">
         <meta name="author" content="Bajanica Bogdan Dionisie">
-        <meta name="description" content="Ortoprotetica - afisare afectiuni">
+        <meta name="description" content="Ortoprotetica - afisare subcategorii">
         <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
         <LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css">
+		<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script> 
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("#main_frame",window.parent.document).height($(document).height()+10);
+			});    
+		</script>
 	</head>
 	<body>
-	<div class="titlu_pag">Afisare afectiuni</div>
+	<div class="titlu_pag">Afisare Subcategorii</div>
 		<?=$tabel;?>
 	</body>
 </html>

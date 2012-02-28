@@ -58,13 +58,13 @@ function getStatistici()
 	$output_vandute .= "</ol>";
 	$return["error_msg"] = "";
 	include_once("../inc/global.php");
-	$sql_vizitate = "SELECT count(a.id) as vizite, b.nume as produs, b.id FROM vizionari a, produse b WHERE b.id = a.id_prod GROUP BY a.id_prod ORDER BY vizite desc LIMIT 0,5";
+	$sql_vizitate = "SELECT count(a.id) as vizite, b.nume as produs, b.id as id FROM vizionari a, produse b WHERE b.id = a.id_prod GROUP BY a.id_prod ORDER BY vizite desc LIMIT 0,5";
 	//$return["error_msg"] = ;
 	$q_vizitate = mysql_query($sql_vizitate) or die("Eroare preluare cele mai vizitate produse!". mysql_error());
 	$output_vizitate = "<ol>";
 	while ($row_vizitate = mysql_fetch_array($q_vizitate))
 	{
-		$output_vizitate .= "<li onmouseover=\"this.style.cursor='pointer'; this.style.color='#6897BD'\" onmouseout=\"this.style.color='#000000';\" onclick=\"top.document.getElementById('main_frame').src='ro/produse.php?mod=1&id_produs=".$row_vizitate["id"]."';\">".substr(ucfirst($row_vizitate["produs"]),0,25)."</li>";
+		$output_vizitate .= "<li onclick=\"top.document.getElementById('main_frame').src='ro/produse.php?mod=1&id_produs=".$row_vizitate["id"]."';\">".substr(ucfirst($row_vizitate[1]),0,25)."</li>";
 	}
 	$output_vizitate .= "</ol>";
 	$return["continut_vizitate"] = $output_vizitate;
