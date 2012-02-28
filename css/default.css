@@ -8,6 +8,7 @@
 *
 {
     font-family: "Arial";
+	outline: none;
 }
 html, body
 {
@@ -108,7 +109,7 @@ table td
 {
     float:left;
     color: black;
-    width: 836px;
+    width: 632px;
 }
 .footer
 {
@@ -324,13 +325,23 @@ h2
     cursor: pointer;
 }
 
+.left_caseta li
+{
+	line-height: 18px;	
+}
+
+#categorii_produse li:hover
+{
+	background-color: #ECECEC;
+}
+
 /*
 * CSS caseta produs
 */
 
 #produse
 {
-    width: 836px;
+    width: 632px;
 	font-size: 11px;
 	float: left;
 	margin-top: 8px;
@@ -559,6 +570,10 @@ h2
 #cele_mai_vandute_div ol, #cele_mai_vizitate_div ol
 {
 	margin-top: 48px;
+}
+#cele_mai_vandute_div li, #cele_mai_vizitate_div li
+{
+	line-height: 18px;
 }
 
 #last_prods_container

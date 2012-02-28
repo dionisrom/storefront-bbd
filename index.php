@@ -145,7 +145,7 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
             <div class='left_caseta'>
                 <div class='header_produse'></div>
                 <div class='caseta_content'>
-                    <ul>
+                    <ul id='categorii_produse'>
                         ".$categories_list."
                     </ul>
                 </div>
