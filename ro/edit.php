@@ -72,6 +72,7 @@ case "prod":
     $db = "produse";
     $sql = "UPDATE ".$db." SET ";
     $sql .= " nume = '".$_REQUEST["nume"]."', ";
+    $sql .= " cod = '".$_REQUEST["cod"]."', ";
     $sql .= " descriere = '".$_REQUEST["descriere"]."', ";
     $sql .= " id_categorie = ".$_REQUEST["categorie"].", ";
     $sql .= " indicatii = '".$_REQUEST["indicatii"]."', ";

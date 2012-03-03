@@ -3,8 +3,9 @@ session_start();
 include("../inc/global.php");
 if ( isset($_REQUEST["salvez"]) && $_REQUEST["salvez"] == "da" && ( $_SESSION["tipusr"] == 1 || $_SESSION["tipusr"] == 2 ) )
 {
-    $sql_prod = "INSERT INTO produse (nume,descriere,indicatii,pret,id_categorie,id_producator,id_subcategorie,reducere,prima_pagina,super_oferta) VALUES (";
+    $sql_prod = "INSERT INTO produse (nume,cod,descriere,indicatii,pret,id_categorie,id_producator,id_subcategorie,reducere,prima_pagina,super_oferta) VALUES (";
 	$sql_prod .= " '".trim($_REQUEST['nume'])."', ";
+	$sql_prod .= " '".trim($_REQUEST['cod'])."', ";
 	$sql_prod .= " '".trim($_REQUEST['descriere'])."', ";
 	$sql_prod .= " '".trim($_REQUEST['indicatii'])."', ";
 	$sql_prod .= " ".trim($_REQUEST['pret']).", ";
@@ -120,6 +121,11 @@ else
 					<td>Denumire *:</td>
             		<td><input type="text" name="nume" id="nume" onkeyup="this.style.textTransform = 'capitalize';" value="" size="30" class="input" /></td>
             		<td id='err_nume' class="eroare_text"></td>
+				</tr>
+				<tr>
+					<td>Cod *:</td>
+            		<td><input type="text" name="cod" id="cod" value="" size="30" class="input" /></td>
+            		<td id='err_cod' class="eroare_text"></td>
 				</tr>
 				<tr>
 					<td>Descriere :</td>

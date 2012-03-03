@@ -25,6 +25,12 @@ class BBDWebSite {
     var $body_left_content = "";
 	var $body_right_content = "";
 	
+	var $extra_left_top = true;
+	var $extra_left_body = true;
+	var $extra_left_footer = true;
+	var $extra_right_top = true;
+	var $extra_right_body = true;
+	var $extra_right_footer = true;
     var $top_left = false;
     var $top_right = false;
     var $body_left = true;
@@ -75,7 +81,7 @@ class BBDWebSite {
     public function setContentPage()
     {
         $content = "<div id='content'>".$this->EOF;
-        $header = "<div id='header' class='header'>$this->headerContent</div>".$this->EOF;
+        $header = "<div id='header' class='header'>".$this->headerContent."</div>".$this->EOF;
         if (!$this->top_left)
             $head_left_div = "".$this->EOF;
         else
@@ -110,16 +116,22 @@ class BBDWebSite {
         $footer = "
 			<div id='footer' class='footer'>
 				<div style=' padding: 0; margin: 0; width:99%; text-align: left; float: left; font-weight: bold; white-space: nowrap; height: 15px;'>
-					<ul><li>Acasa</li><li>Despre noi</li><li>Livrare</li><li>Cum cumpar</li><li>Harta Site</li><li>Contact</li></ul>
+					<ul>
+						<li onclick=\"document.getElementById('main_frame').src='ro/acasa.php'\">Acasa</li>
+						<li onclick=\"document.getElementById('main_frame').src='ro/despre_noi.html'\">Despre noi</li>
+						<li onclick=\"document.getElementById('main_frame').src='ro/livrare.html'\">Livrare</li>
+						<li onclick=\"document.getElementById('main_frame').src='ro/cum_cumpar.html'\">Cum cumpar</li>
+						<li>Harta Site</li>
+						<li onclick=\"document.getElementById('main_frame').src='ro/contact.html'\">Contact</li>
+					</ul>
 				</div>
 				<div class='date_created'>Copyright &copy; Ortoprotetica 2012. Toate drepturile rezervate.</div><div class='center'></div>
-				<div class='created'></div>
 			</div>".$this->EOF;
         
-        $content .= $head_left_div . $header . $head_right_div;
-        $content .= "<div class='clearfix'><div>";
-        $content .= $body_left_div . $body . $body_right_div;
-        $content .= "<div class='clearfix'><div>";
+        $content .= $head_left_div . $header . $head_right_div; 
+        //$content .= "<div class='clearfix'></div>";
+        $content .= "<div id='body_container'>".$body_left_div . $body . $body_right_div."</div>";
+        //$content .= "<div class='clearfix'></div>";
         $content .= $bottom_left_div . $footer . $bottom_right_div;
         $content .= "</div>".$this->EOF;
         $this->content = $content;
@@ -128,7 +140,6 @@ class BBDWebSite {
     public function setHeaderInclude()
     {
         $this->headInclude = "<script type='text/JavaScript' src='js/jquery-1.7.1.min.js'></script>".$this->EOF;
-        $this->headInclude .= '<link rel="stylesheet" type="text/css" href="css/reset-min.css" />'.$this->EOF;
         $this->headInclude .= '<link rel="stylesheet" href="css/style.css" type="text/css" media="all" charset="utf-8" />'.$this->EOF;
         $this->headInclude .= '<link rel="stylesheet" href="css/MenuMatic.css" type="text/css" media="screen" charset="utf-8" />'.$this->EOF;
         $this->headInclude .= '<!--[if lt IE 7]><link rel="stylesheet" href="css/MenuMatic-ie6.css" type="text/css" media="screen" charset="utf-8" /><![endif]-->'.$this->EOF;
@@ -148,7 +159,6 @@ class BBDWebSite {
     
     public function setCSS()
     {
-		/*
 		$css_content = file_get_contents("css/_default_.css");
         $css_compiled = "css/default_compiled.css";
         $css_content = str_replace('$this->width',  $this->width, $css_content);
@@ -158,8 +168,8 @@ class BBDWebSite {
 		if ($this->top_left) $headerWidth -= $this->leftWidth+2;
 		if ($this->top_right) $headerWidth -= $this->rightWidth+2;
 		$bodyWidth = $this->width;
-		if ($this->body_left) $bodyWidth -= $this->leftWidth+8;
-		if ($this->body_right) $bodyWidth -= $this->rightWidth+8;
+		if ($this->body_left) $bodyWidth -= $this->leftWidth+4;
+		if ($this->body_right) $bodyWidth -= $this->rightWidth+4;
 		$footerWidth = $this->width;
 		if ($this->bottom_left) $footerWidth -= $this->leftWidth+2;
 		if ($this->bottom_right) $footerWidth -= $this->rightWidth+2;
@@ -178,7 +188,6 @@ class BBDWebSite {
         }
         file_put_contents($css_compiled, $css_content);
         file_put_contents("css/default.css", $css_content);
-		*/
         $this->css = "<link rel='stylesheet' type='text/css' href='css/default_compiled.css' />".$this->EOF;
         return $this->css;
     }

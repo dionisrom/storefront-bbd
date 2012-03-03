@@ -44,7 +44,7 @@
 #subMenusContainer a.subMenuParentBtnFocused,
 #nav li a:hover,
 #nav li a:focus{
-	background-color:#transparent ;
+	background-color:transparent ;
 	color:#EAEAEA;
 }
 

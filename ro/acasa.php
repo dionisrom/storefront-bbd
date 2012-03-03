@@ -19,7 +19,7 @@
                 continuous: true,
                 numeric: true
             });
-			jQuery("#main_frame",window.parent.document).height(jQuery(document).height()+10);
+			jQuery("#main_frame",window.parent.document).height(jQuery(document).height());
         });    
     </script>
 	<LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css" />
@@ -29,7 +29,6 @@
 
 <?
     include("../inc/global.php");
-    $inputs = "";
     $sql_produse = "SELECT a.id, a.nume, a.descriere, a.pret, a.reducere, b.denumire FROM produse a LEFT JOIN categorii b ON b.id = a.id_categorie WHERE prima_pagina like 'da'";
     $q_produse = mysql_query($sql_produse) or die("Eroare preluare produse!");
     $tabel = "
@@ -48,8 +47,9 @@
         </div>
     </div>
     <!-- slider -->
-    <div class='.clearfix'></div>
-    <div id='produse'>";
+    
+    <div id='produse'>
+		<h3 style='color: #3c3d3f; font-size: 12px; text-indent: 20px;'>Promo Ortoprotetica</h3>";
     while ($rs_produse = mysql_fetch_array($q_produse))
     {
         $image = "&nbsp;";

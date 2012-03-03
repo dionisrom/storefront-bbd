@@ -27,6 +27,7 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
 		case 'administrare_cosuri'	: adm_content("adm_cosuri");break;
 		case 'administrare_useri'	: adm_content("adm_users");break;
 		case 'pagini_web'			: adm_content("adm_pagini");break;
+		case 'rapoarte'				: adm_content("rapoarte");break;
 		case 'statistici'			: getStatistici();break;
 		default						: getPage($action); break;
     }

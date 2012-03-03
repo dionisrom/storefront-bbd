@@ -21,7 +21,7 @@ if( !empty($_POST["pagina"]) && !empty($_POST["operation"]) )
 			$return["msg"] = "Preluare continutului pentru fisierul ".$rs[0]." s-a efectuat cu succes!";
 			$rs = mysql_fetch_array($q);
 			$return["denumire"]=$rs[0];
-			$return["continut"]=nl2br(htmlspecialchars($rs[1], ENT_QUOTES));
+			$return["continut"]=nl2br($rs[1]);
 		}
 	}
 	if($_POST["operation"] == "putcontent")
@@ -30,7 +30,7 @@ if( !empty($_POST["pagina"]) && !empty($_POST["operation"]) )
 			$continut = "";
 		else
 			//$continut = mysql_real_escape_string($_POST["continut"]);
-			$continut = htmlentities($_POST['continut'], ENT_QUOTES);
+			$continut = $_POST['continut'];
 		$str = "UPDATE files SET content = '".$continut."' WHERE id_file = ".$_POST["pagina"];
 		$q = mysql_query($str);
 		if (!$q)

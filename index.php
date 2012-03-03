@@ -35,17 +35,10 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
             echo $myPage->setHeaderInclude();
             echo $myPage->setCSS();
         ?>
-        <style>
-        	html, body, body center
-        	{
-				background-color: #eceeef;
-        	}
-        </style>
         <script>
 			jQuery(function()
 			{
 				var iFrames = jQuery('#main_frame');
-				var innerDoc = (iFrames.get(0).contentDocument) ? iFrames.get(0).contentDocument : iFrames.get(0).contentWindow.document;
 				iFrames.height(0);
 				function iResize() 
 				{
@@ -70,8 +63,7 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
 								}
 							});
 						}
-						innerDoc = (iFrames.get(0).contentDocument) ? iFrames.get(0).contentDocument : iFrames.get(0).contentWindow.document;
-						//iFrames.height(innerDoc.body.scrollHeight + 35);
+
 					}
 					else
 					{
@@ -82,8 +74,8 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
 			});
         </script>
     </head>
-    <body>
-        <center>
+    <body style="background-color: #eceeef;">
+		<div style="width:100%; height: 6px; background-color: #cbcdcf;"></div>
         <?php
             if (isset($_SESSION["tipusr"]) && $_SESSION["tipusr"] <= 2)
             {
@@ -97,7 +89,12 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
 					<div style='margin-right: 10px; float: right; font-size: 24px; color: #6897bd; white-space: nowrap;'>021 316 96 05</div>
 					<div style='margin-right: 10px; width: 80%; float: right; font-size: 10px; text-align: right; white-space: nowrap; color: #7d7d7d;'>Pentru informatii<br />si comenzi telefonice</div>
 					<div style=' padding: 0; margin: 0; width:99%; text-align: right; margin-right: 10px; float: right; font-weight: bold; white-space: nowrap; height: 15px;'>
-						<ul><li>Acasa</li><li>Ajutor Clienti</li><li>Harta Site</li><li>Contact</li></ul>
+						<ul>
+							<li onclick=\"document.getElementById('main_frame').src='ro/acasa.php'\">Acasa</li>
+							<li onclick=\"document.getElementById('main_frame').src='ro/ajutor_clienti.html'\">Ajutor Clienti</li>
+							<li>Harta Site</li>
+							<li onclick=\"document.getElementById('main_frame').src='ro/contact.html';\">Contact</li>
+						</ul>
 					</div>
 				</div>
 				<form id='cautare' name='cautare' method='post' action='ro/cauta.php' >
@@ -296,6 +293,5 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
 			$myPage->setBodyContent($body_content);
             echo $myPage->newPage();
         ?>
-        </center>
     </body>
 </html>

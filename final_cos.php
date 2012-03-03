@@ -1,7 +1,7 @@
 <?php
 session_start();
 include ("inc/global.php");
-$sql_cos = "INSERT INTO cos (data,ora,produse,cantitati,id_user,curier) VALUE ('".strftime('%d.%m.%Y',time())."','".strftime('%H:%M:%S',time())."','".implode(",",$_SESSION["id_produse"])."','".implode(",",$_SESSION["cant_produse"])."',".$_SESSION["id_user"].", ".$_REQUEST['curier'].")";
+$sql_cos = "INSERT INTO cos (data,ora,produse,cantitati,preturi,id_user,curier) VALUE ('".strftime('%d.%m.%Y',time())."','".strftime('%H:%M:%S',time())."','".implode(",",$_SESSION["id_produse"])."','".implode(",",$_SESSION["cant_produse"])."','".implode(",",$_SESSION["pret_produse"])."',".$_SESSION["id_user"].", ".$_REQUEST['curier'].")";
 mysql_query($sql_cos) or die("Eroare la finalizarea cosului !");
 session_unregister("cos");
 session_unregister("nr_produse");
