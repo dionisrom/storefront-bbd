@@ -95,8 +95,9 @@ include("../inc/global.php");
 		</script>
 	</head>
 	<body role="application">
+		<h3>Administrare pagini</h3>
 		<form id="page_frm" method="post">
-		<div style="float: left; width:80%;">
+		<div style="float: left; width:97%;">
 			<div id="message"></div>
 			<br />
 			<input type="hidden" id="page_name" name="page_name" value="">
@@ -112,13 +113,16 @@ include("../inc/global.php");
 	            ?>
 	        </select>
 	        <br />
-	        <div style="width:80%; float: left;">
-				<textarea id="elm1" name="elm1" rows="15" style="width: 80%; float: left;">
+	        <div style="width:97%; float: left;">
+				<textarea id="elm1" name="elm1" rows="35" style="width: 95%; float: left;">
 					
 				</textarea>
 				<br />
 				<input type="button"  name="save" value="Submit" onclick="putPageContent();" />
 				<input type="reset" name="reset" value="Reset" />
+				<br />
+				<br />
+				<br />
 			</div>
 		</div>
 		</form>

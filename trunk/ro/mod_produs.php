@@ -15,11 +15,6 @@ if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" && ( $_SESSION["tipus
         <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
         <LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css">
 		<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script> 
-		<script type="text/javascript">
-			$(document).ready(function(){
-				$("#main_frame",window.parent.document).height($(document).height()+10);
-			});    
-		</script>
         <!--[if IE]>
 		<style>
 		.trans
@@ -40,19 +35,52 @@ if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" && ( $_SESSION["tipus
 		<!--<![endif]-->
 	</head>
 	<body>
-	<div class="titlu_pag">Modificare produs</div>                                                       
+	<div class="titlu_pag">Modificare produs</div> 
+		<?php
+		$prod_in_pag = 20;
+		$str_total_prod = "SELECT count(a.id) FROM produse a, producatori b, categorii c WHERE b.id = a.id_producator and c.id = a.id_categorie";
+		$q_total_prod = mysql_query($str_total_prod) or die("<script>alert('Eroare preluare numar total de produse!');</script>");
+		$rs_total_prod = mysql_fetch_array($q_total_prod);
+		$total_pag = ceil(($rs_total_prod[0]) / $prod_in_pag);
+		if (isset($_REQUEST["pag"]))
+			$pag = $_REQUEST["pag"];
+		else
+			$pag = 1;
+
+		$pag_nav = "
+			<ul id='pag_nav' style='list-style-type: none;'>";
+		for($i=1;$i<=$total_pag;$i++ )
+		{
+			if ($i == $pag)
+			{
+				$current = "background-color: #EAEAEA;";
+				$class = " onmouseover=\"this.style.cursor='pointer'; this.style.backgroundColor='#EAEAEA';\" ";
+			}
+			else
+			{
+				$current = "";
+				$class = " onmouseover=\"this.style.cursor='pointer'; this.style.backgroundColor='#EAEAEA';\" onmouseout=\"this.style.backgroundColor='transparent';\" ";
+			}
+			$pag_nav .= "
+				<li style='padding: 3px; font-size:14px; float: left; ".$current."' ".$class." onclick=\"parent.document.getElementById('main_frame').src = './ro/mod_produs.php?pag=".$i."';\"><strong>".$i."</strong></li>";
+		}
+		$pag_nav .= "
+			</ul>";
+		echo $pag_nav."<br /><br />";
+		?>
 		<form target="_self" method="post" enctype="multipart/form-data" id="form_prod" name="form_prod">
 			<table cellpadding="0" cellspacing="0" border="0" style="white-space:nowrap;">
 	            <tr>
 	                <th>Denumire produs</th>
-	                <!--<th>Categorie</th>-->
+	                <th>Cod produs</th>
+	                <th>Categorie</th>
 	                <th>Producator</th>
 	                <th width="100">Operatiuni</th>
 	                <th>&nbsp;</th>
 	            </tr>
 				<?
-	            $str_categ = "SELECT a.*, c.denumire, b.denumire FROM produse a, producatori b, categorii c WHERE b.id = a.id_producator and c.id = a.id_categorie ORDER BY a.nume ";
-	            $q_categ = mysql_query($str_categ) or die("<script>alert('Eroare preluare produse!');</script>");
+				$str_categ = "SELECT a.*, c.denumire as categ, b.denumire as producator FROM produse a, producatori b, categorii c WHERE b.id = a.id_producator and c.id = a.id_categorie ORDER BY a.nume LIMIT ".($pag-1)*$prod_in_pag.", ".($prod_in_pag);
+				$q_categ = mysql_query($str_categ) or die("<script>alert('Eroare preluare produse!');</script>");
 	            $linie = 0;
 	            while ( $rs = mysql_fetch_array($q_categ) )
 	            {
@@ -65,10 +93,12 @@ if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" && ( $_SESSION["tipus
 	                    $class = "even";
 	                }
 	            ?>
+				
                 <tr class="<?=$class?>">
-                	<td style="padding-left:4px; padding-right:4px;"><?=$rs[1]?></td>
-                	<td style="border-left:1px solid #367766; padding-left:4px; padding-right:4px;"><?=$rs[12]?></td>
-                	<!--<td style="border-left:1px solid #367766; padding-left:4px; padding-right:4px;"><?=$rs[13]?></td>-->
+                	<td style="padding-left:4px; padding-right:4px;"><?=$rs["nume"]?></td>
+                	<td style="border-left:1px solid #367766; padding-left:4px; padding-right:4px;"><?=$rs["cod"]?></td>
+                	<td style="border-left:1px solid #367766; padding-left:4px; padding-right:4px;"><?=$rs["categ"]?></td>
+                	<td style="border-left:1px solid #367766; padding-left:4px; padding-right:4px;"><?=$rs["producator"]?></td>
                 	<td style="border-left:1px solid #367766; padding-left:4px; padding-right:4px;">
                 		<img onmouseover="this.style.cursor='pointer';" title="Editare" src="../ico/edit.png" border=0 onclick="document.getElementById('product_box').style.display='block'; document.getElementById('date_prod').src='date_produs.php?id=<?=$rs[0]?>'; ">
                         <img onmouseover="this.style.cursor='pointer';" title="Stergere" src="../ico/delete.png" border=0 onclick="if ( confirm('Esti sigur ca doresti stergerea acestui produs?') ) {document.getElementById('frm').src='sterg.php?db=prod&id=<?=$rs[0]?>'}">
@@ -83,8 +113,7 @@ if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" && ( $_SESSION["tipus
 				?>
 			</table>
 		</form>
-	</body>
-<div   class="trans" id="product_box" style="position:absolute; top:100; left:150; display:none;background-color:#fa6c00;">
+<div class="trans" id="product_box" style="position:absolute; top:100; left:150; display:none;background-color:#fa6c00;">
 	<!-- NOTE: nested divs required for slide effect-->
 	<div class="content_panel" id="content_box">
 	    <form target="date_prod" action="edit.php" method="post" enctype="multipart/form-data" id="form_prod" name="form_prod">
@@ -96,6 +125,11 @@ if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" && ( $_SESSION["tipus
                     <td>Denumire *:</td>
                     <td><input type="text" name="nume" id="nume" onkeyup="this.style.textTransform = 'capitalize';" value="" size="60" class="input" /></td>
                     <td id='err_nume' class="eroare_text"></td>
+                </tr>
+				<tr>
+                    <td>Cod *:</td>
+                    <td><input type="text" name="cod" id="cod" value="" size="30" class="input" /></td>
+                    <td id='err_cod' class="eroare_text"></td>
                 </tr>
                 <tr>
                     <td>Descriere :</td>
@@ -190,8 +224,14 @@ if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" && ( $_SESSION["tipus
 		</form>
 	</div>
 </div>
+
 <iframe src="" id="date_prod" name="date_prod" frameborder="0" marginheight="0" marginwidth="0" height="0" width="0" scrolling="no"></iframe>
 <iframe id="frm" width="0" height="0" name="frm" src="" frameborder="0" marginheight="0" marginwidth="0" scrolling="no"></iframe>
+
+<script type="text/javascript">
+	jQuery("#main_frame",window.parent.document).height(jQuery(document).height()+30);
+</script>
+</body>
 </html>
 <?
 }

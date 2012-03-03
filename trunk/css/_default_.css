@@ -12,11 +12,15 @@
 }
 html, body
 {
-    text-align: auto;
     font-size: 12px;
-	height: 100%;
+	margin:0;
+	padding: 0;
 }
-
+ol, ul, li
+{
+	margin: 0;
+	padding:0;
+}
 table
 {
 	margin-right: 10px;
@@ -29,42 +33,57 @@ table td
 	padding-left: 5px;
 	padding-right: 5px;
 }
+#body_container
+{
+	background-color: #FFFFFF;
+	display: block;
+	position:relative;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+}
 #main_frame
 {
 	height: 100%;
 	overflow: hidden;
     padding: 10px;
 }
-#content, .body, .footer, .header
+.body, .footer, .header
 {
     width: $this->widthpx;
     background-color: #FFFFFF;
+}
+#content{
+	width: 1021px;
+	padding-left: 9px;
+	position:absolute;
+	left:50%;
+	margin-left: -515px;
+	top:6px;
+	display: block;
+	background: url(../img/bg_contents.png) repeat-y #FFF;
 }
 .hidden
 {
     display: none;
 }
-.hl, .bl, .fl, .hr, .br, .fr
-{
-    display: inline-block;
-    background-color: #FFFFFF;
-}
 .hl, .bl, .fl
 {
-    width: $this->leftWidthpx;
+	width: $this->leftWidthpx;
 }
 .hr, .br, .fr
 {
-    width: $this->rightWidthpx;
+	width: $this->rightWidthpx;
+}
+.hl, .bl, .fl, .hr, .br, .fr
+{
+    background-color: #FFFFFF;
 }
 .header, .hl, .hr
 {
     height: 120px;
     border-bottom: 1px solid lightgray;
-}
-.body, .bl, .br
-{
-    min-height: 600px;
 }
 .footer, .fl, .fr
 {
@@ -102,15 +121,13 @@ table td
     color: black;
     width: $headerWidthpx;
 }
-.clearfix
-{
-    clear: both;
-}
 .body
 {
     float:left;
     color: black;
     width: $bodyWidthpx;
+	display: block;
+	height:100%;
 }
 .footer
 {
@@ -191,11 +208,10 @@ table td
 	margin-top:8px;
 	float: right;
 	height:18px;
-	width: 130px;
-	overflow: none;
+	width: 105px;
 	outline: none;
 	border:0;
-	margin-right: 40px;
+	margin-right: 70px;
 	z-index: 10;
 	padding-right: 40px;
 	padding-left: 3px;
@@ -207,14 +223,12 @@ table td
 	right: 0;
 	height: 18px;
 	width: 66px;
-	overflow: none;
 	outline: none;
 	margin-right: 10px;
-	margin-top:8px;
+	margin-top: 9px;
 	z-index: 11;
     background: url(../img/search_btn.png) no-repeat transparent;
 	border: 0;
-	overflow: none;
 }
 #search_icon
 {
@@ -225,7 +239,7 @@ table td
 	margin: 0;
 	padding: 0;
 	margin-top: 9px;
-	margin-left: 40px;
+	margin-left: 35px;
 	z-index: 999;
     background: url(../img/search_icon.png) no-repeat center transparent;
 }
@@ -326,7 +340,6 @@ h2
     background: url('../img/small_arrow.png') no-repeat center left transparent;
     text-align: left;
     list-style-type: none;
-    width: fill-available;
 	line-height: 18px;
 }
 .caseta_content ul li:hover
@@ -381,7 +394,6 @@ h2
 	width: 46px;
 	height: 16px;
 	outline: none;
-	overflow: none;
 	border: 0;
 	background: url(../img/detalii.png) no-repeat transparent;
 	float: right;
@@ -392,7 +404,6 @@ h2
 	width: 24px;
 	height: 24px;
 	outline: none;
-	overflow: none;
 	border: 0;
 	background: url(../img/add_in_cos.png) no-repeat center transparent;
 	float: right;
@@ -599,7 +610,6 @@ h2
     padding: 0;
     background: url('../img/cele_mai_vizitate.png') no-repeat top left;
 	margin-bottom: 10px;
-	padding-left: 9px;
 	font-size: 11px;
 	text-align: left;
 }
@@ -607,6 +617,7 @@ h2
 #cele_mai_vandute_div ol, #cele_mai_vizitate_div ol
 {
 	margin-top: 48px;
+	margin-left: 29px;
 }
 #cele_mai_vandute_div li, #cele_mai_vizitate_div li
 {
@@ -651,7 +662,6 @@ h2
 	width: 110px;
 	float: left;
 	text-align: left;
-	font-size: normal;
 	color: #898989;
 	font-size: 12px;
 	padding-left: 5px;
