@@ -31,17 +31,30 @@
     include("../inc/global.php");
     $sql_produse = "SELECT a.id, a.nume, a.descriere, a.pret, a.reducere, b.denumire FROM produse a LEFT JOIN categorii b ON b.id = a.id_categorie WHERE prima_pagina like 'da'";
     $q_produse = mysql_query($sql_produse) or die("Eroare preluare produse!");
-    $tabel = "
+    //citeste fisierele pentru slide
+	$cale = "../images/slider/";
+	$imagini = array();
+	if ($handle = opendir($cale)) 
+	{
+		$imagini = array();
+		while (false !== ($entry = readdir($handle))) {
+			if ($entry != "." && $entry != "..") $imagini[] = $entry;
+		}
+		closedir($handle);
+	}
+	$slide_images = "";
+	foreach ($imagini as $imagine)
+	{
+		$slide_images .= "<li><a href=''><img src='".$cale.$imagine."' alt='Css Template Preview' /></a></li>
+			";
+	}
+	$tabel = "
     <!-- slider -->
     <div id='container'>
         <div id='content_slider'>
             <div id='slider'>
                 <ul>                
-                    <li><a href=''><img src='../images/slider/slider1.jpg' alt='Css Template Preview' /></a></li>
-                    <li><a href=''><img src='../images/slider/slider2.jpg' alt='Css Template Preview' /></a></li>
-                    <li><a href=''><img src='../images/slider/slider3.jpg' alt='Css Template Preview' /></a></li>
-                    <li><a href=''><img src='../images/slider/slider4.jpg' alt='Css Template Preview' /></a></li>
-                    <li><a href=''><img src='../images/slider/slider5.jpg' alt='Css Template Preview' /></a></li>            
+                    ".$slide_images."            
                 </ul>
             </div>
         </div>
