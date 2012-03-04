@@ -212,6 +212,40 @@ if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" && ( $_SESSION["tipus
                     <td><input type="text" name="reducere" id="reducere" value="0" size="30" class="input" /></td>
                     <td id='err_reducere' class="eroare_text"></td>
                 </tr>
+				<tr>
+					<td>Se aduce doar la comanda :</td>
+            		<td>
+						<select name="prod_la_comanda" id="prod_la_comanda" class="input">
+            				<option value="0">NU</option>
+            				<option value="1">DA</option>
+            			</select>
+					</td>
+            		<td id='err_prod_la_comanda' class="eroare_text"></td>
+				</tr>
+                <tr>
+                    <td style="vertical-align: top;">Grila masuri:</td>
+                    <td>
+						<h3 style="margin-left: 15px;">Masuri tip 1</h3>
+						<label style="width: 40px;"><input type="checkbox" name="masuri_tip1[]" id="S" value="S" class="input" /> S</label><br />
+						<label style="width: 40px;"><input type="checkbox" name="masuri_tip1[]" id="M" value="M" class="input" /> M</label><br />
+						<label style="width: 40px;"><input type="checkbox" name="masuri_tip1[]" id="L" value="L" class="input" /> L</label><br />
+						<label style="width: 40px;"><input type="checkbox" name="masuri_tip1[]" id="XL" value="XL" class="input" /> XL</label><br />
+						<label style="width: 40px;"><input type="checkbox" name="masuri_tip1[]" id="XXL" value="XXL" class="input" /> XXL</label><br />
+						<hr>
+						<h3 style="clear:both;margin-left: 15px;">Masuri tip 2</h3>
+						<label>1 <input type="checkbox" name="masuri_tip2[]" value="1" id="1" class="input" /></label><br />
+						<label>2 <input type="checkbox" name="masuri_tip2[]" value="2" id="2" class="input" /></label><br />
+						<label>3 <input type="checkbox" name="masuri_tip2[]" value="3" id="3" class="input" /></label><br />
+						<label>4 <input type="checkbox" name="masuri_tip2[]" value="4" id="4" class="input" /></label><br />
+						<label>5 <input type="checkbox" name="masuri_tip2[]" value="5" id="5" class="input" /></label><br />
+						<label>6 <input type="checkbox" name="masuri_tip2[]" value="6" id="6" class="input" /></label><br />
+						<label>7 <input type="checkbox" name="masuri_tip2[]" value="7" id="7" class="input" /></label><br />
+						<hr>
+						<h3 style="margin-left: 15px;">Masuri tip 3</h3>
+						<label>Masura unica <input type="checkbox" name="masuri_tip3[]" id="unica" value="unica" class="input" /></label><br />
+					</td>
+                    <td id='err_grila_masuri' class="eroare_text"></td>
+                </tr>
                 <tr>
                     <td colspan="3" align="center">
                         <input type="hidden" id="id_produs" name="id_produs" value="">
