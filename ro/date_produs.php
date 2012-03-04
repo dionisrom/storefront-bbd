@@ -12,7 +12,23 @@ if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" )
      for ($i=0; $i<count($str_arr1); $i++)
         $str_ind .= $str_arr1[$i]."\\n\\";
      $str_ind = substr($str_ind,0,(strlen($str_ind)-3));
-     echo "
+     $masuri = explode(",",$rs_date["grila_masuri"]);
+	 $grila_masuri = "\n";
+	 if($masuri[0] == "unica")
+	 {
+		 $grila_masuri .= "parent.document.getElementById('unica').checked='checked';\n";
+	 }
+	 else
+	 {		 
+		for($i=0;$i<count($masuri);$i++)
+		{
+			$grila_masuri .= "parent.document.getElementById('".$masuri[$i]."').checked='checked';\n";
+		}
+	 }
+	 if (file_exists("../images/produse/".$rs_date["id"].".jpg")) $foto = "../images/produse/".$rs_date["id"].".jpg";
+	 if (file_exists("../images/produse/".$rs_date["id"].".gif")) $foto = "../images/produse/".$rs_date["id"].".gif";
+	 if (file_exists("../images/produse/".$rs_date["id"].".png")) $foto = "../images/produse/".$rs_date["id"].".png";
+	 echo "
      <script>
         parent.document.getElementById('id_produs').value='".$rs_date["id"]."';
         parent.document.getElementById('id').value='".$rs_date["id"]."';
@@ -22,7 +38,8 @@ if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" )
         parent.document.getElementById('pret').value='".$rs_date["pret"]."';
         parent.document.getElementById('indicatii').value='".$str_ind."';
         parent.document.getElementById('reducere').value='".$rs_date["reducere"]."';
-        parent.document.getElementById('poza_existenta').src='../images/produse/".$rs_date["id"].".jpg';
+        parent.document.getElementById('poza_existenta').src='".$foto."';
+		".$grila_masuri."	
 		var cat = parent.document.getElementById('categorie');
         for (i=1;i<cat.options.length;i++)
             if (cat.options[i].value==".$rs_date["id_categorie"].")
@@ -39,6 +56,11 @@ if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" )
             parent.document.getElementById('super_oferta').options[1].selected=true;
         else
             parent.document.getElementById('super_oferta').options[0].selected=true;
+		
+        if ( '".$rs_date["prod_la_comanda"]."' == '1' )
+            parent.document.getElementById('prod_la_comanda').options[1].selected=true;
+        else
+            parent.document.getElementById('prod_la_comanda').options[0].selected=true;
      </script>
      ";
 }

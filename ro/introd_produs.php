@@ -3,7 +3,11 @@ session_start();
 include("../inc/global.php");
 if ( isset($_REQUEST["salvez"]) && $_REQUEST["salvez"] == "da" && ( $_SESSION["tipusr"] == 1 || $_SESSION["tipusr"] == 2 ) )
 {
-    $sql_prod = "INSERT INTO produse (nume,cod,descriere,indicatii,pret,id_categorie,id_producator,id_subcategorie,reducere,prima_pagina,super_oferta) VALUES (";
+    $masuri =array();
+	if (isset($_REQUEST['masuri_tip1'])) $masuri = $_REQUEST['masuri_tip1'];
+    if (isset($_REQUEST['masuri_tip2'])) $masuri = $_REQUEST['masuri_tip2'];
+    if (isset($_REQUEST['masuri_tip3'])) $masuri = $_REQUEST['masuri_tip3'];
+	$sql_prod = "INSERT INTO produse (nume,cod,descriere,indicatii,pret,id_categorie,id_producator,id_subcategorie,reducere,prima_pagina,super_oferta,grila_masuri,prod_la_comanda) VALUES (";
 	$sql_prod .= " '".trim($_REQUEST['nume'])."', ";
 	$sql_prod .= " '".trim($_REQUEST['cod'])."', ";
 	$sql_prod .= " '".trim($_REQUEST['descriere'])."', ";
@@ -14,21 +18,23 @@ if ( isset($_REQUEST["salvez"]) && $_REQUEST["salvez"] == "da" && ( $_SESSION["t
 	$sql_prod .= " ".trim($_REQUEST['subcategorie']).", ";
 	$sql_prod .= " ".trim($_REQUEST['reducere']).", ";
 	$sql_prod .= " '".trim($_REQUEST['prima_pagina'])."', ";
-	$sql_prod .= " '".trim($_REQUEST['super_oferta'])."'";
+	$sql_prod .= " '".trim($_REQUEST['super_oferta'])."', ";
+	$sql_prod .= " '".implode(",",$masuri)."', ";
+	$sql_prod .= " ".trim($_REQUEST["prod_la_comanda"])."', ";
 	$sql_prod .= ")";
 	
 	mysql_query($sql_prod) or die("Eroare aparuta la introducerea unui produs nou! Va rugam contactati administratorul site-ului.<br>".$sql_prod);	
 	$lastid = mysql_insert_id();
 	$mesaj = "";
-	//if ( (($_FILES["poza"]["type"] == "image/gif") || ($_FILES["poza"]["type"] == "image/jpeg") ) && ($_FILES["poza"]["size"] < 50000) && ($_FILES["poza"]["error"] == 0) )
-	//{
+	if ( (($_FILES["poza"]["type"] == "image/png" || $_FILES["poza"]["type"] == "image/gif") || ($_FILES["poza"]["type"] == "image/jpeg") ) && ($_FILES["poza"]["size"] < 50000) && ($_FILES["poza"]["error"] == 0) )
+	{
 		$target_path = "../images/produse/";
 		$ext=substr(basename( $_FILES['poza']['name']),(strlen(basename( $_FILES['poza']['name']))-4));
 		$target_path .= $lastid.$ext;
 		
 		if (file_exists($target_path) )
 	    {
-	    	$mesaj = "Fisierul cu denumirea <b></i>".$lastid.$ext."</i></b> exista deja. ";
+	    	$mesaj = "Fisierul cu denumirea <b></i>".$lastid.$ext."</i></b> exista deja.";
 	    }
 	    else
 	    {
@@ -38,11 +44,11 @@ if ( isset($_REQUEST["salvez"]) && $_REQUEST["salvez"] == "da" && ( $_SESSION["t
 			    $mesaj = "A aparut o eroare la uploadarea fisierului ce contine poza produsului!";
 			}
 		}
-	//}
-	/*else
+	}
+	else
 	{
 		$mesaj = "Fisierul nu indeplineste conditiile pentru upload!<br>";
-	}*/
+	}
 	echo'
 		<html>
 		<head>
@@ -217,6 +223,40 @@ else
 					<td>Reducere :</td>
             		<td><input type="text" name="reducere" id="reducere" value="0" size="30" class="input" /></td>
             		<td id='err_reducere' class="eroare_text"></td>
+				</tr>
+				<tr>
+					<td>Se aduce doar la comanda :</td>
+            		<td>
+						<select name="prod_la_comanda" id="prod_la_comanda" class="input">
+            				<option value="0">NU</option>
+            				<option value="1">DA</option>
+            			</select>
+					</td>
+            		<td id='err_prod_la_comanda' class="eroare_text"></td>
+				</tr>
+				<tr>
+					<td style="vertical-align: top;">Grila masuri :</td>
+            		<td>
+						<h3 style="margin-left: 15px;">Masuri tip 1</h3>
+						<label style="width: 40px;"><input type="checkbox" name="masuri_tip1[]" value="S" class="input" /> S</label><br />
+						<label style="width: 40px;"><input type="checkbox" name="masuri_tip1[]" value="M" class="input" /> M</label><br />
+						<label style="width: 40px;"><input type="checkbox" name="masuri_tip1[]" value="L" class="input" /> L</label><br />
+						<label style="width: 40px;"><input type="checkbox" name="masuri_tip1[]" value="XL" class="input" /> XL</label><br />
+						<label style="width: 40px;"><input type="checkbox" name="masuri_tip1[]" value="XXL" class="input" /> XXL</label><br />
+						<hr>
+						<h3 style="clear:both;margin-left: 15px;">Masuri tip 2</h3>
+						<label>1 <input type="checkbox" name="masuri_tip2[]" value="1" class="input" /></label><br />
+						<label>2 <input type="checkbox" name="masuri_tip2[]" value="2" class="input" /></label><br />
+						<label>3 <input type="checkbox" name="masuri_tip2[]" value="3" class="input" /></label><br />
+						<label>4 <input type="checkbox" name="masuri_tip2[]" value="4" class="input" /></label><br />
+						<label>5 <input type="checkbox" name="masuri_tip2[]" value="5" class="input" /></label><br />
+						<label>6 <input type="checkbox" name="masuri_tip2[]" value="6" class="input" /></label><br />
+						<label>7 <input type="checkbox" name="masuri_tip2[]" value="7" class="input" /></label><br />
+						<hr>
+						<h3 style="margin-left: 15px;">Masuri tip 3</h3>
+						<label>Masura unica <input type="checkbox" name="masuri_tip3[]" value="unica" class="input" /></label><br />
+					</td>
+            		<td id='err_grila_masuri' class="eroare_text"></td>
 				</tr>
 				<tr>
 			        <td colspan="3" align="center">

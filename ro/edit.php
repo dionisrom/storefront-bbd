@@ -70,6 +70,10 @@ case "pr":
     break;
 case "prod":
     $db = "produse";
+	$masuri =array();
+	if (isset($_REQUEST['masuri_tip1'])) $masuri = $_REQUEST['masuri_tip1'];
+    if (isset($_REQUEST['masuri_tip2'])) $masuri = $_REQUEST['masuri_tip2'];
+    if (isset($_REQUEST['masuri_tip3'])) $masuri = $_REQUEST['masuri_tip3'];
     $sql = "UPDATE ".$db." SET ";
     $sql .= " nume = '".$_REQUEST["nume"]."', ";
     $sql .= " cod = '".$_REQUEST["cod"]."', ";
@@ -81,12 +85,48 @@ case "prod":
     $sql .= " id_subcategorie = '".$_REQUEST["subcategorie"]."', ";
     $sql .= " reducere = ".$_REQUEST["reducere"].", "; 
     $sql .= " prima_pagina = '".$_REQUEST["prima_pagina"]."', ";
-    $sql .= " super_oferta = '".$_REQUEST["super_oferta"]."' ";
-    $sql .= " WHERE id = ".$_REQUEST["id_produs"] ;
-    mysql_query($sql) or die("<script>alert('Eroare la actualizare date produs.<br>');</script>");
+    $sql .= " super_oferta = '".$_REQUEST["super_oferta"]."', ";
+    $sql .= " prod_la_comanda = ".$_REQUEST["prod_la_comanda"].", ";
+    $sql .= " grila_masuri = '".implode(",",$masuri)."' ";
+    $sql .= " WHERE id = ".$_REQUEST["id"]." ";
+    mysql_query($sql) or die("<script>alert(\"Eroare la actualizare date produs.\");</script>");
+	$mesaj = "";
+	$ext_arr = array(".png",".jpg",".gif");
+	if (isset($_FILES["poza"]))
+	{
+		if ( (($_FILES["poza"]["type"] == "image/png" || $_FILES["poza"]["type"] == "image/gif") || ($_FILES["poza"]["type"] == "image/jpeg") ) && ($_FILES["poza"]["size"] < 50000) && ($_FILES["poza"]["error"] == 0) )
+		{
+			$lastid = $_REQUEST["id"];
+			$target_path = "../images/produse/";
+			$ext=substr(basename( $_FILES['poza']['name']),(strlen(basename( $_FILES['poza']['name']))-4));
+			$target_path .= $lastid.$ext;
+
+			foreach ($ext_arr as $key=>$value) 
+			{
+				$target_path = "../images/produse/".$lastid.$value;
+				if (file_exists($target_path) )
+				{
+					unlink($target_path);
+				}
+			}
+			$target_path = "../images/produse/".$lastid.$ext;
+			if(move_uploaded_file($_FILES['poza']['tmp_name'], $target_path))
+			{
+				$mesaj = "Poza produsului a fost uploadata cu succes.";
+			}
+			else
+			{
+				$mesaj = "A aparut o eroare la uploadarea fisierului ce contine poza produsului!";
+			}
+		}
+		else
+		{
+			$mesaj = "Fisierul nu indeplineste conditiile pentru upload!";
+		}
+	}
     echo "
     <script>
-        alert ('Modificarea produsului a fost efectuata cu succes!');
+        alert ('Modificarea produsului a fost efectuata cu succes!\\n".$mesaj."');
     </script>";
     break;
 }

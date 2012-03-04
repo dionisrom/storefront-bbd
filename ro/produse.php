@@ -11,7 +11,11 @@ else
 }
 if ( intval($mod) == 1 )
 {
-    $str_prod = "SELECT a.*, b.denumire as categorie, c.denumire as producator, d.denumire as subcategorie FROM produse a, categorii b, producatori c, subcategorii d WHERE a.id=".$_REQUEST["id_produs"]." and b.id = a.id_categorie and c.id = a.id_producator and d.id = a.id_subcategorie ORDER BY a.nume";
+    $str_prod = "SELECT a.*, b.denumire as categorie, c.denumire as producator, d.denumire as subcategorie FROM produse a
+		LEFT JOIN subcategorii d ON d.id = a.id_subcategorie
+		LEFT JOIN producatori c ON c.id = a.id_producator
+		LEFT JOIN categorii b ON b.id = a.id_categorie
+		WHERE a.id=".$_REQUEST["id_produs"]." ORDER BY a.nume";
     $q_prod = mysql_query($str_prod) or die ("Eroare preluare produse. ".mysql_error());
     $num = mysql_num_fields($q_prod);
     $table = "";
@@ -40,6 +44,23 @@ if ( intval($mod) == 1 )
         {
             $pret = $rs_prod["pret"];
         }
+		
+		if (!$rs_prod["prod_la_comanda"])
+		{
+			$tip_comanda = "<td class='trans'>Cantitate:</td>
+                            <td class='trans'>
+                            	<input type='text' class='input' id='cant_".$rs_prod["id"]."' id='cant_".$rs_prod["id"]."' value='0' size=8>
+                            	<input type='button' title='Adauga in cos' class='add_to_cart' onmouseover=\"this.style.cursor='pointer';\" onclick=\"if (document.getElementById('cant_".$rs_prod["id"]."').value>0) {top.document.getElementById('cos_frame').src='cos.php?adauga_prod=1&cant_prod='+document.getElementById('cant_".$rs_prod["id"]."').value+'&pret_prod=".$pret."&id_prod=".$rs_prod["id"]."';} else {alert('Nu ati completat cantitatea dorita ! ')};\">
+                            </td>";
+		}
+		else
+		{
+			$tip_comanda = "<td class='trans' colspan='2'>
+							<div class='comanda_acum show' onmouseover=\"this.style.cursor='pointer';\" title='Acest produs se aduce doar la comanda!' onclick=\"document.getElementById('main_comanda').src='mail_comanda.php?id_prod=".$rs_prod["id"]."&id_user=".$_SESSION["id_user"]."\"></div>
+							<iframe style='display:none;' id='mail_comanda' src='' ></iframe>
+							</td>";
+		}
+			
         $table .= "
             <tr>
                 <td onmouseover=\"this.style.cursor='pointer'; return false;\" width=110>
@@ -69,12 +90,10 @@ if ( intval($mod) == 1 )
                             <td class='trans'>Grila de masuri:</td><td class='trans'>".$rs_prod["grila_masuri"]."</td>
                         </tr>
                         <tr>
-                            <td class='trans'>Cantitate:</td>
-                            <td class='trans'>
-                            	<input type='text' class='input' id='cant_".$rs_prod["id"]."' id='cant_".$rs_prod["id"]."' value='0' size=8>
-                            	<input type='button' title='Adauga in cos' class='add_to_cart' onmouseover=\"this.style.cursor='pointer';\" onclick=\"if (document.getElementById('cant_".$rs_prod["id"]."').value>0) {top.document.getElementById('cos_frame').src='cos.php?adauga_prod=1&cant_prod='+document.getElementById('cant_".$rs_prod["id"]."').value+'&pret_prod=".$pret."&id_prod=".$rs_prod["id"]."';} else {alert('Nu ati completat cantitatea dorita ! ')};\">
-                            </td>
-                        </tr>
+						"
+                        .$tip_comanda.
+                        "
+						</tr>
                     </table>
                 </td>
             </tr>
@@ -136,7 +155,7 @@ if ( intval($mod) == 2 )
         $inputs .= "
         <input type='hidden' id='id_catprod' name='id_catprod' value='".$_REQUEST["id_catprod"]."'>";
     } 
-	$sql_produse = "SELECT produse.id as id, produse.nume as nume, produse.descriere as descriere, produse.pret as pret, produse.reducere as reducere, produse.cod as cod, categorii.denumire as categorie FROM produse, categorii ".$filtru." ORDER BY produse.nume"; 
+	$sql_produse = "SELECT produse.id as id, produse.nume as nume, produse.descriere as descriere, produse.pret as pret, produse.reducere as reducere, produse.cod as cod, categorii.denumire as categorie, produse.prod_la_comanda as tip FROM produse, categorii ".$filtru." ORDER BY produse.nume"; 
     // --------------------- PAGINARE ----------------------
     
     $q_nr_prod = mysql_query("SELECT count(produse.id) FROM produse, categorii ".$filtru);
@@ -203,6 +222,11 @@ if ( intval($mod) == 2 )
             $pret = $rs_produse["pret"];
             $pret_ron = $rs_produse["pret"];
         }
+		if ($rs_produse["tip"])
+		{
+			$class_tip_prod = "hide";
+			$class_tip_prod1 = "show";
+		}
         $table .= "
              <div class='caseta_prod'>
 				<div class='categorie_prod_top'>".$rs_produse["categorie"]."</div>
@@ -210,7 +234,8 @@ if ( intval($mod) == 2 )
                 <div class='nume_prod'>".$rs_produse["nume"]."</div>
                 <div class='pret_div'>pret <span class='pret'>".$pret."</span> Lei <input type='button' onmouseover=\"this.style.cursor='pointer';\" title='Detalii despre produs' class='detalii_prod' onclick=\"top.document.getElementById('main_frame').src='ro/produse.php?mod=1&id_produs=".$rs_produse["id"]."';\" /></div>
                 <div class='descript_prod'>".substr(trim($rs_produse["descriere"]),0,70)."...</div>
-                <div class='prod_in_cos'>Cantitate: <input type='text' class='input' id='cant_".$rs_produse["id"]."' id='cant_".$rs_produse["id"]."' value='0' size=4 /> <input type='button' title='Adauga in cos' class='add_to_cart' onmouseover=\"this.style.cursor='pointer';\" onclick=\"if (document.getElementById('cant_".$rs_produse["id"]."').value>0) {top.document.getElementById('cos_frame').src='cos.php?adauga_prod=1&cant_prod='+document.getElementById('cant_".$rs_produse["id"]."').value+'&pret_prod=".$pret_ron."&id_prod=".$rs_produse["id"]."';} else {alert('Nu ati completat cantitatea dorita ! ')};\" /></div>
+                <div class='prod_in_cos ".$class_tip_prod."'>Cantitate: <input type='text' class='input' id='cant_".$rs_produse["id"]."' id='cant_".$rs_produse["id"]."' value='0' size=4 /> <input type='button' title='Adauga in cos' class='add_to_cart' onmouseover=\"this.style.cursor='pointer';\" onclick=\"if (document.getElementById('cant_".$rs_produse["id"]."').value>0) {top.document.getElementById('cos_frame').src='cos.php?adauga_prod=1&cant_prod='+document.getElementById('cant_".$rs_produse["id"]."').value+'&pret_prod=".$pret_ron."&id_prod=".$rs_produse["id"]."';} else {alert('Nu ati completat cantitatea dorita ! ')};\" /></div>
+				<div class='comanda_acum ".$class_tip_prod1."' onmouseover=\"this.style.cursor='pointer';\" title='Acest produs se aduce doar la comanda!' onclick=\"top.document.getElementById('main_frame').src='ro/produse.php?mod=1&id_produs=".$rs_produse[0]."';\"></div>
              </div>
             ";   
     }

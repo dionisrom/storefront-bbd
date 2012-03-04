@@ -436,6 +436,13 @@ h2
 	width:95%;
 	text-align: left;
 }
+.comanda_acum
+{
+	width: 152px;
+	height: 26px;
+	background: url(../img/btn_comanda_acum.png) no-repeat center transparent;
+	display: none;
+}
 .caseta_prod div
 {
     margin-left: 10px;
@@ -771,4 +778,12 @@ h2
 	text-align: left;
 	font-weight: bold;
 	float: left;
+}
+.hide
+{
+	display:none;
+}
+.show
+{
+	display:block;
 }
