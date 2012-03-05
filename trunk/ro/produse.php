@@ -44,7 +44,19 @@ if ( intval($mod) == 1 )
         {
             $pret = $rs_prod["pret"];
         }
-		
+		$masuri = "Masura:";
+		if ($rs_prod["masuri"] == 'unica')
+			$masuri .= "unica";
+		else
+		{
+			$masuri_arr = explode(",",$rs_prod["masuri"]);
+			$masuri .= "<select name='masura' id='masura'>";
+			foreach ($masuri_arr as $masura)
+			{
+				$masuri .= "<option value='".$masura."'>".$masura."</option>";
+			}
+			$masuri .= "</select>";
+		}
 		if (!$rs_prod["prod_la_comanda"])
 		{
 			$tip_comanda = "<td class='trans'>Cantitate:</td>
@@ -155,7 +167,7 @@ if ( intval($mod) == 2 )
         $inputs .= "
         <input type='hidden' id='id_catprod' name='id_catprod' value='".$_REQUEST["id_catprod"]."'>";
     } 
-	$sql_produse = "SELECT produse.id as id, produse.nume as nume, produse.descriere as descriere, produse.pret as pret, produse.reducere as reducere, produse.cod as cod, categorii.denumire as categorie, produse.prod_la_comanda as tip FROM produse, categorii ".$filtru." ORDER BY produse.nume"; 
+	$sql_produse = "SELECT produse.id as id, produse.nume as nume, produse.descriere as descriere, produse.pret as pret, produse.reducere as reducere, produse.cod as cod, categorii.denumire as categorie, produse.prod_la_comanda as tip, produse.grila_masuri as masuri FROM produse, categorii ".$filtru." ORDER BY produse.nume"; 
     // --------------------- PAGINARE ----------------------
     
     $q_nr_prod = mysql_query("SELECT count(produse.id) FROM produse, categorii ".$filtru);
@@ -222,10 +234,28 @@ if ( intval($mod) == 2 )
             $pret = $rs_produse["pret"];
             $pret_ron = $rs_produse["pret"];
         }
-		if ($rs_produse["tip"])
+		if (intval($rs_produse["tip"]))
 		{
 			$class_tip_prod = "hide";
 			$class_tip_prod1 = "show";
+		}
+		else
+		{
+			$class_tip_prod = "show";
+			$class_tip_prod1 = "hide";
+		}
+		$masuri = "Masura:";
+		if ($rs_produse["masuri"] == 'unica')
+			$masuri .= "unica";
+		else
+		{
+			$masuri_arr = explode(",",$rs_produse["masuri"]);
+			$masuri .= "<select name='masura_".$rs_produse[0]."' id='masura_".$rs_produse[0]."'>";
+			foreach ($masuri_arr as $masura)
+			{
+				$masuri .= "<option value='".$masura."'>".$masura."</option>";
+			}
+			$masuri .= "</select>";
 		}
         $table .= "
              <div class='caseta_prod'>
@@ -234,7 +264,7 @@ if ( intval($mod) == 2 )
                 <div class='nume_prod'>".$rs_produse["nume"]."</div>
                 <div class='pret_div'>pret <span class='pret'>".$pret."</span> Lei <input type='button' onmouseover=\"this.style.cursor='pointer';\" title='Detalii despre produs' class='detalii_prod' onclick=\"top.document.getElementById('main_frame').src='ro/produse.php?mod=1&id_produs=".$rs_produse["id"]."';\" /></div>
                 <div class='descript_prod'>".substr(trim($rs_produse["descriere"]),0,70)."...</div>
-                <div class='prod_in_cos ".$class_tip_prod."'>Cantitate: <input type='text' class='input' id='cant_".$rs_produse["id"]."' id='cant_".$rs_produse["id"]."' value='0' size=4 /> <input type='button' title='Adauga in cos' class='add_to_cart' onmouseover=\"this.style.cursor='pointer';\" onclick=\"if (document.getElementById('cant_".$rs_produse["id"]."').value>0) {top.document.getElementById('cos_frame').src='cos.php?adauga_prod=1&cant_prod='+document.getElementById('cant_".$rs_produse["id"]."').value+'&pret_prod=".$pret_ron."&id_prod=".$rs_produse["id"]."';} else {alert('Nu ati completat cantitatea dorita ! ')};\" /></div>
+                <div class='prod_in_cos ".$class_tip_prod."'>Cant.: <input type='text' class='input' name='cant_".$rs_produse[0]."' id='cant_".$rs_produse[0]."' value='0' style=\"width:20px;\" /> ".$masuri." <input type='button' title='Adauga in cos' class='add_to_cart' onmouseover=\"this.style.cursor='pointer';\" onclick=\"if (document.getElementById('cant_".$rs_produse[0]."').value>0) {top.document.getElementById('cos_frame').src='cos.php?adauga_prod=1&cant_prod='+document.getElementById('cant_".$rs_produse[0]."').value+'&pret_prod=".$pret_ron."&id_prod=".$rs_produse[0]."&masura_prod='+document.getElementById('masura_".$rs_produse[0]."').options[document.getElementById('masura_".$rs_produse[0]."').selectedIndex].value;} else {alert('Nu ati completat cantitatea dorita ! ')};\" /></div>
 				<div class='comanda_acum ".$class_tip_prod1."' onmouseover=\"this.style.cursor='pointer';\" title='Acest produs se aduce doar la comanda!' onclick=\"top.document.getElementById('main_frame').src='ro/produse.php?mod=1&id_produs=".$rs_produse[0]."';\"></div>
              </div>
             ";   

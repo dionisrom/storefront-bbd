@@ -7,16 +7,18 @@
   	session_unregister("id_produse");
   	session_unregister("cant_produse");
   	session_unregister("pret_produse");
+  	session_unregister("masura_produse");
   }
   if ( isset($_REQUEST["adauga_prod"]) && $_REQUEST["adauga_prod"] == 1 )
   {
-	  if ( in_array($_REQUEST["id_prod"], $_SESSION["id_produse"]) )
+	  if ( in_array($_REQUEST["id_prod"]."_".$_REQUEST["masura_prod"], $_SESSION["id_produse"]) )
 	  {
-		  for ($i=0; $i<=($_SESSION["nr_produse"]-1); $i++)
+		  for ($i=0; $i<($_SESSION["nr_produse"]-1); $i++)
 		  {
-			  if ( $_REQUEST["id_prod"] == $_SESSION["id_produse"][$i] )
+			  if ( $_REQUEST["id_prod"]."_".$_REQUEST["masura_prod"] == $_SESSION["id_produse"][$i] )
 			  {
 				  $_SESSION["cant_produse"][$i] += $_REQUEST["cant_prod"];
+				  $_SESSION["masura_produse"][$i] = $_REQUEST["masura_prod"];
 		  		  $_SESSION["pret_produse"][$i] = $_REQUEST["pret_prod"];
 		  		  $_SESSION["cos"] = "plin" ;
 			  }
@@ -37,9 +39,10 @@
 		  
 		  $nr_crt = $_SESSION["nr_produse"] - 1;
 		   
-  		  $_SESSION["id_produse"][$nr_crt] = $_REQUEST["id_prod"];
+  		  $_SESSION["id_produse"][$nr_crt] = $_REQUEST["id_prod"]."_".$_REQUEST["masura_prod"];
 		  $_SESSION["cant_produse"][$nr_crt] = $_REQUEST["cant_prod"];
 		  $_SESSION["pret_produse"][$nr_crt] = $_REQUEST["pret_prod"];
+		  $_SESSION["masura_produse"][$nr_crt] = $_REQUEST["masura_prod"];
 	  }
   }
   if ($_SESSION["nr_produse"]>0)
@@ -48,7 +51,7 @@
 	  $tabel_cos = "
 	  <script>
   	  ";
-	  for ($i=0; $i<=($_SESSION["nr_produse"]-1); $i++)
+	  for ($i=0; $i<$_SESSION["nr_produse"]; $i++)
 	  {
           $total += $_SESSION["cant_produse"][$i]*$_SESSION["pret_produse"][$i] ;
 	  }

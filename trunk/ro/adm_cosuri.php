@@ -77,7 +77,7 @@
 	<div class="titlu_pag">Administrare cosuri</div>
 			<?
 			include("../inc/global.php");
-			$sql_cosuri = "SELECT a.data, a.ora, a.produse, a.cantitati, b.usr, b.nume, b.prenume, a.id, c.denumire, b.localitate, b.adresa, b.cod_postal, b.telefon, b.email, b.telefon_mobil, b.fax, a.curier FROM cos a, useri b, judete c WHERE a.validat = 0 and b.id = a.id_user and c.id = b.id_judet ORDER BY a.id";
+			$sql_cosuri = "SELECT a.data, a.ora, a.produse, a.cantitati, b.usr, b.nume, b.prenume, a.id, c.denumire, b.localitate, b.adresa, b.cod_postal, b.telefon, b.email, b.telefon_mobil, b.fax, a.curier, a.masuri FROM cos a, useri b, judete c WHERE a.validat = 0 and b.id = a.id_user and c.id = b.id_judet ORDER BY a.id";
 			$q_cosuri = mysql_query($sql_cosuri) or die("Eroare la preluare cosuri pentru validare!<br>".mysql_error());
 			$gr_total = 0;
 			$detalii_cosuri = "";
@@ -101,7 +101,13 @@
 				while ( $rs_cos = mysql_fetch_array($q_cosuri) )
 				{
 					$prod_arr = explode(",",$rs_cos[2]);
+					$produse = array();
+					foreach ($prod_arr as $value) {
+						$id_produs = explode("_", $value);
+						$produse[] = $id_produs[0];
+					}
 					$cant_arr = explode(",",$rs_cos[3]);
+					$masuri_arr = explode(",",$rs_cos["masuri"]);
 					$span = " rowspan=".(count($prod_arr)+1);
 					$class="";
 					if ($linie%2)
@@ -118,7 +124,7 @@
 						<td".$span." align='center'>".$rs_cos[0]."<br>".$rs_cos[1]."</td>
 						<td".$span.">".$rs_cos[4]."</td>
 						<td".$span.">".$rs_cos[5]." ".$rs_cos[6]."</td>";
-					$sql_prod = "SELECT nume, pret, reducere FROM produse WHERE id IN (".$rs_cos[2].")";
+					$sql_prod = "SELECT nume, pret, reducere FROM produse WHERE id IN (".implode(",",$produse).")";
 					$q_prod = mysql_query($sql_prod) or die("Eroare preluare produse din cos!");
 					$j = 0;
 					$total=0;

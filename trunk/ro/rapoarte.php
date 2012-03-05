@@ -35,6 +35,7 @@ session_start();
 			$cantitati = explode(",",$row["cantitati"]);
 			$preturi = explode(",",$row["preturi"]);
 			$produse = explode(",", $row["produse"]);
+			$masuri = explode(",", $row["masuri"]);
 			foreach ($produse as $key => $value)
 			{
 				$cant[$value] = $cantitati[$key];
@@ -47,6 +48,7 @@ session_start();
 			$detalii .= "<tr>";
 			$detalii .= "<th>Nume produs</th>";
 			$detalii .= "<th>cant</th>";
+			$detalii .= "<th>masura</th>";
 			$detalii .= "<th>pret unitar</th>";
 			$detalii .= "<th>valoare</th>";
 			$detalii .= "</tr>";
@@ -56,6 +58,7 @@ session_start();
 				$detalii .= "<tr>";
 				$detalii .= "<td>".$row_detalii["nume"]."</td>";
 				$detalii .= "<td>".$cant["$id"]."</td>";
+				$detalii .= "<td>".$masuri["$id"]."</td>";
 				$detalii .= "<td>".$pret["$id"]."</td>";
 				$detalii .= "<td>".($cant["$id"]*$pret["$id"])."</td>";
 				$total_comanda += $cant["$id"]*$pret["$id"];
