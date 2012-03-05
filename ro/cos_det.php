@@ -50,14 +50,16 @@
   	<tr>
   		<th align=center>Nume produs</th>
   		<th align=center>Cant.</th>
+  		<th align=center>Masura</th>
   		<th align=center>Pret unitar<br>(cu TVA)</th>
   		<th align=center>Pret total<br>(cu TVA)</th>
   	</tr>";
   	include("../inc/global.php");
   	$total = 0;
-  	for ($i=0;$i<($_SESSION["nr_produse"]);$i++ )
+  	for ($i=0;$i<$_SESSION["nr_produse"];$i++ )
   	{
-		$sql_denprod = "SELECT nume FROM produse WHERE id = ".$_SESSION["id_produse"][$i] ;
+		$arr_temp = explode("_",$_SESSION["id_produse"][$i]);
+		$sql_denprod = "SELECT nume FROM produse WHERE id = ".$arr_temp[0];
 		$q_denprod = mysql_query($sql_denprod) or die ("Eroare preluare denumire produs!") ;
 		$rs_denprod = mysql_fetch_array($q_denprod);
 		
@@ -68,6 +70,9 @@
 			</td>
 			<td align=center>
 				".$_SESSION["cant_produse"][$i]."
+			</td>
+			<td align=center>
+				".$_SESSION["masura_produse"][$i]."
 			</td>
 			<td align=right>
 				".$_SESSION["pret_produse"][$i]."
@@ -84,6 +89,7 @@
   		<tr>
   			<td align=left id='nume_tr'>Posta Romana</td>
   			<td align=center id='tr_cant'>1</td>
+  			<td align=center></td>
   			<td align=right id='trftva'>12</td>
   			<td align=right id='trtva'>12</td>
   		</tr>

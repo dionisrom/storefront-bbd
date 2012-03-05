@@ -100,7 +100,7 @@ if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" && ( $_SESSION["tipus
                 	<td style="border-left:1px solid #367766; padding-left:4px; padding-right:4px;"><?=$rs["categ"]?></td>
                 	<td style="border-left:1px solid #367766; padding-left:4px; padding-right:4px;"><?=$rs["producator"]?></td>
                 	<td style="border-left:1px solid #367766; padding-left:4px; padding-right:4px;">
-                		<img onmouseover="this.style.cursor='pointer';" title="Editare" src="../ico/edit.png" border=0 onclick="document.getElementById('product_box').style.display='block'; document.getElementById('date_prod').src='date_produs.php?id=<?=$rs[0]?>'; ">
+                		<img onmouseover="this.style.cursor='pointer';" title="Editare" src="../ico/edit.png" border=0 onclick="document.getElementById('product_box').style.visibility='visible'; document.getElementById('date_prod').src='date_produs.php?id=<?=$rs[0]?>'; ">
                         <img onmouseover="this.style.cursor='pointer';" title="Stergere" src="../ico/delete.png" border=0 onclick="if ( confirm('Esti sigur ca doresti stergerea acestui produs?') ) {document.getElementById('frm').src='sterg.php?db=prod&id=<?=$rs[0]?>'}">
                 	</td>
                 	<td id="efect_op_<?=$rs[0]?>" name="efect_op_<?=$rs[0]?>" style="padding-left:4px;padding-right:4px;" align="center">
@@ -113,13 +113,13 @@ if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" && ( $_SESSION["tipus
 				?>
 			</table>
 		</form>
-<div class="trans" id="product_box" style="position:absolute; top:100; left:150; display:none;background-color:#fa6c00;">
+<div class="trans" id="product_box" style="position:absolute; top:100; left:150; visibility:hidden; background-color:#fa6c00;">
 	<!-- NOTE: nested divs required for slide effect-->
 	<div class="content_panel" id="content_box">
 	    <form target="date_prod" action="edit.php" method="post" enctype="multipart/form-data" id="form_prod" name="form_prod">
             <table cellpadding="2" cellspacing="0" border="0" style="white-space:nowrap;" width="100%">
                 <tr>
-                    <td colspan="3" align="right" onclick="document.getElementById('product_box').style.display='none';" onmouseover="this.style.cursor='pointer';"  style="padding-right:20px;">Inchide</td>
+                    <td colspan="3" align="right" onclick="document.getElementById('product_box').style.visibility='hidden';" onmouseover="this.style.cursor='pointer';"  style="padding-right:20px;">Inchide</td>
                 </tr>
                 <tr>
                     <td>Denumire *:</td>

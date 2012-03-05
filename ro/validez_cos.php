@@ -43,8 +43,8 @@
     $pdf->Text(120,25,"Data expedierii:");
     //$pdf->Text(180,25,date("Y-m-d",time()));
     $pdf->Text(145,25,$data_validare);
-    $pdf->Text(120,29,"Pagina:");
-    $pdf->Text(145,29,"1");
+    $pdf->Text(120,29,"Cod comanda:");
+    $pdf->Text(145,29,"".$_REQUEST["idcos"]);
     //$pdf->Text(150,33,"Re: No commande");
     //$pdf->SetXY(10,60);
     $pdf->SetFont('Arial','B');
@@ -94,11 +94,12 @@
     $pdf->Text(180,119,$rs[6].'');
     $pdf->Text(180,126,$rs[7]+$dif.'');
     $total=$rs[5]+$rs[6]+$rs[7]+$dif;*/
-    $q_cos = mysql_query("SELECT produse, cantitati, curier FROM cos WHERE id=".$_REQUEST["idcos"]);
+    $q_cos = mysql_query("SELECT produse, cantitati, masuri curier FROM cos WHERE id=".$_REQUEST["idcos"]);
     $rs_cos = mysql_fetch_array($q_cos);
     $q_prod = mysql_query("SELECT * FROM produse WHERE id IN (".$rs_cos[0].")");
     $i = 0;
     $cant_arr = explode(",",$rs_cos[1]);
+    $masuri_arr = explode(",",$rs_cos[2]);
     $h=98;
     $pas = 8;
     $total = 0;
@@ -121,7 +122,7 @@
 		    $pdf->Cell(20,10,$i+1,0,1,"C",0);
 		    $pdf->SetXY(33,$h+$pas*$i);
             $pdf->SetFontSize(6.5);
-		    $pdf->Cell(80,10,$rs_prod[1],0,1,"L",0);
+		    $pdf->Cell(80,10,$rs_prod[1]."( masura ".$masuri_arr[$i].")",0,1,"L",0);
             $pdf->SetFontSize(8);
 		    $pdf->SetXY(113,$h+$pas*$i);
 		    $pdf->Cell(10,10,"buc",0,1,"L",0);
@@ -224,7 +225,7 @@
 	$to=$_REQUEST["email"];
 	$from = "webmaster@ortoprotetica.ro";
 	$subject = "Factura proforma - Ortoprotetica";
-	$message = "<p>Va multumim pentru comanda facuta si va trimitem atasat FACTURA PROFORMA !</p>";
+	$message = "<p>Va multumim pentru comanda facuta si va trimitem atasat FACTURA PROFORMA pentru comanda cu codul ".$_REQUEST["idcos"]." !</p>";
 	// a random hash will be necessary to send mixed content
 	$separator = md5(time());
 	// carriage return type (we use a PHP end of line constant)

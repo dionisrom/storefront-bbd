@@ -203,7 +203,7 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
             {
 				$myPage->body_right_content .= '
 				<div id="cos_div">
-					<iframe name="cos_frame" id="cos_frame" width=0 height=0 frameborder=no src="" style="display: hidden;"></iframe>
+					<iframe name="cos_frame" id="cos_frame" width=100 height=50 frameborder=0 src="" style="display: none;"></iframe>
 					<div class="cos_div_header"></div>
 					<div id="continut_cos" align="center">
 				';
