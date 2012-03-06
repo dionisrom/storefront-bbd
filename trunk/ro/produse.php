@@ -152,18 +152,30 @@ if ( intval($mod) == 2 )
     if ( isset($_REQUEST["id_pr"]) )
     {
         $filtru .= "AND id_producator=".$_REQUEST["id_pr"]."";
-        $inputs .= "
+        $sql_titlu = "SELECT denumire FROM producatori WHERE id = ".$_REQUEST["id_pr"];
+		$q_titlu = mysql_query($sql_titlu);
+		$rs_titlu = mysql_fetch_array($q_titlu);
+		$titlu_pag = strtoupper($rs_titlu[0]);
+		$inputs .= "
         <input type='hidden' id='id_pr' name='id_pr' value='".$_REQUEST["id_pr"]."'>";
     } 
     if ( isset($_REQUEST["id_subcat"]) )
     {
         $filtru .= "AND produse.id_subcategorie = ".$_REQUEST["id_subcat"]."";
-        $inputs .= "
+        $sql_titlu = "SELECT a.denumire, b.denumire FROM categorii a, subcategorii b WHERE b.id = ".$_REQUEST["id_subcat"]." and b.id_categ = a.id";
+		$q_titlu = mysql_query($sql_titlu);
+		$rs_titlu = mysql_fetch_array($q_titlu);
+		$titlu_pag = strtoupper($rs_titlu[0]." > ".$rs_titlu[1]);
+		$inputs .= "
         <input type='hidden' id='id_cat' name='id_subcat' value='".$_REQUEST["id_subcat"]."'>";
     }
     if ( isset($_REQUEST["id_catprod"]) )
     {
         $filtru .= "AND produse.id_categorie=".$_REQUEST["id_catprod"]."";
+		$sql_titlu = "SELECT denumire FROM categorii WHERE id = ".$_REQUEST["id_catprod"];
+		$q_titlu = mysql_query($sql_titlu);
+		$rs_titlu = mysql_fetch_array($q_titlu);
+		$titlu_pag = strtoupper($rs_titlu[0]);
         $inputs .= "
         <input type='hidden' id='id_catprod' name='id_catprod' value='".$_REQUEST["id_catprod"]."'>";
     } 
@@ -312,7 +324,7 @@ $table .= "</table>";
             if ( $mod == 1 )
                 echo "<img src='../ico/back.png' title='Inapoi' width='21' onmouseover=\"this.style.cursor='pointer';\" onclick=\"history.go(-1);\">  ";
             ?>
-            Afisare produse
+            <?=$titlu_pag?>
         </div>
 		<?php
 		if ( $mod == 2 )
