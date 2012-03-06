@@ -35,44 +35,6 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
             echo $myPage->setHeaderInclude();
             echo $myPage->setCSS();
         ?>
-        <script>
-			jQuery(function()
-			{
-				var iFrames = jQuery('#main_frame');
-				iFrames.height(0);
-				function iResize() 
-				{
-					if (document.getElementById("main_frame").contentWindow.document.readyState=="complete")
-					{
-						if (document.getElementById("main_frame").src.search("produse") > 0)
-						{
-							jQuery.ajax({ 
-								url: 'inc/ajax_functions.php',
-								data: {
-									action : "statistici"
-								},
-								type: 'post',
-								dataType : 'json',
-								success: function(output) {
-									jQuery("#cele_mai_vizitate_div").html(output.continut_vizitate);
-									jQuery("#cele_mai_vandute_div").html(output.continut_vandute);
-									
-								},
-								errors: function(output) {
-									alert(output.error_msg);
-								}
-							});
-						}
-
-					}
-					else
-					{
-						iResize();
-					}
-				}
-				iFrames.load(iResize);
-			});
-        </script>
     </head>
     <body style="background-color: #eceeef;">
 		<div style="width:100%; height: 6px; background-color: #cbcdcf;"></div>
@@ -110,7 +72,7 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
             $myPage->setHeaderContent($head_content);
 			if ( !isset($_SESSION["tipusr"]) || $_SESSION["tipusr"] > 2 )
 				//$arr_menu = array("Acasa","Despre noi","Cum cumpar","Cum platesc","Livrare","Asistenta","Parteneri","Contact");
-				$arr_menu = array("Acasa","Despre noi","Parteneri","Info","Contact","Noutati","Link-uri utile","Cariere","Testimoniale","Kinetoterapie/Colaboratori");
+				$arr_menu = array("Acasa","Despre noi","Parteneri","Info","Contact","Noutati","Link-uri utile","Cariere","Kinetoterapie");
 			else
 				$arr_menu = array("Introducere&nbsp;&nbsp;&nbsp;"=>array("Producator", "Categorie", "Subcategorie", "Produs"),"Modificare&nbsp;&nbsp;&nbsp;"=>array("Producator", "Categorie", "Subcategorie", "Produs"),"Administrare cosuri","Administrare useri","Administrare reclame","Rapoarte","Pagini web");
             $myPage->setMenu($arr_menu);
@@ -132,11 +94,22 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
 			// caseta categorii de produse - START -
             $myPage->body_left_content = "";
             $categories_list = "";
-            $str_cat = "SELECT denumire,id FROM categorii ORDER BY denumire";
+            $str_cat = "SELECT denumire, id FROM categorii ORDER BY denumire";
             $q_cat = mysql_query($str_cat) or die("Eroare aparuta la preluarea categoriilor de produse!");
             while ( $rs_cat = mysql_fetch_array($q_cat) )
             {
-                $categories_list .= "<li onclick=\"document.getElementById('main_frame').src='ro/produse.php?mod=2&id_catprod=".$rs_cat["id"]."'\">".$rs_cat["denumire"]."</li>";
+                $categories_list .= "<li onmouseover=\"document.getElementById('subcat_menu_".$rs_cat["id"]."').style.display='block';\" onmouseout=\"document.getElementById('subcat_menu_".$rs_cat["id"]."').style.display='none';\"><a onclick=\"document.getElementById('main_frame').src='ro/produse.php?mod=2&id_catprod=".$rs_cat["id"]."'\" href='javascript:return false;'>".$rs_cat["denumire"]."</a>";
+                $categories_list .= "<ul id='subcat_menu_".$rs_cat["id"]."' style='display:none;' >";
+				$sql_subcat = "SELECT id, denumire FROM subcategorii WHERE id_categ = ".$rs_cat["id"]." ORDER BY denumire";
+				$query_subcat = mysql_query($sql_subcat);
+				if (mysql_numrows($query_subcat) > 0)
+				{
+					while ($row_subcat = mysql_fetch_array($query_subcat))
+					{
+						$categories_list .= "<li><a onclick=\"document.getElementById('main_frame').src='ro/produse.php?mod=2&id_subcat=".$row_subcat["id"]."'\" href='javascript:return false;'>".$row_subcat["denumire"]."</a></li>";
+					}
+				}
+				$categories_list .= "</ul></li>";
             }
             $produse_categorii = "
             <div class='left_caseta'>
@@ -158,7 +131,7 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
             $q_prod = mysql_query($str_prod) or die("Eroare aparuta la preluarea producatorilor!");
             while ( $rs_prod = mysql_fetch_array($q_prod) )
             {
-                $producatori_list .= "<li onclick=\"document.getElementById('main_frame').src='ro/produse.php?mod=2&id_pr=".$rs_prod["id"]."'\">".$rs_prod["denumire"]."</li>";
+                $producatori_list .= "<li><a href='javascript: return false;' onclick=\"document.getElementById('main_frame').src='ro/produse.php?mod=2&id_pr=".$rs_prod["id"]."'\">".$rs_prod["denumire"]."</a></li>";
             }
             $producatori = "
             <div class='left_caseta'>
@@ -173,8 +146,10 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
             ";
             $myPage->body_left_content .= $producatori;
 			// caseta de producatori - STOP -
-
+			
+			
 			// caseta de link-uri utile - START -
+			/*
 			$producatori_list = "";
             $str_prod = "SELECT denumire,link FROM producatori ORDER BY denumire";
             $q_prod = mysql_query($str_prod) or die("Eroare aparuta la preluarea producatorilor(link-ri utile)!");
@@ -194,6 +169,7 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
             </div>
             ";
             $myPage->body_left_content .= $producatori;
+			 */
 			// caseta de link-uri utile - STOP -
             // -- Setez partea din stanga a body-ului STOP --
             
@@ -271,12 +247,65 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
 				$myPage->body_right_content .= "<div id='istoric_div' align='center' title='Istoric cumparaturi' onmouseover=\"this.style.cursor='pointer';\" onclick=\"document.getElementById('main_frame').src='ro/istoric.php';\">Istoric cumparaturi</div>";
 			}*/
 			
+			// preluare informatii statistice
+			$return = array();
+			$sql_vizitate = "SELECT count(a.id) as vizite, b.nume as produs, b.id as id FROM vizionari a, produse b WHERE b.id = a.id_prod GROUP BY a.id_prod ORDER BY vizite desc LIMIT 0,5";
+			//$return["error_msg"] = ;
+
+			$q_vizitate = mysql_query($sql_vizitate) or die("Eroare preluare cele mai vizitate produse!". mysql_error());
+			$output_vizitate = "<ol>";
+			while ($row_vizitate = mysql_fetch_array($q_vizitate))
+			{
+				$output_vizitate .= "<li onclick=\"top.document.getElementById('main_frame').src='ro/produse.php?mod=1&id_produs=".$row_vizitate["id"]."';\">".substr(ucfirst($row_vizitate[1]),0,25)."</li>";
+			}
+			$output_vizitate .= "</ol>";
+			$return["continut_vizitate"] = $output_vizitate;
+
+
+			$sql_vandute = "SELECT * FROM cos WHERE validat = 1";
+			$q_vandute = mysql_query($sql_vandute) or die("Eroare preluare cele mai vandute produse!". mysql_error());
+			$produse = array();
+			$cant = array();
+			while ($row_vandute= mysql_fetch_array($q_vandute))
+			{
+				$produse_row = explode(",",$row_vandute["produse"]) ;
+				$cant_row = explode(",", $row_vandute["cantitati"]);
+				foreach ($produse_row as $key => $value)
+				{
+					if (in_array($value,$produse))
+					{
+						$cant[$value] += $cant_row[$key];
+					}
+					else
+					{
+						$arr_ids = explode("_", $value);
+						$produse[] = $arr_ids[0];
+						$cant[$arr_ids[0]] = $cant_row[$key];
+					}
+				}
+			}
+			arsort($cant);
+			$output_vandute = "<ol>";
+			foreach ($cant as $key => $value)
+			{
+				$sql_prod = "SELECT nume FROM produse WHERE id = ".$key;
+				$rez = mysql_query($sql_prod);
+				if(mysql_num_rows($rez)>0)
+				{
+					$produs = mysql_fetch_array($rez); 
+					$output_vandute .= "<li onclick=\"top.document.getElementById('main_frame').src='ro/produse.php?mod=1&id_produs=".$value."';\">".substr(ucfirst($produs[0]),0,25)."</li>";
+				}
+			}
+			$output_vandute .= "</ol>";
+			$return["continut_vandute"] = $output_vandute;
+			// final preluare informatii statistice
+			
 			if (!isset($_SESSION["tipusr"]) || $_SESSION["tipusr"] > 2)
             {
 				// Afisez caseta de cele mai vandute - START
 				$myPage->body_right_content .= '
 					<div id="cele_mai_vandute_div">
-
+						'.$return["continut_vandute"].'
 					</div>
 					';
 				// Afisez caseta de cele mai vandute - STOP
@@ -284,9 +313,10 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
 				// Afisez caseta de cele mai vizitate - START
 				$myPage->body_right_content .= '
 					<div id="cele_mai_vizitate_div">
-
+						'.$return["continut_vizitate"].'
 					</div>
 					';
+				
 				// Afisez caseta de cele mai vizitate - STOP
 				// Setez partea din dreapta a body-ului -STOP -
 			}

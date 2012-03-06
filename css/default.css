@@ -9,6 +9,7 @@
 {
     font-family: "Arial";
 	outline: none;
+	color: #464646;
 }
 html, body
 {
@@ -125,7 +126,7 @@ table td
 {
     float:left;
     color: black;
-    width: 840px;
+    width: 628px;
 	display: block;
 	height:100%;
 }
@@ -189,6 +190,7 @@ table td
     top: 81px;
     margin-left: 8px;
     height:32px;
+	width: 750px;
     background: url(../img/menu_bar.png) no-repeat center left transparent;
 }
 
@@ -335,29 +337,43 @@ h2
 }
 .caseta_content ul li
 {
-    margin-left: 8px;
-    padding-left: 7px;
-    background: url('../img/small_arrow.png') no-repeat center left transparent;
-    text-align: left;
     list-style-type: none;
-	line-height: 18px;
 }
-.caseta_content ul li:hover
+.caseta_content ul li a
 {
-    margin-left: 8px;
+    text-decoration: none;
+	text-align: left;
+	display: block;
+	width: 175px;
+	margin-left: 8px;
     padding-left: 7px;
-    padding-right: 8px;
+    background: url('../img/small_arrow.png') no-repeat left center transparent;
+	color: #464646;
+}
+.caseta_content ul li ul li a
+{
+    text-align: left;
+	display: block;
+	width: 165px;
+	margin-left: 20px;
+    padding-left: 7px;
+    background: url('../img/small_arrow.png') no-repeat left center transparent;
+	color: #464646; 
+}
+.caseta_content ul li a:hover
+{
+    margin-right: 3px;
+	padding-right: 8px;
     background: url('../img/small_arrow_right.png') no-repeat 97% center #eceeef;
     text-align: left;
-    list-style-type: none;
     color: #1c72af;
-    font-weight: bold;
     cursor: pointer;
 }
 
 .left_caseta li
 {
-	line-height: 18px;	
+	line-height: 20px;
+	font-size: 12px;
 }
 
 #categorii_produse li:hover
@@ -371,10 +387,10 @@ h2
 
 #produse
 {
-    width: 840px;
+    width: 628px;
 	font-size: 11px;
 	float: left;
-	margin-top: 8px;
+	margin-top: 20px;
     
 }
 .caseta_prod
@@ -604,7 +620,7 @@ h2
     padding: 0;
     background: url('../img/cele_mai_vandute.png') no-repeat top left;
 	margin-bottom: 10px;
-	font-size: 11px;
+	font-size: 12px;
 	text-align: left;
 }
 
@@ -617,7 +633,7 @@ h2
     padding: 0;
     background: url('../img/cele_mai_vizitate.png') no-repeat top left;
 	margin-bottom: 10px;
-	font-size: 11px;
+	font-size: 12px;
 	text-align: left;
 }
 
@@ -628,12 +644,7 @@ h2
 }
 #cele_mai_vandute_div li, #cele_mai_vizitate_div li
 {
-	line-height: 18px;
-}
-
-#cele_mai_vandute_div ol li, #cele_mai_vizitate_div ol li
-{
-	line-height: 18px;
+	line-height: 20px;
 }
 #cele_mai_vandute_div ol li:hover, #cele_mai_vizitate_div ol li:hover
 {
@@ -733,9 +744,10 @@ h2
 	padding-left: 40px;
 	padding-top: 10px;
 	padding-bottom: 10px;
-	font-size: 18px;
+	font-size: 16px;
 	font-weight: bold;
 	text-decoration: underline;	
+	color: #fa6c00;
 }
 .titlu
 {
@@ -786,4 +798,12 @@ h2
 .show
 {
 	display:block;
+}
+
+#no_prod_promo
+{
+	margin-top: 20px;
+	width: 95%;
+	text-align: justify;
+	float: left;
 }

@@ -24,23 +24,6 @@ jQuery(document).ready(function(){
         });
         return false;
     });
-	
-	jQuery.ajax({ 
-		url: './inc/ajax_functions.php',
-		data: {
-			action : "statistici"
-		},
-		type: 'post',
-		dataType : 'json',
-		success: function(output) {
-			jQuery("#cele_mai_vizitate_div").html(output.continut_vizitate);
-			jQuery("#cele_mai_vandute_div").html(output.continut_vandute);
-
-		},
-		errors: function(output) {
-			alert(output.error_msg);
-		}
-	});
 });
 /**
 * Toggle ClassName
