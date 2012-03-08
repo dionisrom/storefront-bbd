@@ -41,8 +41,8 @@ session_start();
 				$cant[$value] = $cantitati[$key];
 				$pret[$value] = $preturi[$key];
 			}
-			$rs_detalii = "SELECT * FROM produse WHERE id IN (".$row["produse"].")";
-			$query_detalii = mysql_query($rs_detalii) or die("<script>alert('Eroare preluare detalii produse!')</script>");
+			$sql_detalii = "SELECT * FROM produse WHERE id IN (".$row["produse"].")";
+			$query_detalii = mysql_query($sql_detalii) or die("<script>alert('Eroare preluare detalii produse!\n$rs_detalii')</script>");
 			$i = 0;
 			$detalii = "<table border=1 id='detalii_comanda_".$row["id"]."' cellpadding=4 cellspacing=0 style=\"border:1px solid #EFEFEF; margin: 5px; padding: 3;\">";
 			$detalii .= "<tr>";
@@ -84,7 +84,7 @@ session_start();
 				";
 		}
 		$comenzi .= "</table>";
-		echo "<h3>Detalii comenzi inchise</h3>".$comenzi;
+		echo "<div class='titlu_pag'>Detalii comenzi inchise</div>".$comenzi;
 		?>
     </body>
 </html>

@@ -82,14 +82,14 @@ case "prod":
     $sql .= " indicatii = '".$_REQUEST["indicatii"]."', ";
     $sql .= " pret = ".$_REQUEST["pret"].", ";
     $sql .= " id_producator = ".$_REQUEST["producator"].", ";
-    $sql .= " id_subcategorie = '".$_REQUEST["subcategorie"]."', ";
+    $sql .= " id_subcategorie = ".$_REQUEST["subcategorie"].", ";
     $sql .= " reducere = ".$_REQUEST["reducere"].", "; 
     $sql .= " prima_pagina = '".$_REQUEST["prima_pagina"]."', ";
     $sql .= " super_oferta = '".$_REQUEST["super_oferta"]."', ";
     $sql .= " prod_la_comanda = ".$_REQUEST["prod_la_comanda"].", ";
     $sql .= " grila_masuri = '".implode(",",$masuri)."' ";
     $sql .= " WHERE id = ".$_REQUEST["id"]." ";
-    mysql_query($sql) or die("<script>alert(\"Eroare la actualizare date produs.\");</script>");
+    mysql_query($sql) or die("<script>alert(\"Eroare la actualizare produs.".$sql."\");</script>");
 	$mesaj = "";
 	$ext_arr = array(".png",".jpg",".gif");
 	if (isset($_FILES["poza"]))

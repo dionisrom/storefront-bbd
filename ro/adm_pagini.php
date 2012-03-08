@@ -6,7 +6,7 @@ include("../inc/global.php");
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<script type="text/javascript" src="../js/jquery.js"></script>
-		
+		<LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css">
 		<!-- TinyMCE -->
 		<script type="text/javascript" src="../js/tiny_mce/tiny_mce.js"></script>
 		<script type="text/javascript">
@@ -95,7 +95,7 @@ include("../inc/global.php");
 		</script>
 	</head>
 	<body role="application">
-		<h3>Administrare pagini</h3>
+		<div class="titlu_pag">Administrare pagini</div>
 		<form id="page_frm" method="post">
 		<div style="float: left; width:97%;">
 			<div id="message"></div>

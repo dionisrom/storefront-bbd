@@ -19,7 +19,7 @@ if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" && ( $_SESSION["tipus
 		<style>
 		.trans
 		{
-			filter: alpha(opacity=85);
+			filter: alpha(opacity=95);
 		}
 		</style>
 		<![endif]-->
@@ -28,11 +28,36 @@ if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" && ( $_SESSION["tipus
 		<style>
 		.trans
 		{
-			-moz-opacity:0.85;
-			opacity:.85;           
+			-moz-opacity:0.95;
+			opacity:.95;           
 		}
 		</style>
 		<!--<![endif]-->
+		<script>
+			function getSubcateg(categ)
+			{
+				$.ajax({
+					type : 'POST',
+					url : 'getSubcategories.php',
+					dataType : 'json',
+					data: {
+						categorie : categ
+					},
+					success : function(data){
+						if (data.error === true)
+							alert("Eroare ajax: "+data.msg);
+						else
+						{
+							$("#subcategorie option[value!='0']").remove();
+							$.each(data.opts, function(val, text) {
+								$('#subcategorie').append( new Option(text,val) );
+							});
+						}
+					}
+
+				});
+			};
+		</script>
 	</head>
 	<body>
 	<div class="titlu_pag">Modificare produs</div> 
@@ -156,7 +181,7 @@ if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" && ( $_SESSION["tipus
                 <tr>
                     <td>Categorie :</td>
                     <td>
-                        <select name="categorie" id="categorie" class="input" />
+                        <select name="categorie" id="categorie" class="input" onchange="getSubcateg($(this).val());">
                             <option>- ALEGE -</option>
                             <?
                             $str_cat = "SELECT id, denumire FROM categorii ORDER BY denumire";
@@ -171,10 +196,19 @@ if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" && ( $_SESSION["tipus
                     <td id='err_categorie' class="eroare_text"></td>
                 </tr>
                 <tr>
+                    <td>Subcategorie :</td>
+                    <td>
+                        <select name="subcategorie" id="subcategorie" class="input">
+							<option value="0">- ALEGE -</option>
+                        </select>
+                    </td>
+                    <td id='err_categorie' class="eroare_text"></td>
+                </tr>
+                <tr>
                     <td>Producator :</td>
                     <td>
-                        <select name="producator" id="producator" class="input" />
-                            <option>- ALEGE -</option>
+                        <select name="producator" id="producator" class="input" >
+                            <option value="0">- ALEGE -</option>
                             <?
                             $str_cat = "SELECT id, denumire FROM producatori ORDER BY denumire";
                             $q_cat = mysql_query($str_cat) or die("Eroare aparuta la preluarea producatorilor!");

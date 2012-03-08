@@ -72,7 +72,7 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
             $myPage->setHeaderContent($head_content);
 			if ( !isset($_SESSION["tipusr"]) || $_SESSION["tipusr"] > 2 )
 				//$arr_menu = array("Acasa","Despre noi","Cum cumpar","Cum platesc","Livrare","Asistenta","Parteneri","Contact");
-				$arr_menu = array("Acasa","Despre noi","Parteneri","Info","Contact","Noutati","Link-uri utile","Cariere","Kinetoterapie");
+				$arr_menu = array("Acasa","Despre noi","Parteneri","Info","Contact","Noutati","Cariere","Kinetoterapie");
 			else
 				$arr_menu = array("Introducere&nbsp;&nbsp;&nbsp;"=>array("Producator", "Categorie", "Subcategorie", "Produs"),"Modificare&nbsp;&nbsp;&nbsp;"=>array("Producator", "Categorie", "Subcategorie", "Produs"),"Administrare cosuri","Administrare useri","Administrare reclame","Rapoarte","Pagini web");
             $myPage->setMenu($arr_menu);
@@ -125,6 +125,7 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
 			$myPage->body_left_content .= $produse_categorii;
 			// caseta categorii de produse - STOP -
 
+			/*
 			// caseta de producatori - START -
 			$producatori_list = "";
             $str_prod = "SELECT denumire,id FROM producatori ORDER BY denumire";
@@ -146,16 +147,19 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
             ";
             $myPage->body_left_content .= $producatori;
 			// caseta de producatori - STOP -
-			
+			*/
 			
 			// caseta de link-uri utile - START -
-			/*
+			
 			$producatori_list = "";
             $str_prod = "SELECT denumire,link FROM producatori ORDER BY denumire";
             $q_prod = mysql_query($str_prod) or die("Eroare aparuta la preluarea producatorilor(link-ri utile)!");
             while ( $rs_prod = mysql_fetch_array($q_prod) )
             {
-                $producatori_list .= "<li onclick=\"window.open('".$rs_prod["link"]."')\">".$rs_prod["denumire"]."</li>";
+				if (substr($rs_prod["link"],0,4) == "http" )
+					$producatori_list .= "<li><a href=\"".$rs_prod["link"]."\" target='_blank'>".$rs_prod["denumire"]."</a></li>";
+				else
+					$producatori_list .= "<li><a href=\"http://".$rs_prod["link"]."\" target='_blank'>".$rs_prod["denumire"]."</a></li>";
             }
             $producatori = "
             <div class='left_caseta'>
@@ -169,7 +173,7 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
             </div>
             ";
             $myPage->body_left_content .= $producatori;
-			 */
+			
 			// caseta de link-uri utile - STOP -
             // -- Setez partea din stanga a body-ului STOP --
             

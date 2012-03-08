@@ -31,6 +31,8 @@ if ( intval($mod) == 1 )
 		// Introducere vizionare pentru articolul curent - STOP
 		
 		$rs_prod = mysql_fetch_array($q_prod);
+		$titlu_pag = $rs_prod["nume"];
+		
 		$imagine = "<img src='../images/produse/no_foto.jpg' border=0 height=160 />";
         if( file_exists("../images/produse/".$rs_prod["id"].".jpg") )
             $imagine = "<img src='../images/produse/".$rs_prod["id"].".jpg' title='Apasati pentru a mari imaginea !' onclick=\"window.open(this.src);\" border=0 height=160 />";
@@ -72,7 +74,13 @@ if ( intval($mod) == 1 )
 							<iframe style='display:none;' id='mail_comanda' src='' ></iframe>
 							</td>";
 		}
-			
+		$masuri_arr = explode(",",$rs_prod["grila_masuri"]);
+		$masuri = "<select name='masura_".$rs_prod[0]."' id='masura_".$rs_prod[0]."'>";
+		foreach ($masuri_arr as $masura)
+		{
+			$masuri .= "<option value='".$masura."'>".$masura."</option>";
+		}
+		$masuri .= "</select>";	
         $table .= "
             <tr>
                 <td onmouseover=\"this.style.cursor='pointer'; return false;\" width=110>
@@ -99,7 +107,7 @@ if ( intval($mod) == 1 )
                             <td class='trans'>Subcategorie:</td><td class='trans'>".$rs_prod[("subcategorie")]."</td>
                         </tr>
                         <tr>
-                            <td class='trans'>Grila de masuri:</td><td class='trans'>".$rs_prod["grila_masuri"]."</td>
+                            <td class='trans'>Grila de masuri:</td><td class='trans'>".$masuri."</td>
                         </tr>
                         <tr>
 						"
@@ -155,7 +163,7 @@ if ( intval($mod) == 2 )
         $sql_titlu = "SELECT denumire FROM producatori WHERE id = ".$_REQUEST["id_pr"];
 		$q_titlu = mysql_query($sql_titlu);
 		$rs_titlu = mysql_fetch_array($q_titlu);
-		$titlu_pag = strtoupper($rs_titlu[0]);
+		$titlu_pag = $rs_titlu[0];
 		$inputs .= "
         <input type='hidden' id='id_pr' name='id_pr' value='".$_REQUEST["id_pr"]."'>";
     } 
@@ -165,7 +173,7 @@ if ( intval($mod) == 2 )
         $sql_titlu = "SELECT a.denumire, b.denumire FROM categorii a, subcategorii b WHERE b.id = ".$_REQUEST["id_subcat"]." and b.id_categ = a.id";
 		$q_titlu = mysql_query($sql_titlu);
 		$rs_titlu = mysql_fetch_array($q_titlu);
-		$titlu_pag = strtoupper($rs_titlu[0]." > ".$rs_titlu[1]);
+		$titlu_pag = $rs_titlu[0]." > ".$rs_titlu[1];
 		$inputs .= "
         <input type='hidden' id='id_cat' name='id_subcat' value='".$_REQUEST["id_subcat"]."'>";
     }
@@ -175,7 +183,7 @@ if ( intval($mod) == 2 )
 		$sql_titlu = "SELECT denumire FROM categorii WHERE id = ".$_REQUEST["id_catprod"];
 		$q_titlu = mysql_query($sql_titlu);
 		$rs_titlu = mysql_fetch_array($q_titlu);
-		$titlu_pag = strtoupper($rs_titlu[0]);
+		$titlu_pag = $rs_titlu[0];
         $inputs .= "
         <input type='hidden' id='id_catprod' name='id_catprod' value='".$_REQUEST["id_catprod"]."'>";
     } 
@@ -257,18 +265,13 @@ if ( intval($mod) == 2 )
 			$class_tip_prod1 = "hide";
 		}
 		$masuri = "Masura:";
-		if ($rs_produse["masuri"] == 'unica')
-			$masuri .= "unica";
-		else
+		$masuri_arr = explode(",",$rs_produse["masuri"]);
+		$masuri .= "<select name='masura_".$rs_produse[0]."' id='masura_".$rs_produse[0]."'>";
+		foreach ($masuri_arr as $masura)
 		{
-			$masuri_arr = explode(",",$rs_produse["masuri"]);
-			$masuri .= "<select name='masura_".$rs_produse[0]."' id='masura_".$rs_produse[0]."'>";
-			foreach ($masuri_arr as $masura)
-			{
-				$masuri .= "<option value='".$masura."'>".$masura."</option>";
-			}
-			$masuri .= "</select>";
+			$masuri .= "<option value='".$masura."'>".$masura."</option>";
 		}
+		$masuri .= "</select>";
         $table .= "
              <div class='caseta_prod'>
 				<div class='categorie_prod_top'>".$rs_produse["categorie"]."</div>

@@ -6,6 +6,19 @@ if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" )
      $sql_date = "SELECT * FROM produse WHERE id=".$_REQUEST["id"];
      $q_date = mysql_query($sql_date);
      $rs_date = mysql_fetch_array($q_date);
+	 
+	 // preluare subcategorii
+	 $str_subcat = "SELECT id, denumire FROM subcategorii WHERE id_categ = ".$rs_date["id_categorie"]." ORDER BY denumire";
+	 $q_subcat = mysql_query($str_subcat);
+	 $subcat = "var subcategorii_id = new Array();";
+	 $subcat .= "var subcategorii_den = new Array();";
+	 $i = 0;
+     while ( $rs_subcat = mysql_fetch_array($q_subcat) )
+	 {
+		$subcat .= "subcategorii_id[".$i."] = '".$rs_subcat[0]."';";
+		$subcat .= "subcategorii_den[".$i."] = '".$rs_subcat[1]."';";
+		$i++;
+	 }
 	 $str_des = str_replace("\n", "\\n", $rs_date["descriere"]);
      $str_arr1 = split("\r",$rs_date["indicatii"]) ;
      $str_ind = "";
@@ -29,7 +42,14 @@ if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" )
 	 if (file_exists("../images/produse/".$rs_date["id"].".gif")) $foto = "../images/produse/".$rs_date["id"].".gif";
 	 if (file_exists("../images/produse/".$rs_date["id"].".png")) $foto = "../images/produse/".$rs_date["id"].".png";
 	 echo "
+	<html>
+	<head>
+		 <script type='text/javascript' src='../js/jquery-1.7.1.min.js'></script>
+		 <title>Date produs</title>
+	</head>
+	<body>
      <script>
+		".$subcat."
         parent.document.getElementById('id_produs').value='".$rs_date["id"]."';
         parent.document.getElementById('id').value='".$rs_date["id"]."';
         parent.document.getElementById('nume').value='".$rs_date["nume"]."';
@@ -42,12 +62,42 @@ if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" )
 		".$grila_masuri."	
 		var cat = parent.document.getElementById('categorie');
         for (i=1;i<cat.options.length;i++)
+		{
             if (cat.options[i].value==".$rs_date["id_categorie"].")
+			{
                 cat.options[i].selected = true;
+				break;
+			}
+		}
+		
+        jQuery(\"#subcategorie option[value!='0']\", window.parent.document).remove();
+		for(i=0;i<subcategorii_id.length;i++)
+		{
+			if (subcategorii_id[i] == '".$rs_date["id_subcategorie"]."')
+				jQuery('#subcategorie',window.parent.document).append( new Option(subcategorii_den[i],subcategorii_id[i]) ).attr('selected','selected');
+			else
+				jQuery('#subcategorie',window.parent.document).append( new Option(subcategorii_den[i],subcategorii_id[i]) );
+				
+		}
+		var subcat = parent.document.getElementById('subcategorie');
+		for (i=1;i<subcat.options.length;i++)
+		{
+            if (subcat.options[i].value == '".$rs_date["id_subcategorie"]."')
+			{
+                subcat.options[i].selected = true;
+				break;
+			}
+		}
+		
         var prod = parent.document.getElementById('producator');
         for (i=1;i<prod.options.length;i++)
+		{
             if (prod.options[i].value==".$rs_date["id_producator"].")
+			{
                 prod.options[i].selected = true;
+				break;
+			}
+		}
         if ( '".$rs_date["prima_pagina"]."' == 'da' )
             parent.document.getElementById('prima_pagina').options[1].selected=true;
         else
@@ -62,6 +112,8 @@ if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" )
         else
             parent.document.getElementById('prod_la_comanda').options[0].selected=true;
      </script>
+	 </body>
+	 </html>
      ";
 }
 ?>

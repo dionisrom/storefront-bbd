@@ -71,7 +71,7 @@ if ( !isset($_REQUEST["salvez"]) && !isset($_REQUEST["cauta"]) )
 			</script>
         </head>
         <body>
-            <div class="titlu_mic">Cauta utilizator pentru administrare date personale</div>
+            <div class="titlu_pag">Cauta utilizator pentru administrare date personale</div>
             <br><br>
             <form target="_self">
                 <table border=0>
