@@ -7,7 +7,7 @@
 */
 *
 {
-    font-family: "Arial";
+    font-family: arial;
 	outline: none;
 	color: #464646;
 }
@@ -126,7 +126,7 @@ table td
 {
     float:left;
     color: black;
-    width: 628px;
+    width: 840px;
 	display: block;
 	height:100%;
 }
@@ -387,7 +387,7 @@ h2
 
 #produse
 {
-    width: 628px;
+    width: 840px;
 	font-size: 11px;
 	float: left;
 	margin-top: 20px;

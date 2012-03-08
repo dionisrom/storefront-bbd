@@ -70,8 +70,7 @@ if (isset($_REQUEST["op"]) && $_REQUEST["op"] == "del")
 		</style>
     </head>
     <body>
-		
-		<h3>Administrarea imaginilor pentru slider</h3>
+		<div class="titlu_pag">Administrarea imaginilor pentru slider</div>
 		<h4 style="line-height: 18px;"><?=$mesaj?></h4>
 		<?php
 			if ($handle = opendir($cale)) 

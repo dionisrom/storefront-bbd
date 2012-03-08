@@ -19,7 +19,7 @@ case "subcat":
     break;
 case "pr":
     $db = "producatori";
-    $pag = 'mod_producator.php';
+    $pag = 'mod_producatori.php';
     $mesaj_del = 'Producatorul a fost sters';
     if ( file_exists("../images/producatori/".$_REQUEST["id"].".jpg") )
         unlink("../images/producatori/".$_REQUEST["id"].".jpg");
@@ -28,7 +28,7 @@ case "pr":
     break;
 case "prod":
     $db = "produse";
-    $pag = 'mod_produse.php';
+    $pag = 'mod_produs.php';
     $mesaj_del = 'Produsul a fost sters';
     if ( file_exists("../images/produse/".$_REQUEST["id"].".jpg") )
         unlink("../images/produse/".$_REQUEST["id"].".jpg");

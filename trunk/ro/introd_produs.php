@@ -20,7 +20,7 @@ if ( isset($_REQUEST["salvez"]) && $_REQUEST["salvez"] == "da" && ( $_SESSION["t
 	$sql_prod .= " '".trim($_REQUEST['prima_pagina'])."', ";
 	$sql_prod .= " '".trim($_REQUEST['super_oferta'])."', ";
 	$sql_prod .= " '".implode(",",$masuri)."', ";
-	$sql_prod .= " ".trim($_REQUEST["prod_la_comanda"])."', ";
+	$sql_prod .= " ".trim($_REQUEST["prod_la_comanda"])."' ";
 	$sql_prod .= ")";
 	
 	mysql_query($sql_prod) or die("Eroare aparuta la introducerea unui produs nou! Va rugam contactati administratorul site-ului.<br>".$sql_prod);	
@@ -108,7 +108,7 @@ else
 							alert("Eroare ajax: "+data.msg);
 						else
 						{
-							$("#subcategorie option[text!='- ALEGE -']").remove();
+							$("#subcategorie option[value!='0']").remove();
 							$.each(data.opts, function(val, text) {
 								$('#subcategorie').append( new Option(text,val) );
 							});
@@ -176,7 +176,7 @@ else
 					<td>Subcategorie :</td>
             		<td>
             			<select name="subcategorie" id="subcategorie" class="input">
-            				<option>- ALEGE -</option>
+            				<option value='0'>- ALEGE -</option>
             				
             			</select>
             		</td>
