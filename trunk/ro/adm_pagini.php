@@ -90,7 +90,7 @@ include("../inc/global.php");
 		<!-- /TinyMCE -->
 		<script type="text/javascript">
 			$(window).load(function(){
-				$("#main_frame",window.parent.document).height($(document).height());
+				$("#main_frame",window.parent.document).height($("html").height()+20); $("#body",window.parent.document).height($("html").height()+30);
 			});    
 		</script>
 	</head>

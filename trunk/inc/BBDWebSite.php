@@ -159,37 +159,38 @@ class BBDWebSite {
     
     public function setCSS()
     {
-		$css_content = file_get_contents("css/_default_.css");
-        $css_compiled = "css/default_compiled.css";
-        $css_content = str_replace('$this->width',  $this->width, $css_content);
-        $css_content = str_replace('$this->leftWidth',  $this->leftWidth, $css_content);
-        $css_content = str_replace('$this->rightWidth',  $this->rightWidth, $css_content);
-		$headerWidth = $this->width;
-		if ($this->top_left) $headerWidth -= $this->leftWidth+2;
-		if ($this->top_right) $headerWidth -= $this->rightWidth+2;
-		$bodyWidth = $this->width;
-		if ($this->body_left) $bodyWidth -= $this->leftWidth+4;
-		if ($this->body_right) $bodyWidth -= $this->rightWidth+4;
-		$footerWidth = $this->width;
-		if ($this->bottom_left) $footerWidth -= $this->leftWidth+2;
-		if ($this->bottom_right) $footerWidth -= $this->rightWidth+2;
-        $css_content = str_replace('$headerWidth',  ($headerWidth), $css_content);
-        $css_content = str_replace('$bodyWidth',  ($bodyWidth), $css_content);
-        $css_content = str_replace('$footerWidth',  ($footerWidth), $css_content);
-        $menu_pos = explode(" ",$this->menu_position);
-        //if ( $menu_pos[0] == "right" )
-        $css_content = str_replace('$this->navfloat', "float: ".$menu_pos[0].";", $css_content);
-        if (count($menu_pos)>0 && $menu_pos[1] == "bottom")
-            $css_content = str_replace('$this->navmargintop', "81", $css_content);
-        if ( file_exists($css_compiled) == TRUE )
-        {
-            unlink($css_compiled);
-            unlink("css/default.css");
-        }
-        file_put_contents($css_compiled, $css_content);
-        file_put_contents("css/default.css", $css_content);
-        $this->css = "<link rel='stylesheet' type='text/css' href='css/default_compiled.css' />".$this->EOF;
-        return $this->css;
+	$css_content = file_get_contents("css/_default_.css");
+	$css_compiled = "css/default_compiled.css";
+
+	$headerWidth = $this->width;
+	if ($this->top_left) $headerWidth -= $this->leftWidth+2;
+	if ($this->top_right) $headerWidth -= $this->rightWidth+2;
+	$bodyWidth = $this->width;
+	if ($this->body_left) $bodyWidth -= $this->leftWidth+4;
+	if ($this->body_right) $bodyWidth -= $this->rightWidth+4;
+	$footerWidth = $this->width;
+	if ($this->bottom_left) $footerWidth -= $this->leftWidth+2;
+	if ($this->bottom_right) $footerWidth -= $this->rightWidth+2;
+	$css_content = str_replace('$this->width',  $this->width, $css_content);
+	$css_content = str_replace('$this->leftWidth',  $this->leftWidth, $css_content);
+	$css_content = str_replace('$this->rightWidth',  $this->rightWidth, $css_content);
+	$css_content = str_replace('$headerWidth',  ($headerWidth), $css_content);
+	$css_content = str_replace('$bodyWidth',  ($bodyWidth), $css_content);
+	$css_content = str_replace('$footerWidth',  ($footerWidth), $css_content);
+	$menu_pos = explode(" ",$this->menu_position);
+	//if ( $menu_pos[0] == "right" )
+	$css_content = str_replace('$this->navfloat', "float: ".$menu_pos[0].";", $css_content);
+	if (count($menu_pos)>0 && $menu_pos[1] == "bottom")
+		$css_content = str_replace('$this->navmargintop', "81", $css_content);
+	if ( file_exists($css_compiled) == TRUE )
+	{
+		unlink($css_compiled);
+		unlink("css/default.css");
+	}
+	file_put_contents($css_compiled, $css_content);
+	file_put_contents("css/default.css", $css_content);
+	$this->css = "<link rel='stylesheet' type='text/css' href='css/default_compiled.css' />".$this->EOF;
+	return $this->css;
     }
     
     public function setLogo($img_src)

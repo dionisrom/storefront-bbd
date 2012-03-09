@@ -10,7 +10,7 @@
 	<meta http-equiv="Cache-Control" content="no-cache" />
 	<meta name="description" content="Ortoprotetica - Acasa" />
 	<meta name="copyright" content="&copy; 2012 Ortoprotetica" />
-    <script type="text/javascript" src="../js/easyslider/jquery.js"></script> 
+    <script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script> 
     <script type="text/javascript" src="../js/easyslider/easySlider1.7.js"></script>
     <script type="text/javascript">
         jQuery(document).ready(function(){    
@@ -19,7 +19,6 @@
                 continuous: true,
                 numeric: false
             });
-			jQuery("#main_frame",window.parent.document).height(jQuery(document).height());
         });    
     </script>
 	<LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css" />
@@ -170,6 +169,14 @@
 			</div>
 		';
 ?>
-    
+<script>
+	var db1 = jQuery("#container").height();
+	var db2 = jQuery("#produse").height();
+	var db3 = jQuery("#last_prods_container").height();
+
+	var docHeight = db1+db2+db3;
+	jQuery("#main_frame",window.parent.document).height(docHeight +50);
+	jQuery("#body",window.parent.document).height(docHeight +60);
+</script>
 </body>
 </html>
