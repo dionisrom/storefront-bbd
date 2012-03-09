@@ -21,7 +21,7 @@ if (isset($_REQUEST["usrid"]) && isset($_REQUEST["passwd"]) )
             echo "
 		    <script>
                 alert('".$_SESSION["err"]."');
-			    top.location.replace('http://".$_SERVER['SERVER_NAME'].$path."');
+			    top.location.href('index.php');
 		    </script>
 		    ";
         }
@@ -37,7 +37,7 @@ if (isset($_REQUEST["usrid"]) && isset($_REQUEST["passwd"]) )
             $_SESSION["tipusr"] = $rs["id_tip"];
             echo "
             <script>
-                top.location.replace('http://".$_SERVER['SERVER_NAME'].$path."');
+                top.location.href('index.php');
             </script>
             ";
         }
@@ -47,7 +47,7 @@ if (isset($_REQUEST["usrid"]) && isset($_REQUEST["passwd"]) )
 		echo "
 		<script>
             alert('Autentificare esuata! Va rugam sa reincercati !');
-            top.location.replace('http://".$_SERVER['SERVER_NAME'].$path."');
+            top.location.href('index.php');
 		</script>
 		";	
 	}

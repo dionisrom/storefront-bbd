@@ -301,11 +301,6 @@ $table .= "</table>";
         <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
         <LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css" />
         <script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script> 
-		<script type="text/javascript">
-			$(window).load(function(){
-				$("#main_frame",window.parent.document).height($(document).height());
-			});    
-		</script>
         <style>
         .trans
         {
@@ -344,8 +339,20 @@ $table .= "</table>";
 	        }
 		}
         ?>
-        <table cellpadding="0" cellspacing="0" border="0">
-            <?=$table?>
+        <table cellpadding="0" cellspacing="0" border="0" id="tbl_prod"><tr><td>
+            <?php echo $table;?>
+					</td></tr>
         </table>
+		<script type="text/javascript">
+			
+			var db1 = jQuery("#tbl_prod").height();
+			var db2 = jQuery(".titlu_pag").height();
+			var db3 = jQuery("#mod_pags table").height();
+
+			//var docHeight = Math.max(jQuery("html").height(),(db1+db2+db3));
+			var docHeight = db1+db2+db3;
+			jQuery("#main_frame",window.parent.document).height(docHeight +50);
+			jQuery("#body",window.parent.document).height(docHeight +60);
+		</script>
     </body>
 </html>

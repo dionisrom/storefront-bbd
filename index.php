@@ -24,13 +24,18 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
             if (isset($_SESSION["tipusr"]) && $_SESSION["tipusr"] <= 2)
             {
 				$myPage->body_left = false;
+				$myPage->leftWidth =1;
 				$pag = "";
+				$myPage->setWidth(0,1,0);
             }
             else
             {
+				$myPage->body_left = true;
+				$myPage->leftWidth = 206;
 				$pag = "ro/acasa.php";
+				$myPage->setWidth();
             }
-            $myPage->setWidth();
+            
             $myPage->setLogo("img/logo.png");
             echo $myPage->setHeaderInclude();
             echo $myPage->setCSS();

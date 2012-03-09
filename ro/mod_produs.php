@@ -182,7 +182,6 @@ if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" && ( $_SESSION["tipus
                     <td>Categorie :</td>
                     <td>
                         <select name="categorie" id="categorie" class="input" onchange="getSubcateg($(this).val());">
-                            <option>- ALEGE -</option>
                             <?
                             $str_cat = "SELECT id, denumire FROM categorii ORDER BY denumire";
                             $q_cat = mysql_query($str_cat) or die("Eroare aparuta la preluarea categoriilor!");

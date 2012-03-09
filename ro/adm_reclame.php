@@ -48,7 +48,7 @@ if (isset($_REQUEST["op"]) && $_REQUEST["op"] == "del")
 		<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script> 
 		<script type="text/javascript">
 			$(window).load(function(){
-				$("#main_frame",window.parent.document).height($(document).height());
+				$("#main_frame",window.parent.document).height($("html").height()+20); $("#body",window.parent.document).height($("html").height()+30);
 			});    
 		</script>
 		<style>
