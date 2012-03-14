@@ -4,12 +4,12 @@ if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" )
 {
      include("../inc/global.php");
      $sql_date = "SELECT * FROM produse WHERE id=".$_REQUEST["id"];
-     $q_date = mysql_query($sql_date);
+     $q_date = mysql_query($sql_date) or die("Eroare preluare produs!");
      $rs_date = mysql_fetch_array($q_date);
 	 
 	 // preluare subcategorii
 	 $str_subcat = "SELECT id, denumire FROM subcategorii WHERE id_categ = ".$rs_date["id_categorie"]." ORDER BY denumire";
-	 $q_subcat = mysql_query($str_subcat);
+	 $q_subcat = mysql_query($str_subcat) or die("Eroare preluare subcategorii! ");
 	 $subcat = "var subcategorii_id = new Array();";
 	 $subcat .= "var subcategorii_den = new Array();";
 	 $i = 0;
@@ -19,44 +19,60 @@ if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" )
 		$subcat .= "subcategorii_den[".$i."] = '".$rs_subcat[1]."';";
 		$i++;
 	 }
-	 $str_des = str_replace("\n", "\\n", $rs_date["descriere"]);
-     $str_arr1 = split("\r",$rs_date["indicatii"]) ;
-     $str_ind = "";
-     for ($i=0; $i<count($str_arr1); $i++)
-        $str_ind .= $str_arr1[$i]."\\n\\";
-     $str_ind = substr($str_ind,0,(strlen($str_ind)-3));
-     $masuri = explode(",",$rs_date["grila_masuri"]);
-	 $grila_masuri = "\n";
-	 if($masuri[0] == "unica")
+	$str_des = str_replace("\r","",$rs_date["descriere"]); 
+	$str_des = str_replace("\n","<br>",$str_des);
+	$str_ind = str_replace("\r","",$rs_date["indicatii"]);
+	$str_ind = str_replace("\n","<br>",$str_ind);
+	/*$str_arr1 = split("\r",$rs_date["indicatii"]) ;
+	$str_ind = "";
+	for ($i=0; $i<count($str_arr1); $i++)
+		$str_ind .= $str_arr1[$i]."\\n\\";
+	$str_ind = substr($str_ind,0,(strlen($str_ind)-3));
+	  */
+	 //$str_des = htmlentities($rs_date["descriere"]);
+	 //$str_ind = htmlentities($rs_date["indicatii"]);
+	if(trim($rs_date["grila_masuri"]) != "" && !is_null($rs_date["grila_masuri"]) )
+		$masuri = explode(",",$rs_date["grila_masuri"]);
+	else
+		$masuri = array();
+	 $grila_masuri = "";
+	 if(count($masuri)>0)
 	 {
-		 $grila_masuri .= "parent.document.getElementById('unica').checked='checked';\n";
-	 }
-	 else
-	 {		 
-		for($i=0;$i<count($masuri);$i++)
+		if($masuri[0] == "unica")
 		{
-			$grila_masuri .= "parent.document.getElementById('".$masuri[$i]."').checked='checked';\n";
+			$grila_masuri .= "parent.document.getElementById('unica').checked='checked';\n";
+		}
+		else
+		{		 
+			for($i=0;$i<count($masuri);$i++)
+			{
+				$grila_masuri .= "parent.document.getElementById('".$masuri[$i]."').checked='checked';\n";
+			}
 		}
 	 }
 	 if (file_exists("../images/produse/".$rs_date["id"].".jpg")) $foto = "../images/produse/".$rs_date["id"].".jpg";
 	 if (file_exists("../images/produse/".$rs_date["id"].".gif")) $foto = "../images/produse/".$rs_date["id"].".gif";
 	 if (file_exists("../images/produse/".$rs_date["id"].".png")) $foto = "../images/produse/".$rs_date["id"].".png";
 	 echo "
-	<html>
+	<html lang='ro'>
 	<head>
-		 <script type='text/javascript' src='../js/jquery-1.7.1.min.js'></script>
+		<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' /> 
+		<script type='text/javascript' src='../js/jquery-1.7.1.min.js'></script>
 		 <title>Date produs</title>
 	</head>
 	<body>
      <script>
 		".$subcat."
+	nl = '\\r\\n';
         parent.document.getElementById('id_produs').value='".$rs_date["id"]."';
         parent.document.getElementById('id').value='".$rs_date["id"]."';
         parent.document.getElementById('nume').value='".$rs_date["nume"]."';
         parent.document.getElementById('cod').value='".$rs_date["cod"]."';
         parent.document.getElementById('descriere').value='".$str_des."';
+        parent.document.getElementById('descriere').value= parent.document.getElementById('descriere').value.replace( /\<br(\s*\/|)\>/g, nl );
         parent.document.getElementById('pret').value='".$rs_date["pret"]."';
         parent.document.getElementById('indicatii').value='".$str_ind."';
+        parent.document.getElementById('indicatii').value=parent.document.getElementById('indicatii').value.replace( /\<br(\s*\/|)\>/g, nl );
         parent.document.getElementById('reducere').value='".$rs_date["reducere"]."';
         parent.document.getElementById('poza_existenta').src='".$foto."';
 		".$grila_masuri."	

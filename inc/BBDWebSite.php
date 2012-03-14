@@ -157,12 +157,9 @@ class BBDWebSite {
         return $this->headInclude;
     }
     
-    public function setCSS()
+    public function setCSS($css_file="default_compiled.css")
     {
-	$css_content = file_get_contents("css/_default_.css");
-	$css_compiled = "css/default_compiled.css";
-
-	$headerWidth = $this->width;
+	/*$headerWidth = $this->width;
 	if ($this->top_left) $headerWidth -= $this->leftWidth+2;
 	if ($this->top_right) $headerWidth -= $this->rightWidth+2;
 	$bodyWidth = $this->width;
@@ -177,11 +174,14 @@ class BBDWebSite {
 	$css_content = str_replace('$headerWidth',  ($headerWidth), $css_content);
 	$css_content = str_replace('$bodyWidth',  ($bodyWidth), $css_content);
 	$css_content = str_replace('$footerWidth',  ($footerWidth), $css_content);
+	$css_content = file_get_contents("css/_default_.css");
+	$css_compiled = "css/default_compiled.css";
 	$menu_pos = explode(" ",$this->menu_position);
-	//if ( $menu_pos[0] == "right" )
+	if ( $menu_pos[0] == "right" )
 	$css_content = str_replace('$this->navfloat', "float: ".$menu_pos[0].";", $css_content);
 	if (count($menu_pos)>0 && $menu_pos[1] == "bottom")
 		$css_content = str_replace('$this->navmargintop', "81", $css_content);
+	
 	if ( file_exists($css_compiled) == TRUE )
 	{
 		unlink($css_compiled);
@@ -189,7 +189,8 @@ class BBDWebSite {
 	}
 	file_put_contents($css_compiled, $css_content);
 	file_put_contents("css/default.css", $css_content);
-	$this->css = "<link rel='stylesheet' type='text/css' href='css/default_compiled.css' />".$this->EOF;
+	*/ 
+	$this->css = "<link rel='stylesheet' type='text/css' href='css/".$css_file."' />".$this->EOF;
 	return $this->css;
     }
     

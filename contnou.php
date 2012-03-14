@@ -47,12 +47,15 @@ if ( isset($_REQUEST["salvez"]) )
                 <meta name="description" content="Ortoprotetica - Creare cont utilizator nou">
                 <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
                 <LINK HREF="css/default.css" REL="stylesheet" TYPE="text/css"> 
-				<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script> 
-				<script type="text/javascript">
-					$(document).ready(function(){
-						$("#main_frame",window.parent.document).height($("html").height()+10);
-					});    
-				</script>
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script> 
+		<script type="text/javascript">
+			jQuery(window).load(function(){
+				var db1 = jQuery("html").height();
+				var docHeight = db1;
+				jQuery("#main_frame",window.parent.document).height(docHeight +50);
+				jQuery("#body",window.parent.document).height(docHeight +60);
+			})
+		</script>
             </head>
             <body>
                 <div class="titlu_mic">'.$mesaj.'</div>
@@ -72,14 +75,17 @@ if ( isset($_REQUEST["salvez"]) )
                 <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
                 <LINK HREF="css/default.css" REL="stylesheet" TYPE="text/css">
 				<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script> 
-				<script type="text/javascript">
-					$(document).ready(function(){
-						$("#main_frame",window.parent.document).height($("html").height()+10);
-					});    
-				</script>
             </head>
             <body>
-                <div class="titlu_mic">Emailul nu a fost trimis catra utilizator!</div>
+                <div class="titlu_pag">Emailul nu a fost trimis catra utilizator!</div>
+		<script type="text/javascript">
+			jQuery(window).load(function(){
+				var db1 = jQuery("html").height();
+				var docHeight = db1;
+				jQuery("#main_frame",window.parent.document).height(docHeight +50);
+				jQuery("#body",window.parent.document).height(docHeight +60);
+			})
+		</script>
             </body>
             </html>
             ';
@@ -97,16 +103,19 @@ if ( isset($_REQUEST["salvez"]) )
             <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
             <LINK HREF="css/default.css" REL="stylesheet" TYPE="text/css">
 			<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script> 
-			<script type="text/javascript">
-				$(document).ready(function(){
-					$("#main_frame",window.parent.document).height($("html").height()+10);
-				});    
-			</script>
         </head>
         <body>
-            <div class="titlu_mic">
+            <div class="titlu_pag">
                 Username-ul '.$_REQUEST["username"].' deja exista in baza noastra de date. Va rugam sa modificati aceasta informatie. <a href="javascript: history.go(-1);">Inapoi la pagina de creare cont utilizator</a>
             </div>
+		<script type="text/javascript">
+			jQuery(window).load(function(){
+				var db1 = jQuery("html").height();
+				var docHeight = db1;
+				jQuery("#main_frame",window.parent.document).height(docHeight +50);
+				jQuery("#body",window.parent.document).height(docHeight +60);
+			})
+		</script>
         </body>
         </html>
         ';    
@@ -124,11 +133,6 @@ else
     <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
     <LINK HREF="css/default.css" REL="stylesheet" TYPE="text/css">
 	<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script> 
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$("#main_frame",window.parent.document).height($("html").height()+10);
-		});    
-	</script>
     <script>
         function toggleContainer(id)
         {
@@ -471,6 +475,14 @@ else
         </tr>
     </table>
 </form>
+<script type="text/javascript">
+	jQuery(window).load(function(){
+		var db1 = jQuery("html").height();
+		var docHeight = db1;
+		jQuery("#main_frame",window.parent.document).height(docHeight +50);
+		jQuery("#body",window.parent.document).height(docHeight +60);
+	})
+</script>
 </body>
 </html>
 <?

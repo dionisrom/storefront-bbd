@@ -17,16 +17,19 @@ if ( isset($_REQUEST["salvez"]) && $_REQUEST["salvez"] == "da" && ( $_SESSION["t
 		    <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
 		    <LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css">
 			<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script> 
-			<script type="text/javascript">
-				$(window).load(function(){
-					$("#main_frame",window.parent.document).height($("html").height()+20); $("#body",window.parent.document).height($("html").height()+30);
-				});    
-			</script>
 		</head>
 		<body>
 			<div class="titlu_mic">
 				A fost adugata cu succes noua categorie : <b><i><u>'.$_REQUEST["denumire"].'</u></i></b> in baza de date.<br>
 			</div>
+			<script type="text/javascript">
+		jQuery("#main_frame",window.parent.document).load(function(){
+			var db1 = jQuery(document).height();
+			var docHeight = db1;
+			jQuery("#main_frame",window.parent.document).height(docHeight +50);
+			jQuery("#body",window.parent.document).height(docHeight +60);
+		})
+	</script>
 		</body>
 		</html>
 		';
@@ -45,11 +48,6 @@ else
         <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
         <LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css">
 		<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script> 
-		<script type="text/javascript">
-			$(window).load(function(){
-				$("#main_frame",window.parent.document).height($("html").height()+20); $("#body",window.parent.document).height($("html").height()+30);
-			});    
-		</script>
 	</head>
 	<body>
 	<div class="titlu_pag">Inserare categorie noua</div>
@@ -67,6 +65,14 @@ else
 				</tr>
 			</table>
 		</form>
+		<script type="text/javascript">
+			jQuery(window).load(function(){
+				var db1 = jQuery("html").height();
+				var docHeight = db1;
+				jQuery("#main_frame",window.parent.document).height(docHeight +50);
+				jQuery("#body",window.parent.document).height(docHeight +60);
+			})
+		</script>
 	</body>
 </html>
 <?

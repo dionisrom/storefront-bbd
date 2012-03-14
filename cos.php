@@ -2,12 +2,12 @@
   session_start();
   if ( isset($_REQUEST["reset_cos"]) && $_REQUEST["reset_cos"] == 1 )
   {
-  	session_unregister("cos");
-  	session_unregister("nr_produse");
-  	session_unregister("id_produse");
-  	session_unregister("cant_produse");
-  	session_unregister("pret_produse");
-  	session_unregister("masura_produse");
+  	unset($_SESSION["cos"]);
+  	unset($_SESSION["nr_produse"]);
+  	unset($_SESSION["id_produse"]);
+  	unset($_SESSION["cant_produse"]);
+  	unset($_SESSION["pret_produse"]);
+  	unset($_SESSION["masura_produse"]);
   }
   if ( isset($_REQUEST["adauga_prod"]) && $_REQUEST["adauga_prod"] == 1 )
   {

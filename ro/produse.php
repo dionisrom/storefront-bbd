@@ -344,15 +344,12 @@ $table .= "</table>";
 					</td></tr>
         </table>
 		<script type="text/javascript">
-			
-			var db1 = jQuery("#tbl_prod").height();
-			var db2 = jQuery(".titlu_pag").height();
-			var db3 = jQuery("#mod_pags table").height();
-
-			//var docHeight = Math.max(jQuery("html").height(),(db1+db2+db3));
-			var docHeight = db1+db2+db3;
+		jQuery("#main_frame",window.parent.document).load(function(){
+			var db1 = jQuery(document).height();
+			var docHeight = db1;
 			jQuery("#main_frame",window.parent.document).height(docHeight +50);
 			jQuery("#body",window.parent.document).height(docHeight +60);
-		</script>
+		})
+	</script>
     </body>
 </html>

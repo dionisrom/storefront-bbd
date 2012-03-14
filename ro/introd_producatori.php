@@ -5,7 +5,7 @@ if ( isset($_REQUEST["salvez"]) && $_REQUEST["salvez"] == "da" && ( $_SESSION["t
 {
 	$sql_prod = 'INSERT INTO producatori (denumire,link) VALUES ("'.str_replace("\'","'",$_REQUEST["denumire"]).'","'.$_REQUEST["link"].'")';
 	
-	mysql_query($sql_prod) or die("Eroare aparuta la introducerea unui producator nou! Va rugam contactati administratorul site-ului.<br>".$sql_prod);	
+	mysql_query($sql_prod) or die("Eroare aparuta la introducerea unui producator nou! Va rugam contactati administratorul site-ului.");	
 	$lastid = mysql_insert_id();
 	$mesaj = "";
 	if ( (($_FILES["sigla"]["type"] == "image/gif") || ($_FILES["sigla"]["type"] == "image/jpeg") ) && ($_FILES["sigla"]["size"] < 30000) && ($_FILES["sigla"]["error"] == 0) )
@@ -42,17 +42,20 @@ if ( isset($_REQUEST["salvez"]) && $_REQUEST["salvez"] == "da" && ( $_SESSION["t
 		    <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
 		    <LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css">
 			<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script> 
-			<script type="text/javascript">
-				$(window).load(function(){
-					$("#main_frame",window.parent.document).height($("html").height()+20); $("#body",window.parent.document).height($("html").height()+30);
-				});    
-			</script>
 		</head>
 		<body>
 			<div class="titlu_mic">
 				A fost adugat cu succes noul producator : <b><i><u>'.$_REQUEST["denumire"].'</u></i></b> in baza de date.<br>
 				'.$mesaj.'
 			</div>
+			<script type="text/javascript">
+		jQuery("#main_frame",window.parent.document).load(function(){
+			var db1 = jQuery(document).height();
+			var docHeight = db1;
+			jQuery("#main_frame",window.parent.document).height(docHeight +50);
+			jQuery("#body",window.parent.document).height(docHeight +60);
+		})
+	</script>
 		</body>
 		</html>
 		';
@@ -71,11 +74,6 @@ else
         <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
         <LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css">
 		<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script> 
-		<script type="text/javascript">
-			$(window).load(function(){
-				$("#main_frame",window.parent.document).height($("html").height()+20); $("#body",window.parent.document).height($("html").height()+30);
-			});    
-		</script>
 	</head>
 	<body>
 	<div class="titlu_pag">Inserare producator nou</div>
@@ -107,6 +105,14 @@ else
 				</tr>
 			</table>
 		</form>
+		<script type="text/javascript">
+		jQuery("#main_frame",window.parent.document).load(function(){
+			var db1 = jQuery(document).height();
+			var docHeight = db1;
+			jQuery("#main_frame",window.parent.document).height(docHeight +50);
+			jQuery("#body",window.parent.document).height(docHeight +60);
+		})
+	</script>
 	</body>
 </html>
 <?

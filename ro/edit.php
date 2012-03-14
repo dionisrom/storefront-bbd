@@ -24,25 +24,29 @@ case "pr":
     {
     	mysql_query("UPDATE ".$db." SET link = '".$_REQUEST["link"]."' WHERE id = ".$_REQUEST["id"]);
 	}
-    if ( isset($_REQUEST["fis"]) && $_REQUEST["fis"] != "")
+	$sigla = $_REQUEST["fis"];
+    if ( $_FILES[$sigla]["error"] == 0)
     {
-    	$sigla = $_REQUEST["fis"];
     	$mesaj = "";
-		if ( (($_FILES[$sigla]["type"] == "image/gif") || ($_FILES[$sigla]["type"] == "image/jpeg") ) && ($_FILES[$sigla]["error"] == 0) )
+		if ( (($_FILES[$sigla]["type"] == "image/gif") || ($_FILES[$sigla]["type"] == "image/jpeg") || ($_FILES[$sigla]["type"] == "image/png")))
 		{
 			$target_path = "../images/producatori/";
 			$ext=substr(basename( $_FILES[$sigla]['name']),(strlen(basename( $_FILES[$sigla]['name']))-4));
 			$fara_ext = $target_path.$_REQUEST["id"];
-            $target_path .= $_REQUEST["id"].$ext;
+			$target_path .= $_REQUEST["id"].$ext;
 			
 			if (file_exists($target_path.".jpg") )
-		    {
-                unlink($fara_ext.'.jpg');
-		    }
-            if (file_exists($target_path.".gif") )
-            {
-                unlink($fara_ext.'.gif');
-            }
+			{
+				unlink($fara_ext.'.jpg');
+			}
+			if (file_exists($target_path.".gif") )
+			{
+				unlink($fara_ext.'.gif');
+			}
+			if (file_exists($target_path.".png") )
+			{
+				unlink($fara_ext.'.png');
+			}
 			if(move_uploaded_file($_FILES[$sigla]['tmp_name'], $target_path)) {
 				$mesaj = "Sigla producatorului a fost uploadata cu succes.";
 			} else{
@@ -57,8 +61,8 @@ case "pr":
 		{
 			echo "
 			<script>
-				parent.document.getElementById('poza_".$_REQUEST["id"]."').innerHTML=\"<img src='../images/producatori/".$_REQUEST["id"].$ext."' border=0 height=40px width=40px class='corner iradius10 ishadow25'>\";
-                top.document.getElementById('main_frame').src='ro/mod_producator.php';
+				parent.document.getElementById('poza_".$_REQUEST["id"]."').innerHTML=\"<img src='../images/producatori/".$_REQUEST["id"].$ext."' border=0 height=40px width=40px >\";
+				//top.document.getElementById('main_frame').src='ro/mod_producatori.php';
 			</script>
 			";
 		}
@@ -77,9 +81,9 @@ case "prod":
     $sql = "UPDATE ".$db." SET ";
     $sql .= " nume = '".$_REQUEST["nume"]."', ";
     $sql .= " cod = '".$_REQUEST["cod"]."', ";
-    $sql .= " descriere = '".$_REQUEST["descriere"]."', ";
+    $sql .= " descriere = '".str_replace("<br>","\r\n",$_REQUEST["descriere"])."', ";
     $sql .= " id_categorie = ".$_REQUEST["categorie"].", ";
-    $sql .= " indicatii = '".$_REQUEST["indicatii"]."', ";
+    $sql .= " indicatii = '".str_replace("<br>","\r\n",$_REQUEST["indicatii"])."', ";
     $sql .= " pret = ".$_REQUEST["pret"].", ";
     $sql .= " id_producator = ".$_REQUEST["producator"].", ";
     $sql .= " id_subcategorie = ".$_REQUEST["subcategorie"].", ";
@@ -89,12 +93,12 @@ case "prod":
     $sql .= " prod_la_comanda = ".$_REQUEST["prod_la_comanda"].", ";
     $sql .= " grila_masuri = '".implode(",",$masuri)."' ";
     $sql .= " WHERE id = ".$_REQUEST["id"]." ";
-    mysql_query($sql) or die("<script>alert(\"Eroare la actualizare produs.".$sql."\");</script>");
+    mysql_query($sql) or die("<script>alert(\"Eroare la actualizare produs.\");</script>");
 	$mesaj = "";
 	$ext_arr = array(".png",".jpg",".gif");
-	if (isset($_FILES["poza"]))
+	if (isset($_FILES["poza"]) && $_FILES["poza"]["error"] == 0)
 	{
-		if ( (($_FILES["poza"]["type"] == "image/png" || $_FILES["poza"]["type"] == "image/gif") || ($_FILES["poza"]["type"] == "image/jpeg") ) && ($_FILES["poza"]["size"] < 50000) && ($_FILES["poza"]["error"] == 0) )
+		if ( (($_FILES["poza"]["type"] == "image/png" || $_FILES["poza"]["type"] == "image/gif") || ($_FILES["poza"]["type"] == "image/jpeg") ) && ($_FILES["poza"]["size"] < 50000) )
 		{
 			$lastid = $_REQUEST["id"];
 			$target_path = "../images/produse/";

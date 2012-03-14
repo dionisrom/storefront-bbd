@@ -35,7 +35,7 @@ if ( isset($_REQUEST["salvez"]) && $_REQUEST["salvez"] == "da" )
             <LINK HREF="css/default.css" REL="stylesheet" TYPE="text/css">    
         </head>
         <body>
-            <div class="titlu_mic">'.$mesaj.'</div>
+            <div class="titlu_pag">'.$mesaj.'</div>
         </body>
         </html>
         ';
@@ -71,6 +71,7 @@ $rsi = mysql_fetch_array($qmodif);
         }
        
     </script>
+	<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
     <script language="JavaScript" src="js/formValidator.js"></script>
     <script language="JavaScript" src="js/md5.js"></script>
 	<script language="JavaScript">
@@ -367,6 +368,14 @@ $rsi = mysql_fetch_array($qmodif);
         </tr>
     </table>
 </form>
+<script type="text/javascript">
+			jQuery(window).load(function(){
+				var db1 = jQuery("html").height();
+				var docHeight = db1;
+				jQuery("#main_frame",window.parent.document).height(docHeight +50);
+				jQuery("#body",window.parent.document).height(docHeight +60);
+			})
+		</script>
 </body>
 </html>
 <?

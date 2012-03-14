@@ -11,10 +11,9 @@
     }
     $id = "cant_".$id_cos."_".$j;
     $cant .= $_REQUEST[$id]."";
-    $sql_mod .= "cantitati = '".$cant."', ";
-    $sql_mod .= "curier = ".$_REQUEST["tr_".$id_cos];
+    $sql_mod .= "cantitati = '".$cant."' ";
     $sql_mod .= " WHERE id = ".$id_cos;
-    mysql_query($sql_mod) or die("<script>alert('Eroare la salvare modificari! ".mysql_error()."')</script>");
+    @mysql_query($sql_mod) or die("<script>alert('Eroare la salvare modificari! ')</script>");
     echo "
     <script>
         alert(\"Modificarile au fost salvate cu succes!\");

@@ -31,15 +31,18 @@ if ( isset($_REQUEST["salvez"]) && $_REQUEST["salvez"] == "da" )
             <meta name="description" content="Ortoprotetica - Modificare informatii cont utilizator">
             <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
             <LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css">
-			<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script> 
-			<script type="text/javascript">
-				$(window).load(function(){
-					$("#main_frame",window.parent.document).height($("html").height()+20); $("#body",window.parent.document).height($("html").height()+30);
-				});    
-			</script>
+	   <script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script> 
         </head>
         <body>
             <div class="titlu_mic">'.$mesaj.'</div>
+		<script type="text/javascript">
+		jQuery("#main_frame",window.parent.document).load(function(){
+			var db1 = jQuery(document).height();
+			var docHeight = db1;
+			jQuery("#main_frame",window.parent.document).height(docHeight +50);
+			jQuery("#body",window.parent.document).height(docHeight +60);
+		})
+	</script>
         </body>
         </html>
         ';
@@ -63,12 +66,7 @@ if ( !isset($_REQUEST["salvez"]) && !isset($_REQUEST["cauta"]) )
             <meta name="description" content="Ortoprotetica - Modificare informatii cont utilizator">
             <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
             <LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css"> 
-			<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script> 
-			<script type="text/javascript">
-				$(window).load(function(){
-					$("#main_frame",window.parent.document).height($("html").height()+20); $("#body",window.parent.document).height($("html").height()+30);
-				});    
-			</script>
+	  <script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script> 
         </head>
         <body>
             <div class="titlu_pag">Cauta utilizator pentru administrare date personale</div>
@@ -87,6 +85,14 @@ if ( !isset($_REQUEST["salvez"]) && !isset($_REQUEST["cauta"]) )
                 </tr>
                 </table>
             </form>
+		<script type="text/javascript">
+		jQuery("#main_frame",window.parent.document).load(function(){
+			var db1 = jQuery(document).height();
+			var docHeight = db1;
+			jQuery("#main_frame",window.parent.document).height(docHeight +50);
+			jQuery("#body",window.parent.document).height(docHeight +60);
+		})
+	</script>
         </body>
         </html>
         ';
@@ -105,12 +111,7 @@ $rsi = mysql_fetch_array($qmodif);
     <meta name="description" content="Ortoprotetica - Modificare cont utilizator">
     <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
     <LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css">
-	<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script> 
-	<script type="text/javascript">
-		$(window).load(function(){
-			$("#main_frame",window.parent.document).height($("html").height()+20); $("#body",window.parent.document).height($("html").height()+30);
-		});    
-	</script>
+   <script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script> 
     <script>
         function toggleContainer(id)
         {
@@ -282,6 +283,14 @@ $rsi = mysql_fetch_array($qmodif);
         </tr>
     </table>
 </form>
+<script type="text/javascript">
+		jQuery("#main_frame",window.parent.document).load(function(){
+			var db1 = jQuery(document).height();
+			var docHeight = db1;
+			jQuery("#main_frame",window.parent.document).height(docHeight +50);
+			jQuery("#body",window.parent.document).height(docHeight +60);
+		})
+	</script>
 </body>
 </html>
 <?

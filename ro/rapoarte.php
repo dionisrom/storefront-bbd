@@ -8,11 +8,6 @@ session_start();
 		<title>Rapoarte</title>
 		<LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css">
 		<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script> 
-		<script type="text/javascript">
-			$(window).load(function(){
-				$("#main_frame",window.parent.document).height($("html").height()+20); $("#body",window.parent.document).height($("html").height()+30);
-			});    
-		</script>
     </head>
     <body>
 		<?php
@@ -39,10 +34,17 @@ session_start();
 			foreach ($produse as $key => $value)
 			{
 				$cant[$value] = $cantitati[$key];
-				$pret[$value] = $preturi[$key];
+				if(isset($preturi[$key]))
+				{
+					$pret[$value] = $preturi[$key];
+				}
+				else
+				{
+					$pret[$value] = 0;
+				}
 			}
 			$sql_detalii = "SELECT * FROM produse WHERE id IN (".$row["produse"].")";
-			$query_detalii = mysql_query($sql_detalii) or die("<script>alert('Eroare preluare detalii produse!\n$rs_detalii')</script>");
+			$query_detalii = mysql_query($sql_detalii) or die("<script>alert('Eroare preluare detalii produse!')</script>");
 			$i = 0;
 			$detalii = "<table border=1 id='detalii_comanda_".$row["id"]."' cellpadding=4 cellspacing=0 style=\"border:1px solid #EFEFEF; margin: 5px; padding: 3;\">";
 			$detalii .= "<tr>";
@@ -57,11 +59,11 @@ session_start();
 				$id = $row_detalii["id"];
 				$detalii .= "<tr>";
 				$detalii .= "<td>".$row_detalii["nume"]."</td>";
-				$detalii .= "<td>".$cant["$id"]."</td>";
-				$detalii .= "<td>".$masuri["$id"]."</td>";
-				$detalii .= "<td>".$pret["$id"]."</td>";
-				$detalii .= "<td>".($cant["$id"]*$pret["$id"])."</td>";
-				$total_comanda += $cant["$id"]*$pret["$id"];
+				$detalii .= "<td>".$cant[$id]."</td>";
+				$detalii .= "<td>".$masuri[$id]."</td>";
+				$detalii .= "<td>".$pret[$id]."</td>";
+				$detalii .= "<td>".($cant[$id]*$pret[$id])."</td>";
+				$total_comanda += $cant[$id]*$pret[$id];
 				$detalii .= "</tr>";
 				$i++;
 			}
@@ -86,5 +88,13 @@ session_start();
 		$comenzi .= "</table>";
 		echo "<div class='titlu_pag'>Detalii comenzi inchise</div>".$comenzi;
 		?>
-    </body>
+	<script type="text/javascript">
+		jQuery("#main_frame",window.parent.document).load(function(){
+			var db1 = jQuery(document).height();
+			var docHeight = db1;
+			jQuery("#main_frame",window.parent.document).height(docHeight +50);
+			jQuery("#body",window.parent.document).height(docHeight +60);
+		})
+	</script>
+	</body>
 </html>

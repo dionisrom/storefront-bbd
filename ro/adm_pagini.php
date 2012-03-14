@@ -88,11 +88,6 @@ include("../inc/global.php");
 			};
 		</script>
 		<!-- /TinyMCE -->
-		<script type="text/javascript">
-			$(window).load(function(){
-				$("#main_frame",window.parent.document).height($("html").height()+20); $("#body",window.parent.document).height($("html").height()+30);
-			});    
-		</script>
 	</head>
 	<body role="application">
 		<div class="titlu_pag">Administrare pagini</div>
@@ -126,5 +121,13 @@ include("../inc/global.php");
 			</div>
 		</div>
 		</form>
+		<script type="text/javascript">
+		jQuery("#main_frame",window.parent.document).load(function(){
+			var db1 = jQuery(document).height();
+			var docHeight = db1;
+			jQuery("#main_frame",window.parent.document).height(docHeight +50);
+			jQuery("#body",window.parent.document).height(docHeight +60);
+		})
+	</script>
 	</body>
 </html>
