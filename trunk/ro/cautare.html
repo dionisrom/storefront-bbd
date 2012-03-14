@@ -9,12 +9,12 @@
 	<body>
 		<div></div>
 		<script type="text/javascript">
-			
-			var db1 = jQuery("body").height();
-
-			var docHeight = db1;
-			jQuery("#main_frame",window.parent.document).height(docHeight +50);
-			jQuery("#body",window.parent.document).height(docHeight +60);
+			jQuery(window).load(function(){
+				var db1 = jQuery("html").height();
+				var docHeight = db1;
+				jQuery("#main_frame",window.parent.document).height(docHeight +50);
+				jQuery("#body",window.parent.document).height(docHeight +60);
+			})
 		</script>
 	</body>
 </html>

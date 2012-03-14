@@ -15,11 +15,6 @@ if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" && ( $_SESSION["tipus
         <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
         <LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css">
         <script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script> 
-		<script type="text/javascript">
-			$(window).load(function(){
-				$("#main_frame",window.parent.document).height($("html").height()+20); $("#body",window.parent.document).height($("html").height()+30);
-			});    
-		</script>
         <base target="frm">
     </head>
     <body>
@@ -49,10 +44,10 @@ if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" && ( $_SESSION["tipus
             ?>
             <tr class="<?=$class?>">
                 <td>
-                    <input onblur="this.className='edit';this.setAttribute('readonly','readonly');document.getElementById('frm').src='edit.php?db=pr&id=<?=$rs[0]?>&den='+this.value;" class="edit" type="text" readonly="readonly" name="denumire_<?=$rs[0]?>" id="denumire_<?=$rs[0]?>" value="<?=$rs["denumire"]?>" style="width:200px;"/>
+                    <input onblur="jQuery('#frm_<?=$rs[0]?> [name=den]').val(this.value);" class="edit" type="text" readonly="readonly" name="denumire_<?=$rs[0]?>" id="denumire_<?=$rs[0]?>" value="<?=$rs["denumire"]?>" style="width:150px;"/>
                 </td>
                 <td>
-                    <input onblur="this.className='edit';this.setAttribute('readonly','readonly');document.getElementById('frm').src='edit.php?db=pr&id=<?=$rs[0]?>&link='+this.value;" class="edit" type="text" readonly="readonly" name="link_<?=$rs[0]?>" id="link_<?=$rs[0]?>" value="<?=$rs["link"]?>" style="width:200px;"/>
+                    <input onblur="jQuery('#frm_<?=$rs[0]?> [name=link]').val(this.value);" class="edit" type="text" readonly="readonly" name="link_<?=$rs[0]?>" id="link_<?=$rs[0]?>" value="<?=$rs["link"]?>" style="width:150px;"/>
                 </td>
                 <td id="poza_<?=$rs[0]?>">
                     <?
@@ -68,8 +63,10 @@ if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" && ( $_SESSION["tipus
                     	}
                     }
                     $form_ = '
-                    <form id="frm_'.$rs[0].'" name="frm_'.$rs[0].'" method="post" enctype="multipart/form-data" action="edit.php">
+                    <form id="frm_'.$rs[0].'" name="frm_'.$rs[0].'" method="post" enctype="multipart/form-data" target="frm" action="edit.php">
                         <input type="file" name="sigla_'.$rs[0].'" id="sigla_'.$rs[0].'" value="" class="input">
+                        <input type="hidden" id="den" name="den" value="">
+                        <input type="hidden" id="link" name="link" value="">
                         <input type="hidden" id="db" name="db" value="pr">
                         <input type="hidden" id="id" name="id" value="'.$rs[0].'">
                         <input type="hidden" id="fis" name="fis" value="sigla_'.$rs[0].'">
@@ -78,12 +75,12 @@ if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" && ( $_SESSION["tipus
                 </td>
                 <td align="center">
                     <?=$form_?>
-                    <img onmouseover="this.style.cursor='pointer';" title="Editare" src="../ico/edit.png" border=0 onclick="document.getElementById('save_<?=$rs[0]?>').style.visibility='visible';document.getElementById('denumire_<?=$rs[0]?>').removeAttribute('readOnly'); document.getElementById('denumire_<?=$rs[0]?>').className='edit_over';document.getElementById('denumire_<?=$rs[0]?>').focus();">
+                    <img onmouseover="this.style.cursor='pointer';" title="Editare" src="../ico/edit.png" border=0 onclick="document.getElementById('save_<?=$rs[0]?>').style.visibility='visible';document.getElementById('denumire_<?=$rs[0]?>').removeAttribute('readOnly');document.getElementById('link_<?=$rs[0]?>').removeAttribute('readOnly'); document.getElementById('denumire_<?=$rs[0]?>').className='edit_over';document.getElementById('link_<?=$rs[0]?>').className='edit_over';document.getElementById('denumire_<?=$rs[0]?>').focus();">
                     <img onmouseover="this.style.cursor='pointer';" title="Stergere" src="../ico/delete.png" border=0 onclick="if ( confirm('Esti sigur ca doresti stergerea acestui producator?') ) {document.getElementById('frm').src='sterg.php?db=pr&id=<?=$rs[0]?>'}">
-                    <img id='save_<?=$rs[0]?>' name="save_<?=$rs[0]?>" style="visibility:hidden;" onmouseover="this.style.cursor='pointer';" title="Salvare modificari" src="../ico/save.png" border="0" onclick="this.style.visibility='hidden'; document.getElementById('denumire_<?=$rs[0]?>').className='edit'; document.getElementById('denumire_<?=$rs[0]?>').setAttribute('readonly','readonly');document.getElementById('frm_<?=$rs[0]?>').submit();">
+                    <img id='save_<?=$rs[0]?>' name="save_<?=$rs[0]?>" style="visibility:hidden;" onmouseover="this.style.cursor='pointer';" title="Salvare modificari" src="../ico/save.png" border="0" onclick="this.style.visibility='hidden'; document.getElementById('denumire_<?=$rs[0]?>').className='edit'; document.getElementById('denumire_<?=$rs[0]?>').setAttribute('readonly','readonly');document.getElementById('link_<?=$rs[0]?>').className='edit'; document.getElementById('link_<?=$rs[0]?>').setAttribute('readonly','readonly');document.getElementById('frm_<?=$rs[0]?>').submit();">
                     </form>
                 </td>
-                <td id="efect_op_<?=$rs[0]?>" name="efect_op_<?=$rs[0]?>">
+                <td id="efect_op_<?=$rs[0]?>" name="efect_op_<?=$rs[0]?>" style="vertical-align:top;">
                     &nbsp;
                 </td>
             </tr>
@@ -97,6 +94,14 @@ if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" && ( $_SESSION["tipus
                 </td>
             </tr>
         </table>
+	<script type="text/javascript">
+		jQuery("#main_frame",window.parent.document).load(function(){
+			var db1 = jQuery(document).height();
+			var docHeight = db1;
+			jQuery("#main_frame",window.parent.document).height(docHeight +50);
+			jQuery("#body",window.parent.document).height(docHeight +60);
+		})
+	</script>
     </body>
 </html>
 <?

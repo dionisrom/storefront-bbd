@@ -3,14 +3,14 @@ session_start();
 include_once("inc/global.php"); 
 if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
 {
-    session_unregister("user");
-    session_unregister("id_user");
-    session_unregister("nume");
-    session_unregister("mesaj_auth");
-    session_unregister("id");
-    session_unregister("auth");
-    session_unregister("tipusr");
-    session_unregister("merge");
+    unset($_SESSION["user"]);
+    unset($_SESSION["id_user"]);
+    unset($_SESSION["nume"]);
+    unset($_SESSION["mesaj_auth"]);
+    unset($_SESSION["id"]);
+    unset($_SESSION["auth"]);
+    unset($_SESSION["tipusr"]);
+    unset($_SESSION["merge"]);
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -24,21 +24,23 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
             if (isset($_SESSION["tipusr"]) && $_SESSION["tipusr"] <= 2)
             {
 				$myPage->body_left = false;
-				$myPage->leftWidth =1;
+				//$myPage->leftWidth =1;
 				$pag = "";
-				$myPage->setWidth(0,1,0);
+				//$myPage->setWidth(0,1,0);
+				$css_file = "default_compiled_admin.css";
             }
             else
             {
 				$myPage->body_left = true;
 				$myPage->leftWidth = 206;
+				$css_file = "default_compiled.css";
 				$pag = "ro/acasa.php";
 				$myPage->setWidth();
             }
             
             $myPage->setLogo("img/logo.png");
             echo $myPage->setHeaderInclude();
-            echo $myPage->setCSS();
+            echo $myPage->setCSS($css_file);
         ?>
     </head>
     <body style="background-color: #eceeef;">

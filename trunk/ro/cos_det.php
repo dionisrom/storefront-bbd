@@ -10,11 +10,6 @@
 		<meta name="copyright" content="&copy; 2012 Ortoprotetica" />
 		<LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css">
 		<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script> 
-		<script type="text/javascript">
-			$(window).load(function(){
-				$("#main_frame",window.parent.document).height($("html").height()+20); $("#body",window.parent.document).height($("html").height()+30);
-			});    
-		</script>
 		<script>
 			function adaug_tr(tip,total)
 			{
@@ -66,7 +61,7 @@
 		$tabel .= "
 		<tr>
 			<td align=left>
-				<a title='Detalii produs' href='javascript:;' onclick=\"top.document.getElementById('main_frame').src='ro/produse.php?mod=1&id_produs=".$_SESSION["id_produse"][$i]."';\">".$rs_denprod[0]."</a>
+				<a title='Detalii produs' href='javascript:;' onclick=\"top.document.getElementById('main_frame').src='ro/produse.php?mod=1&id_produs=".$arr_temp[0]."';\">".$rs_denprod[0]."</a>
 			</td>
 			<td align=center>
 				".$_SESSION["cant_produse"][$i]."
@@ -86,6 +81,12 @@
 		//mysql_close($q_denprod);
   	}
   	$tabel .= "
+		<tr>
+			<td colspan=5 align='center'>
+  				<br />Termenele de livrare curg de la data validarii comenzii !
+			</td>
+		</tr>
+		<!--
   		<tr>
   			<td align=left id='nume_tr'>Posta Romana</td>
   			<td align=center id='tr_cant'>1</td>
@@ -100,13 +101,12 @@
   					<option value=0>Posta Romana: 12 lei ( 2-5 zile )</option>
   					<option value=1>Cargus: 25 lei ( 72 ore )</option>
   				</select>
-                <input type='hidden' id='curier' name='curier' value=0>
-  				<br>Termenele de livrare curg de la data validarii comenzii !
   			</td>
   		</tr>
+		-->
   		<tr>
   			<td colspan=3 align=center style='font-size:14pt; color: #900;'>TOTAL</td>
-  			<td id='total_fact' align=right style='border:1px solid #CCC; font-size:14pt; color: #900; background: url(../images/bg_header_galben.png);background-position:bottom;'>".($total+12)."</td>
+  			<td id='total_fact' align=right style='border:1px solid #CCC; font-size:14pt; color: #900; background: url(../images/bg_header_galben.png);background-position:bottom;'>".($total)."</td>
   		</tr>
   	</table>
   	<br>";
@@ -121,7 +121,7 @@
 	}
 	else
 	{
-		$tabel .= "<center><input type='button' value='Finalizeaza' class='submit' onclick=\"top.document.getElementById('main_frame').src='final_cos.php?curier='+document.getElementById('curier').value\"></center>";
+		$tabel .= "<center><input type='button' value='Finalizeaza' class='submit' onclick=\"top.document.getElementById('main_frame').src='final_cos.php?curier=0'\"></center>";
 	}
   	echo $tabel;
   }
@@ -132,6 +132,14 @@
   }
   echo 
   '
+	  <script type="text/javascript">
+		jQuery("#main_frame",window.parent.document).load(function(){
+			var db1 = jQuery(document).height();
+			var docHeight = db1;
+			jQuery("#main_frame",window.parent.document).height(docHeight +50);
+			jQuery("#body",window.parent.document).height(docHeight +60);
+		})
+	</script>
   </body>
   </html>
   ';

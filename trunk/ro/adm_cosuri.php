@@ -1,5 +1,6 @@
 <?php
   session_start();
+  $edit_cosuri = "";
   if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" && ( $_SESSION["tipusr"] == 1 || $_SESSION["tipusr"] == 2 ) )
   {
 ?>
@@ -13,11 +14,6 @@
 	<meta name="copyright" content="&copy; 2012 Ortoprotetica" />
 	<LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css">
 	<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script> 
-	<script type="text/javascript">
-		$(window).load(function(){
-			$("#main_frame",window.parent.document).height($("html").height()+20); $("#body",window.parent.document).height($("html").height()+30);
-		});    
-	</script>
     <script>
         function ch_tr(id, elem, total)
         {
@@ -93,11 +89,12 @@
                         <th>Denumire produs</th>
                         <th>Cantitate</th>
                         <th>Pret unitar</th>
+                        <th>Masura</th>
                         <th>Pret total</th>
                     </tr>
                 <?
 				$linie=0;
-                $edit_cosuri = "";
+				 
 				while ( $rs_cos = mysql_fetch_array($q_cosuri) )
 				{
 					$prod_arr = explode(",",$rs_cos[2]);
@@ -108,7 +105,7 @@
 					}
 					$cant_arr = explode(",",$rs_cos[3]);
 					$masuri_arr = explode(",",$rs_cos["masuri"]);
-					$span = " rowspan=".(count($prod_arr)+1);
+					$span = " rowspan=".(count($prod_arr));
 					$class="";
 					if ($linie%2)
 				        $class="class=odd";
@@ -132,7 +129,7 @@
                     <div id='editeaza_cos_".$rs_cos[7]."' class='detalii' style='margin-top:-600px; z-index:999; display:none; padding:10px;' align=center>
                         <form method='post' target='modif_cos' action='salvez_modif_cos.php' id='form_cos_".$rs_cos[7]."' name='form_cos_".$rs_cos[7]."'>
                             <input type='hidden' id='idcos' name='idcos' value=".$rs_cos[7].">
-                            <table cellpadding=5 cellspacing=0 border=0 style='color: #000; border-collapse: collapse;'>
+                            <table cellpadding=3 cellspacing=0 border=0 style='color: #000; border-collapse: collapse;'>
                             <tr>
                                 <td colspan=4 align=right><p valign=middle onmouseover=\"this.style.cursor='pointer'\" onclick=\"document.getElementById('editeaza_cos_".$rs_cos[7]."').style.display='none';\"><img title='Inchide fereastra' border=0 src='../ico/exit.png'></p></td>
                             </tr>                                                                                    
@@ -153,13 +150,14 @@
 						<td>".$rs_prod[0]."</td>
 						<td align=center>".$cant_arr[$j]."</td>
 						<td align=right>".$pret."</td>
+						<td align=right>".$masuri_arr[$j]."</td>
 						<td align=right>".round($cant_arr[$j]*$pret,2)."</td>
 						</tr>
 						";
                         $edit_cosuri .= "
                         <tr>
                             <td>".$rs_prod[0]."</td>
-                            <td align=center> <span title='Scad cantitatea' onmouseover=\"this.style.cursor='pointer'\" onclick='min_cant(".$rs_cos[7].",".$j.",".$pret.");'><b>-</b></span> <input size=4 type='text' class='input' id='cant_".$rs_cos[7]."_".$j."' name='cant_".$rs_cos[7]."_".$j."' value='".$cant_arr[$j]."'> <span title='Cresc cantitatea' onmouseover=\"this.style.cursor='pointer'\" onclick='add_cant(".$rs_cos[7].",".$j.",".$pret.");'><b>+</b></span> </td>
+                            <td align=center> <span style='font-size:24px;' title='Scad cantitatea' onmouseover=\"this.style.cursor='pointer'\" onclick='min_cant(".$rs_cos[7].",".$j.",".$pret.");'><b>-</b></span> <input size=4 type='text' class='input' id='cant_".$rs_cos[7]."_".$j."' name='cant_".$rs_cos[7]."_".$j."' value='".$cant_arr[$j]."'> <span style='font-size:24px;' title='Cresc cantitatea' onmouseover=\"this.style.cursor='pointer'\" onclick='add_cant(".$rs_cos[7].",".$j.",".$pret.");'><b>+</b></span> </td>
                             <td align=right><input size=6 type='text' class='input' id='pretu_".$rs_cos[7]."_".$j."' name='pretu_".$rs_cos[7]."_".$j."' value='".$pret."' disabled></td>
                             <td align=right><input size=6 type='text' class='input' id='val_".$rs_cos[7]."_".$j."' name='val_".$rs_cos[7]."_".$j."' value='".round($cant_arr[$j]*$pret,2)."' disabled></td>
                         </tr>
@@ -169,6 +167,7 @@
 						$j++;
 					}
                     // -------------- curierat -------------
+					/*
                     if ( $rs_cos[16] == 0 )
                     {
                         $curier = "Taxe curierat - Posta romana";
@@ -210,6 +209,7 @@
                         </tr>
                         ";
                     $total += round($pret_curier,2);
+					 */
                     // -------------- curierat -------------
                     $edit_cosuri .= "</tr>
                     <tr>
@@ -227,7 +227,7 @@
                     $edit_cosuri .= "
                                     </form>";
                     $edit_cosuri .= "</div>";
-					echo "<tr><td colspan=7 align=center style='border-top:1px solid #CCC; font-size:15px; color: #900; font-weight:bold;'>TOTAL</td><td align=right style='border-top:1px solid #CCC; font-size:15px; color: #900; font-weight:bold;'>".$total."</td></tr>";
+					echo "<tr><td colspan=8 align=center style='border-top:1px solid #CCC; font-size:15px; color: #900; font-weight:bold;'>TOTAL</td><td align=right style='border-top:1px solid #CCC; font-size:15px; color: #900; font-weight:bold;'>".$total."</td></tr>";
                     $linie++;
 					$detalii_cosuri .= "
 					<div id='detalii_cos_".$rs_cos[7]."' class='detalii' style='margin-top:-600px; z-index:999; display:none; padding:10px;' align=center>
@@ -274,11 +274,11 @@
 					
 					$gr_total += $total;
 				}
-				echo "<tr><td colspan=7 align=center style='border-top:2px solid #CCC; font-size:14pt; color: #900;'>TOTAL</td><td align=right style='border-top:2px solid #CCC; font-size:14pt; color: #900; background: url(../images/bg_header_galben.png);background-position:bottom;'>".$gr_total."</td></tr>";
+				echo "<tr><td colspan=8 align=center style='border-top:2px solid #CCC; font-size:14pt; color: #900;'>TOTAL</td><td align=right style='border-top:2px solid #CCC; font-size:14pt; color: #900; background: url(../images/bg_header_galben.png);background-position:bottom;'>".$gr_total."</td></tr>";
 			}
 			else
 			{
-				echo "<tr><td colspan=7>In acest moment nu sunt cosuri pentru validare !</td></tr>";
+				echo "<tr><td colspan=8>In acest moment nu sunt cosuri pentru validare !</td></tr>";
 			}
 			echo "</table>";
 			?>
@@ -287,8 +287,16 @@
 		<iframe id="valideaza_cos" name="valideaza_cos" marginheight="0" marginwidth="0" frameborder="0" width="0" height="0" src="" scrolling="no"></iframe>
 		<?
 		echo $detalii_cosuri;
-        echo $edit_cosuri;
+		 echo $edit_cosuri;
 		?>
+	<script type="text/javascript">
+		jQuery("#main_frame",window.parent.document).load(function(){
+			var db1 = jQuery(document).height();
+			var docHeight = db1;
+			jQuery("#main_frame",window.parent.document).height(docHeight +50);
+			jQuery("#body",window.parent.document).height(docHeight +60);
+		})
+	</script>
 </body>
 </html>
 <?

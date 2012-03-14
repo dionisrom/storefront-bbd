@@ -138,7 +138,7 @@ if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" && ( $_SESSION["tipus
 				?>
 			</table>
 		</form>
-<div class="trans" id="product_box" style="position:absolute; top:100; left:150; visibility:hidden; background-color:#fa6c00;">
+<div class="trans" id="product_box" style="position:absolute; top:10; left:150; visibility:hidden; background-color:#fa6c00;">
 	<!-- NOTE: nested divs required for slide effect-->
 	<div class="content_panel" id="content_box">
 	    <form target="date_prod" action="edit.php" method="post" enctype="multipart/form-data" id="form_prod" name="form_prod">
@@ -296,8 +296,13 @@ if ( isset($_SESSION["auth"]) && $_SESSION["auth"] == "da" && ( $_SESSION["tipus
 <iframe id="frm" width="0" height="0" name="frm" src="" frameborder="0" marginheight="0" marginwidth="0" scrolling="no"></iframe>
 
 <script type="text/javascript">
-	jQuery("#main_frame",window.parent.document).height(jQuery(document).height()+30);
-</script>
+		jQuery("#main_frame",window.parent.document).load(function(){
+			var db1 = jQuery(document).height();
+			var docHeight = db1;
+			jQuery("#main_frame",window.parent.document).height(docHeight +50);
+			jQuery("#body",window.parent.document).height(docHeight +60);
+		})
+	</script>
 </body>
 </html>
 <?

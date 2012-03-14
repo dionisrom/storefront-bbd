@@ -70,11 +70,11 @@ table td
 }
 .hl, .bl, .fl
 {
-	width: 208px;
+	width: 206px;
 }
 .hr, .br, .fr
 {
-	width: 168px;
+	width: 166px;
 }
 .hl, .bl, .fl, .hr, .br, .fr
 {
@@ -125,7 +125,7 @@ table td
 {
 	float:left;
 	color: black;
-	width: 628px;
+	width: 842px;
 	display: block;
 	height: 100%;
 }
@@ -185,7 +185,7 @@ table td
 #nav_container
 {
 	position: absolute;
-	float: left;;
+	$this->navfloat;
 	top: 81px;
 	margin-left: 8px;
 	height:32px;
@@ -293,7 +293,7 @@ h2
 	margin: 0;
 	padding: 0;
 	background: url('../img/left_produse.png') no-repeat top left;
-	width: 208px; 
+	width: 206px; 
 }
 .header_producatori
 {
@@ -386,7 +386,7 @@ h2
 
 #produse
 {
-	width: 628px;
+	width: 842px;
 	font-size: 11px;
 	float: left;
 	margin-top: 20px;

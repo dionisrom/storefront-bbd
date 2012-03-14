@@ -21,6 +21,14 @@
             });
         });    
     </script>
+	<script type="text/javascript">
+		jQuery("#main_frame",window.parent.document).load(function(){
+			var db1 = jQuery(document).height();
+			var docHeight = db1;
+			jQuery("#main_frame",window.parent.document).height(docHeight +50);
+			jQuery("#body",window.parent.document).height(docHeight +60);
+		})
+	</script>
 	<LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css" />
     <link href="../css/easyslider.css" rel="stylesheet" type="text/css" />
 </head>
@@ -169,14 +177,5 @@
 			</div>
 		';
 ?>
-<script>
-	var db1 = jQuery("#container").height();
-	var db2 = jQuery("#produse").height();
-	var db3 = jQuery("#last_prods_container").height();
-
-	var docHeight = db1+db2+db3;
-	jQuery("#main_frame",window.parent.document).height(docHeight +50);
-	jQuery("#body",window.parent.document).height(docHeight +60);
-</script>
 </body>
 </html>

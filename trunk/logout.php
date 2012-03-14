@@ -1,14 +1,13 @@
 <?php 
 session_start();
-//session_destroy();
-session_unregister("user");
-session_unregister("id_user");
-session_unregister("nume");
-session_unregister("mesaj_auth");
-session_unregister("id");
-session_unregister("auth");
-session_unregister("tipusr");
-session_unregister("merge");
+unset($_SESSION["user"]);
+unset($_SESSION["id_user"]);
+unset($_SESSION["nume"]);
+unset($_SESSION["mesaj_auth"]);
+unset($_SESSION["id"]);
+unset($_SESSION["auth"]);
+unset($_SESSION["tipusr"]);
+unset($_SESSION["merge"]);
 echo "
 <script>
 	top.location.href='index.php';

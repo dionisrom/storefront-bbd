@@ -22,14 +22,15 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
 		//meniu admin
 		case 'producator'			: adm_content($prefix."producatori");break;
 		case 'categorie'			: adm_content($prefix."categorii");break;
-		case 'subcategorie'			: adm_content($prefix."subcategorii");break;
-		case 'produs'				: adm_content($prefix."produs");break;
+		case 'subcategorie'		: adm_content($prefix."subcategorii");break;
+		case 'produs'			: adm_content($prefix."produs");break;
 		case 'administrare_cosuri'	: adm_content("adm_cosuri");break;
 		case 'administrare_useri'	: adm_content("adm_users");break;
 		case 'administrare_reclame'	: adm_content("adm_reclame");break;
-		case 'pagini_web'			: adm_content("adm_pagini");break;
-		case 'rapoarte'				: adm_content("rapoarte");break;
-		default						: getPage($action); break;
+		case 'pagini_web'		: adm_content("adm_pagini");break;
+		case 'rapoarte'			: adm_content("rapoarte");break;
+		case ''				: break;
+		default				: getPage($action); break;
     }
     
 }

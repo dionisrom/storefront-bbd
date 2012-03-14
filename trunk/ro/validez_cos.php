@@ -10,11 +10,6 @@
 	<meta name="copyright" content="&copy; 2012 Ortoprotetica" />
 	<LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css">
 	<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script> 
-	<script type="text/javascript">
-		$(window).load(function(){
-			$("#main_frame",window.parent.document).height($("html").height()+20); $("#body",window.parent.document).height($("html").height()+30);
-		});    
-	</script>
 </head>
 <body>
 	<div class="titlu_mic">Validare cosuri de cumparaturi</div>
@@ -25,6 +20,7 @@
 	mysql_query($sql_upd) or die("Eroare validare cos!");
 	
 	// --------------------------------- CREARE FACTURA PROFORMA -----------------------------------
+	/*
 	include("../html2fpdf/html2fpdf.php");
 	$pdf = new HTML2FPDF($orientation='P',$unit='mm',$format='A4');
 	$pdf->AddPage();
@@ -86,14 +82,7 @@
     $pdf->Line(138,90,138,240);
     $pdf->Line(162,90,162,240);
     $pdf->Line(182,90,182,240);
-    /*$pdf->Text(73,105,"Distribution Top Menu # ".$_REQUEST["contr"]." contrat");
-    $pdf->Text(73,112,"secteur ".$rs[10]);
-    $pdf->Text(73,119,"TPS ".$rs[3]."%");
-    $pdf->Text(73,126,"TVQ ".$rs[4]."%");
-    $pdf->Text(180,105,$rs[5].'');
-    $pdf->Text(180,119,$rs[6].'');
-    $pdf->Text(180,126,$rs[7]+$dif.'');
-    $total=$rs[5]+$rs[6]+$rs[7]+$dif;*/
+
     $q_cos = mysql_query("SELECT produse, cantitati, masuri curier FROM cos WHERE id=".$_REQUEST["idcos"]);
     $rs_cos = mysql_fetch_array($q_cos);
     $q_prod = mysql_query("SELECT * FROM produse WHERE id IN (".$rs_cos[0].")");
@@ -211,30 +200,23 @@
     }
     $pdf->Output("../fact_proforma/proforma_".$_REQUEST["idcos"].".pdf");
     $pdfdoc = $pdf->Output("","S");
+	*/
 	// ----------------------------- FINAL CREARE FACTURA PROFORMA ---------------------------------
 	
-    
-	/*$headers = 	'From: webmaster@ortoprotetica.ro' . "\r\n" .
-				'Reply-To: webmaster@ortoprotetica.ro' . "\r\n" .
-				'Content-Type: multipart/mixed; boundary=\"PHP-mixed-'.$random_hash.'\"'. "\r\n";
-	$attachment = chunk_split(base64_encode(file_get_contents("../fact_proforma/proforma_".$_REQUEST["idcos"].".pdf")));
-	Va multumim pentru comanda facuta si va trimitem atasat factura proforma!
-	*/
-
 	// email stuff (change data below)
 	$to=$_REQUEST["email"];
 	$from = "webmaster@ortoprotetica.ro";
 	$subject = "Factura proforma - Ortoprotetica";
-	$message = "<p>Va multumim pentru comanda facuta si va trimitem atasat FACTURA PROFORMA pentru comanda cu codul ".$_REQUEST["idcos"]." !</p>";
+	$message = "<p>Va multumim pentru comanda facuta! Codul comenzii dumneavoastra este: ".$_REQUEST["idcos"]." .</p>";
 	// a random hash will be necessary to send mixed content
 	$separator = md5(time());
 	// carriage return type (we use a PHP end of line constant)
 	$eol = "\n";
 	// attachment name
-	$filename = "factura_proforma.pdf";
+	//$filename = "factura_proforma.pdf";
 	// encode data (puts attachment in proper format)
 	//$pdfdoc = $pdf->Output("", "S");
-	$attachment = chunk_split(base64_encode($pdfdoc));
+	//$attachment = chunk_split(base64_encode($pdfdoc));
 	// main header (multipart mandatory)
 	$headers = "From: ".$from.$eol;
 	$headers .= "MIME-Version: 1.0".$eol;
@@ -246,6 +228,7 @@
 	$headers .= "Content-Type: text/html; charset=\"iso-8859-1\"".$eol;
 	$headers .= "Content-Transfer-Encoding: 8bit".$eol.$eol;
 	$headers .= $message.$eol.$eol;
+	/*
 	// attachment
 	$headers .= "--".$separator.$eol;
 	$headers .= "Content-Type: application/octet-stream; name=\"".$filename."\"".$eol;
@@ -253,14 +236,23 @@
 	$headers .= "Content-Disposition: attachment".$eol.$eol;
 	$headers .= $attachment.$eol.$eol;
 	$headers .= "--".$separator."--";
+	 */
 	// send message
 	mail($to, $subject, "", $headers);
     echo "
     <script>
-        alert('Cosul a fost validat cu succes si a fost trimis mailul cu factura proforma catre client !');
+        alert('Cosul a fost validat cu succes si a fost trimis mailul catre client !');
         top.document.getElementById('main_frame').src = 'ro/adm_cosuri.php';
     </script>
     ";
 	?>
+	<script type="text/javascript">
+			jQuery(window).load(function(){
+				var db1 = jQuery("html").height();
+				var docHeight = db1;
+				jQuery("#main_frame",window.parent.document).height(docHeight +50);
+				jQuery("#body",window.parent.document).height(docHeight +60);
+			})
+		</script>
 </body>
 </html>

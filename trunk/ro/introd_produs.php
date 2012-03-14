@@ -23,7 +23,7 @@ if ( isset($_REQUEST["salvez"]) && $_REQUEST["salvez"] == "da" && ( $_SESSION["t
 	$sql_prod .= " ".trim($_REQUEST["prod_la_comanda"])."";
 	$sql_prod .= ")";
 	
-	mysql_query($sql_prod) or die("Eroare aparuta la introducerea unui produs nou! Va rugam contactati administratorul site-ului.<br>".$sql_prod);	
+	mysql_query($sql_prod) or die("Eroare aparuta la introducerea unui produs nou! Va rugam contactati administratorul site-ului.");	
 	$lastid = mysql_insert_id();
 	$mesaj = "";
 	if ( (($_FILES["poza"]["type"] == "image/png" || $_FILES["poza"]["type"] == "image/gif") || ($_FILES["poza"]["type"] == "image/jpeg") ) && ($_FILES["poza"]["size"] < 50000) && ($_FILES["poza"]["error"] == 0) )
@@ -59,17 +59,20 @@ if ( isset($_REQUEST["salvez"]) && $_REQUEST["salvez"] == "da" && ( $_SESSION["t
 		    <meta name="copyright" content="&copy; 2012 Ortoprotetica" />
 		    <LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css">
 			<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script> 
-			<script type="text/javascript">
-				$(window).load(function(){
-					$("#main_frame",window.parent.document).height($("html").height()+20); $("#body",window.parent.document).height($("html").height()+30);
-				});    
-			</script>
 		</head>
 		<body>
 			<div class="titlu_mic">
 				A fost adugat cu succes noul produs : <b><i><u>'.$_REQUEST["nume"].'</u></i></b> in baza de date.<br>
 				'.$mesaj.'
 			</div>
+			<script type="text/javascript">
+		jQuery("#main_frame",window.parent.document).load(function(){
+			var db1 = jQuery(document).height();
+			var docHeight = db1;
+			jQuery("#main_frame",window.parent.document).height(docHeight +50);
+			jQuery("#body",window.parent.document).height(docHeight +60);
+		})
+	</script>
 		</body>
 		</html>
 		';
@@ -88,11 +91,6 @@ else
         <LINK HREF="../css/default.css" REL="stylesheet" TYPE="text/css">
 		<script type="text/javascript" src="../js/jquery.js"></script>
 		<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script> 
-		<script type="text/javascript">
-			$(window).load(function(){
-				$("#main_frame",window.parent.document).height($("html").height()+20); $("#body",window.parent.document).height($("html").height()+30);
-			});    
-		</script>
 		<script>
 			function getSubcateg(categ)
 			{
@@ -261,11 +259,19 @@ else
 				<tr>
 			        <td colspan="3" align="center">
 			            <input type="hidden" id="salvez" name="salvez" value="da">
-			            <input type="submit" onclick="if (document.getElementById('denumire').value==null || document.getElementById('denumire').value=='' ) {document.getElementById('err_denumire').innerHTML='Va rog introduceti denumirea produsului!';return false;} else {document.getElementById('form_prod').submit();}" name="creaza_cont" id="creaza_cont" value="Adauga produs" class="submit" />
+			            <input type="submit" onclick="if (document.getElementById('nume').value==null || document.getElementById('nume').value=='' ) {document.getElementById('err_nume').innerHTML='Va rog introduceti denumirea produsului!';return false;} else {document.getElementById('form_prod').submit();}" name="creaza_cont" id="creaza_cont" value="Adauga produs" class="submit" />
 			        </td>
 				</tr>
 			</table>
 		</form>
+		<script type="text/javascript">
+		jQuery("#main_frame",window.parent.document).load(function(){
+			var db1 = jQuery(document).height();
+			var docHeight = db1;
+			jQuery("#main_frame",window.parent.document).height(docHeight +50);
+			jQuery("#body",window.parent.document).height(docHeight +60);
+		})
+	</script>
 	</body>
 </html>
 <?
