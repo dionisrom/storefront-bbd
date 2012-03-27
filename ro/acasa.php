@@ -73,7 +73,7 @@
 	$sql_no_prods = "SELECT content from files where denumire = 'prima_pagina'";
 	$query__no_prods = mysql_query($sql_no_prods);
 	$rs_no_prods = mysql_fetch_array($query__no_prods);
-	$tabel .= "<div id='no_prod_promo'>".$rs_no_prods[0]."</div><br />";
+	$tabel .= "<div id='no_prod_promo'>".html_entity_decode($rs_no_prods[0])."</div><br />";
 	
     $sql_produse = "SELECT a.id, a.nume, a.descriere, a.pret, a.reducere, b.denumire, a.cod, a.prod_la_comanda as tip, a.grila_masuri as masuri FROM produse a LEFT JOIN categorii b ON b.id = a.id_categorie WHERE prima_pagina like 'da'";
     $q_produse = mysql_query($sql_produse) or die("Eroare preluare produse!");
