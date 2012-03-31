@@ -20,7 +20,7 @@
 	mysql_query($sql_upd) or die("Eroare validare cos!");
 	
 	// --------------------------------- CREARE FACTURA PROFORMA -----------------------------------
-	/*
+	
 	include("../html2fpdf/html2fpdf.php");
 	$pdf = new HTML2FPDF($orientation='P',$unit='mm',$format='A4');
 	$pdf->AddPage();
@@ -128,7 +128,7 @@
         }
 		$i++;
     }
-    
+    /*
     // Adaug transport
     if ( $rs_cos[2] == 0 )
     {
@@ -171,10 +171,8 @@
         $pdf->Cell(17,10,round(4,2),0,1,"R",0);
         $total += round(21,2);
         $total_tva += round(4,2);    
-    }
+    }*/
     // Final adaug transport
-    
-    
     $pdf->Line(122,241,122,266);
     $pdf->Line(162,241,162,266);
     $pdf->Line(182,241,182,260);
@@ -190,8 +188,6 @@
     $pdf->SetFont('Arial');
     $pdf->SetFontSize(8);
     $pdf->SetTextColor(0,0,0);
-    //$pdf->Text(22,247,"Top Menu TPS: 868138496 RT001");
-    //$pdf->Text(22,253,"Top Menu TVQ: 1020951032 TQ001");
     $pdf->Text(22,259,"Comentarii: MULTUMIM !");
     $pdf->Text(22,265,"");
     if (file_exists("../fact_proforma/proforma_".$_REQUEST["idcos"].".pdf"))
@@ -200,7 +196,7 @@
     }
     $pdf->Output("../fact_proforma/proforma_".$_REQUEST["idcos"].".pdf");
     $pdfdoc = $pdf->Output("","S");
-	*/
+	
 	// ----------------------------- FINAL CREARE FACTURA PROFORMA ---------------------------------
 	
 	// email stuff (change data below)
@@ -213,10 +209,10 @@
 	// carriage return type (we use a PHP end of line constant)
 	$eol = "\n";
 	// attachment name
-	//$filename = "factura_proforma.pdf";
+	$filename = "factura_proforma.pdf";
 	// encode data (puts attachment in proper format)
-	//$pdfdoc = $pdf->Output("", "S");
-	//$attachment = chunk_split(base64_encode($pdfdoc));
+	$pdfdoc = $pdf->Output("", "S");
+	$attachment = chunk_split(base64_encode($pdfdoc));
 	// main header (multipart mandatory)
 	$headers = "From: ".$from.$eol;
 	$headers .= "MIME-Version: 1.0".$eol;
@@ -225,10 +221,10 @@
 	$headers .= "This is a MIME encoded message.".$eol.$eol;
 	// message
 	$headers .= "--".$separator.$eol;
-	$headers .= "Content-Type: text/html; charset=\"iso-8859-1\"".$eol;
+	$headers .= "Content-Type: text/html; charset=\"utf-8\"".$eol;
 	$headers .= "Content-Transfer-Encoding: 8bit".$eol.$eol;
 	$headers .= $message.$eol.$eol;
-	/*
+	
 	// attachment
 	$headers .= "--".$separator.$eol;
 	$headers .= "Content-Type: application/octet-stream; name=\"".$filename."\"".$eol;
@@ -236,12 +232,12 @@
 	$headers .= "Content-Disposition: attachment".$eol.$eol;
 	$headers .= $attachment.$eol.$eol;
 	$headers .= "--".$separator."--";
-	 */
+	
 	// send message
 	mail($to, $subject, "", $headers);
     echo "
     <script>
-        alert('Cosul a fost validat cu succes si a fost trimis mailul catre client !');
+        alert('Cosul(comanda) cu numarul ".$_REQUEST["idcos"]." a fost validat cu succes si a fost trimis mailul impreuna cu factura proforma catre client !');
         top.document.getElementById('main_frame').src = 'ro/adm_cosuri.php';
     </script>
     ";

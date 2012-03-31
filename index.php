@@ -105,7 +105,7 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
             $q_cat = mysql_query($str_cat) or die("Eroare aparuta la preluarea categoriilor de produse!");
             while ( $rs_cat = mysql_fetch_array($q_cat) )
             {
-                $categories_list .= "<li onmouseover=\"document.getElementById('subcat_menu_".$rs_cat["id"]."').style.display='block';\" onmouseout=\"document.getElementById('subcat_menu_".$rs_cat["id"]."').style.display='none';\"><a onclick=\"document.getElementById('main_frame').src='ro/produse.php?mod=2&id_catprod=".$rs_cat["id"]."'\" href='javascript:return false;'>".$rs_cat["denumire"]."</a>";
+                $categories_list .= "<li onmouseover=\"document.getElementById('subcat_menu_".$rs_cat["id"]."').style.display='block';\" onmouseout=\"document.getElementById('subcat_menu_".$rs_cat["id"]."').style.display='none';\"><a onclick=\"document.getElementById('main_frame').src='ro/produse.php?mod=2&id_catprod=".$rs_cat["id"]."'\" href='javascript:void(0);'>".$rs_cat["denumire"]."</a>";
                 $categories_list .= "<ul id='subcat_menu_".$rs_cat["id"]."' style='display:none;' >";
 				$sql_subcat = "SELECT id, denumire FROM subcategorii WHERE id_categ = ".$rs_cat["id"]." ORDER BY denumire";
 				$query_subcat = mysql_query($sql_subcat);
@@ -113,7 +113,7 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
 				{
 					while ($row_subcat = mysql_fetch_array($query_subcat))
 					{
-						$categories_list .= "<li><a onclick=\"document.getElementById('main_frame').src='ro/produse.php?mod=2&id_subcat=".$row_subcat["id"]."'\" href='javascript:return false;'>".$row_subcat["denumire"]."</a></li>";
+						$categories_list .= "<li><a onclick=\"document.getElementById('main_frame').src='ro/produse.php?mod=2&id_subcat=".$row_subcat["id"]."'\" href='javascript:void(0);'>".$row_subcat["denumire"]."</a></li>";
 					}
 				}
 				$categories_list .= "</ul></li>";
@@ -267,7 +267,7 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
 			$output_vizitate = "<ol>";
 			while ($row_vizitate = mysql_fetch_array($q_vizitate))
 			{
-				$output_vizitate .= "<li onclick=\"top.document.getElementById('main_frame').src='ro/produse.php?mod=1&id_produs=".$row_vizitate["id"]."';\">".substr(ucfirst($row_vizitate[1]),0,25)."</li>";
+				$output_vizitate .= "<li onclick=\"top.document.getElementById('main_frame').src='ro/produse.php?mod=1&id_produs=".$row_vizitate["id"]."';\">".substr(ucfirst($row_vizitate[1]),0,22)."</li>";
 			}
 			$output_vizitate .= "</ol>";
 			$return["continut_vizitate"] = $output_vizitate;
@@ -304,7 +304,7 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
 				if(mysql_num_rows($rez)>0)
 				{
 					$produs = mysql_fetch_array($rez); 
-					$output_vandute .= "<li onclick=\"top.document.getElementById('main_frame').src='ro/produse.php?mod=1&id_produs=".$value."';\">".substr(ucfirst($produs[0]),0,25)."</li>";
+					$output_vandute .= "<li onclick=\"top.document.getElementById('main_frame').src='ro/produse.php?mod=1&id_produs=".$value."';\">".substr(ucfirst($produs[0]),0,22)."</li>";
 				}
 			}
 			$output_vandute .= "</ol>";

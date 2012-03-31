@@ -113,7 +113,7 @@
 				$class_tip_prod = "show";
 				$class_tip_prod1 = "hide";
 			}
-			$masuri = "Masura:";
+			$masuri = "M.:";
 			if ($rs_produse["masuri"] == 'unica')
 				$masuri .= "<input type='hidden' name='masura_prod' value='unica' />unica";
 			else
@@ -130,10 +130,10 @@
 			$tabel .= "
 				<div class='caseta_prod'>
 					<div class='categorie_prod_top'>$rs_produse[5]</div>
-					<div style='text-align:center;' title='".$rs_produse[1]."' onmouseover=\"this.style.cursor='pointer';\" onclick=\"top.document.getElementById('main_frame').src='ro/produse.php?mod=1&id_produs=".$rs_produse[0]."';\">".$image."</div>
+					<div style='text-align:center; height: 120px; vertical-align:middle;' title='".$rs_produse[1]."' onmouseover=\"this.style.cursor='pointer';\" onclick=\"top.document.getElementById('main_frame').src='ro/produse.php?mod=1&id_produs=".$rs_produse[0]."';\">".$image."</div>
 					<div class='nume_prod'>".$rs_produse[1]."</div>
 					<div class='pret_div'>pret <span class='pret'>".$pret."</span> Lei <input type='button' onmouseover=\"this.style.cursor='pointer';\" title='Detalii despre produs' class='detalii_prod' onclick=\"top.document.getElementById('main_frame').src='ro/produse.php?mod=1&id_produs=".$rs_produse[0]."';\" /></div>
-					<div class='descript_prod'>".substr(trim($rs_produse[2]),0,70)."...</div>
+					<div class='descript_prod'>".substr(trim($rs_produse[2]),0,50)."...</div>
 					<div class='prod_in_cos ".$class_tip_prod."'>Cant.: <input type='text' class='input' name='cant_".$rs_produse[0]."' id='cant_".$rs_produse[0]."' value='0' style=\"width:20px;\" /> ".$masuri." <input type='button' title='Adauga in cos' class='add_to_cart' onmouseover=\"this.style.cursor='pointer';\" onclick=\"if (document.getElementById('cant_".$rs_produse[0]."').value>0) {top.document.getElementById('cos_frame').src='cos.php?adauga_prod=1&cant_prod='+document.getElementById('cant_".$rs_produse[0]."').value+'&pret_prod=".$pret_ron."&id_prod=".$rs_produse[0]."&masura_prod='+document.getElementById('masura_".$rs_produse[0]."').options[document.getElementById('masura_".$rs_produse[0]."').selectedIndex].value;} else {alert('Nu ati completat cantitatea dorita ! ')};\" /></div>
 					<div class='comanda_acum ".$class_tip_prod1."' onmouseover=\"this.style.cursor='pointer';\" title='Acest produs se aduce doar la comanda!' onclick=\"top.document.getElementById('main_frame').src='ro/produse.php?mod=1&id_produs=".$rs_produse[0]."';\"></div>
 				</div>
@@ -149,11 +149,20 @@
 	$prods = "";
 	while ($row = mysql_fetch_array($q_last_prods))
 	{
-		$imagine = "<img src='../images/produse/no_foto.jpg' height=60 alt='' />";
-		if( file_exists("../images/produse/".$row["id"].".jpg") )
-			$imagine = "<img src='../images/produse/".$row["id"].".jpg' height=60 alt='' />";
-		if( file_exists("../images/produse/".$row["id"].".gif") )
-			$imagine = "<img src='../images/produse/".$row["id"].".gif' height=60 alt='' />";
+		$img = '../images/produse/no_foto.jpg';
+		if(file_exists("../images/produse/".$row["id"].".png"))
+			$img = "../images/produse/".$row["id"].".png";
+		if(file_exists("../images/produse/".$row["id"].".jpg"))
+			$img = "../images/produse/".$row["id"].".jpg";
+		if(file_exists("../images/produse/".$row["id"].".gif"))
+			$img = "../images/produse/".$row["id"].".gif";
+		$img_info = getimagesize($img);
+		
+		$dimension = "";
+		if ($img_info[1]>60) $dimension .= " height = 60 ";
+		if ($img_info[0]>100) $dimension .= " width = 100 ";
+		
+		$imagine = "<img src='".$img."' ".$dimension." alt='' />";
 		if ( $row["reducere"] > 0 )
 		{
 			$pret = $row["pret"]*((100-$row["reducere"])/100);
@@ -166,7 +175,7 @@
 			<div class="last_prod" onmouseover="this.style.cursor=\'pointer\';" onclick="top.document.getElementById(\'main_frame\').src=\'ro/produse.php?mod=1&id_produs='.$row["id"].'\'" >
 				'.$imagine.'
 				<div class="info">	
-					<span class="blue">'.substr($row["nume"],0,18).'</span><br />
+					<span class="blue">'.substr($row["nume"],0,16).'</span><br />
 					pret: <span class="red"> '.$pret.' Lei</span>
 				</div>
 			</div>';
