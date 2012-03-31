@@ -258,61 +258,61 @@ if ( !isset($_SESSION["merge"]) || $_SESSION["merge"] != 1 )
 				$myPage->body_right_content .= "<div id='istoric_div' align='center' title='Istoric cumparaturi' onmouseover=\"this.style.cursor='pointer';\" onclick=\"document.getElementById('main_frame').src='ro/istoric.php';\">Istoric cumparaturi</div>";
 			}*/
 			
-			// preluare informatii statistice
-			$return = array();
-			$sql_vizitate = "SELECT count(a.id) as vizite, b.nume as produs, b.id as id FROM vizionari a, produse b WHERE b.id = a.id_prod GROUP BY a.id_prod ORDER BY vizite desc LIMIT 0,5";
-			//$return["error_msg"] = ;
-
-			$q_vizitate = mysql_query($sql_vizitate) or die("Eroare preluare cele mai vizitate produse!". mysql_error());
-			$output_vizitate = "<ol>";
-			while ($row_vizitate = mysql_fetch_array($q_vizitate))
+			if ( !isset($_SESSION["tipusr"]) || $_SESSION["tipusr"] > 2 )
 			{
-				$output_vizitate .= "<li onclick=\"top.document.getElementById('main_frame').src='ro/produse.php?mod=1&id_produs=".$row_vizitate["id"]."';\">".substr(ucfirst($row_vizitate[1]),0,22)."</li>";
-			}
-			$output_vizitate .= "</ol>";
-			$return["continut_vizitate"] = $output_vizitate;
+				// preluare informatii statistice
+				$return = array();
+				$sql_vizitate = "SELECT count(a.id) as vizite, b.nume as produs, b.id as id FROM vizionari a, produse b WHERE b.id = a.id_prod GROUP BY a.id_prod ORDER BY vizite desc LIMIT 0,5";
+				//$return["error_msg"] = ;
 
-
-			$sql_vandute = "SELECT * FROM cos WHERE validat = 1";
-			$q_vandute = mysql_query($sql_vandute) or die("Eroare preluare cele mai vandute produse!". mysql_error());
-			$produse = array();
-			$cant = array();
-			while ($row_vandute= mysql_fetch_array($q_vandute))
-			{
-				$produse_row = explode(",",$row_vandute["produse"]) ;
-				$cant_row = explode(",", $row_vandute["cantitati"]);
-				foreach ($produse_row as $key => $value)
+				$q_vizitate = mysql_query($sql_vizitate) or die("Eroare preluare cele mai vizitate produse!". mysql_error());
+				$output_vizitate = "<ol>";
+				while ($row_vizitate = mysql_fetch_array($q_vizitate))
 				{
-					if (in_array($value,$produse))
+					$output_vizitate .= "<li onclick=\"top.document.getElementById('main_frame').src='ro/produse.php?mod=1&id_produs=".$row_vizitate["id"]."';\">".substr(ucfirst($row_vizitate[1]),0,22)."</li>";
+				}
+				$output_vizitate .= "</ol>";
+				$return["continut_vizitate"] = $output_vizitate;
+
+
+				$sql_vandute = "SELECT * FROM cos WHERE validat = 1";
+				$q_vandute = mysql_query($sql_vandute) or die("Eroare preluare cele mai vandute produse!". mysql_error());
+				$produse = array();
+				$cant = array();
+				while ($row_vandute= mysql_fetch_array($q_vandute))
+				{
+					$produse_row = explode(",",$row_vandute["produse"]) ;
+					$cant_row = explode(",", $row_vandute["cantitati"]);
+					foreach ($produse_row as $key => $value)
 					{
-						$cant[$value] += $cant_row[$key];
-					}
-					else
-					{
-						$arr_ids = explode("_", $value);
-						$produse[] = $arr_ids[0];
-						$cant[$arr_ids[0]] = $cant_row[$key];
+						if (in_array($value,$produse))
+						{
+							$cant[$value] += $cant_row[$key];
+						}
+						else
+						{
+							$arr_ids = explode("_", $value);
+							$produse[] = $arr_ids[0];
+							$cant[$arr_ids[0]] = $cant_row[$key];
+						}
 					}
 				}
-			}
-			arsort($cant);
-			$output_vandute = "<ol>";
-			foreach ($cant as $key => $value)
-			{
-				$sql_prod = "SELECT nume FROM produse WHERE id = ".$key;
-				$rez = mysql_query($sql_prod);
-				if(mysql_num_rows($rez)>0)
+				arsort($cant);
+				$output_vandute = "<ol>";
+				foreach ($cant as $key => $value)
 				{
-					$produs = mysql_fetch_array($rez); 
-					$output_vandute .= "<li onclick=\"top.document.getElementById('main_frame').src='ro/produse.php?mod=1&id_produs=".$value."';\">".substr(ucfirst($produs[0]),0,22)."</li>";
+					$sql_prod = "SELECT nume FROM produse WHERE id = ".$key;
+					$rez = mysql_query($sql_prod) or die("Nu gasesc numele pentru cele mai vandute produse!");
+					if(mysql_num_rows($rez)>0)
+					{
+						$produs = mysql_fetch_array($rez); 
+						$output_vandute .= "<li onclick=\"top.document.getElementById('main_frame').src='ro/produse.php?mod=1&id_produs=".$key."';\">".substr(ucfirst($produs[0]),0,22)."</li>";
+					}
 				}
-			}
-			$output_vandute .= "</ol>";
-			$return["continut_vandute"] = $output_vandute;
-			// final preluare informatii statistice
-			
-			if (!isset($_SESSION["tipusr"]) || $_SESSION["tipusr"] > 2)
-            {
+				$output_vandute .= "</ol>";
+				$return["continut_vandute"] = $output_vandute;
+				// final preluare informatii statistice
+
 				// Afisez caseta de cele mai vandute - START
 				$myPage->body_right_content .= '
 					<div id="cele_mai_vandute_div">

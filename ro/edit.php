@@ -101,22 +101,31 @@ case "prod":
 		if ( (($_FILES["poza"]["type"] == "image/png" || $_FILES["poza"]["type"] == "image/gif") || ($_FILES["poza"]["type"] == "image/jpeg") ) && ($_FILES["poza"]["size"] < 50000) )
 		{
 			$lastid = $_REQUEST["id"];
-			$target_path = "../images/produse/";
+			$target_path = "../images/produse/mari/";
+			$target_path_thumb = "../images/produse/";
 			$ext=substr(basename( $_FILES['poza']['name']),(strlen(basename( $_FILES['poza']['name']))-4));
 			$target_path .= $lastid.$ext;
-
+			$target_path_thumb .= $lastid.$ext;
+			
 			foreach ($ext_arr as $key=>$value) 
 			{
-				$target_path = "../images/produse/".$lastid.$value;
 				if (file_exists($target_path) )
 				{
 					unlink($target_path);
 				}
+				if (file_exists($target_path_thumb) )
+				{
+					unlink($target_path_thumb);
+				}
 			}
-			$target_path = "../images/produse/".$lastid.$ext;
 			if(move_uploaded_file($_FILES['poza']['tmp_name'], $target_path))
 			{
-				$mesaj = "Poza produsului a fost uploadata cu succes.";
+				include_once "../inc/create_thumb.php";
+				$thumb = make_thumb($target_path, $target_path_thumb, WIDTH, HEIGHT);
+				if($thumb)
+				{
+					$mesaj = "Poza produsului a fost uploadata cu succes.";
+				}
 			}
 			else
 			{

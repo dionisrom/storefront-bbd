@@ -467,6 +467,8 @@ h2
 .img_caseta_prod
 {
 	border: 0;
+	max-width: 160px;
+	max-height: 120px;
 }
 .nume_prod
 {

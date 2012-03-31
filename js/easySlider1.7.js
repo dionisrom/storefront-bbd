@@ -62,8 +62,7 @@
 			var obj = $(this); 				
 			var s = $("li", obj).length;
 			var w = $("li", obj).width(); 
-			//var h = $("li", obj).height();
-			var h = 290;
+			var h = $("li", obj).height(); 
 			var clickable = true;
 			obj.width(w); 
 			obj.height(h); 
@@ -71,7 +70,6 @@
 			var ts = s-1;
 			var t = 0;
 			$("ul", obj).css('width',s*w);			
-			//$("ul", obj).css('width',2784);
 			
 			if(options.continuous){
 				$("ul", obj).prepend($("ul li:last-child", obj).clone().css("margin-left","-"+ w +"px"));

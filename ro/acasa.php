@@ -89,6 +89,10 @@
 			{
 				$image = "<img src='../images/produse/".$rs_produse[0].".jpg' class='img_caseta_prod' alt='' />";
 			}
+			if ( file_exists("../images/produse/".$rs_produse[0].".png") )
+			{
+				$image = "<img src='../images/produse/".$rs_produse[0].".png' class='img_caseta_prod' alt='' />";
+			}
 			if ( file_exists("../images/produse/".$rs_produse[0].".gif") )
 			{
 				$image = "<img src='../images/produse/".$rs_produse[0].".gif' class='img_caseta_prod' alt='' />";
@@ -158,11 +162,7 @@
 			$img = "../images/produse/".$row["id"].".gif";
 		$img_info = getimagesize($img);
 		
-		$dimension = "";
-		if ($img_info[1]>60) $dimension .= " height = 60 ";
-		if ($img_info[0]>100) $dimension .= " width = 100 ";
-		
-		$imagine = "<img src='".$img."' ".$dimension." alt='' />";
+		$imagine = "<img src='".$img."'  class='img_last_prods' alt='' />";
 		if ( $row["reducere"] > 0 )
 		{
 			$pret = $row["pret"]*((100-$row["reducere"])/100);
