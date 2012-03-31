@@ -33,11 +33,19 @@ if ( intval($mod) == 1 )
 		$rs_prod = mysql_fetch_array($q_prod);
 		$titlu_pag = $rs_prod["nume"];
 		
-		$imagine = "<img src='../images/produse/no_foto.jpg' border=0 height=160 />";
-        if( file_exists("../images/produse/".$rs_prod["id"].".jpg") )
-            $imagine = "<img src='../images/produse/".$rs_prod["id"].".jpg' title='Apasati pentru a mari imaginea !' onclick=\"window.open(this.src);\" border=0 height=160 />";
-        if( file_exists("../images/produse/".$rs_prod["id"].".gif") )
-            $imagine = "<img src='../images/produse/".$rs_prod["id"].".gif' title='Apasati pentru a mari imaginea !' onclick=\"window.open(this.src);\" border=0 height=160 />";
+		$img = '../images/produse/no_foto.jpg';
+		if(file_exists("../images/produse/".$rs_prod["id"].".png"))
+			$img = "../images/produse/".$rs_prod["id"].".png";
+		if(file_exists("../images/produse/".$rs_prod["id"].".jpg"))
+			$img = "../images/produse/".$rs_prod["id"].".jpg";
+		if(file_exists("../images/produse/".$rs_prod["id"].".gif"))
+			$img = "../images/produse/".$rs_prod["id"].".gif";
+		$img_info = getimagesize($img);
+		$dimension = "";
+		if ($img_info[1]>160) $dimension .= " height = 160 ";
+		if ($img_info[0]>250) $dimension .= " width = 250 ";
+		
+        $imagine = "<img src='".$img."' title='Apasati pentru a mari imaginea !' onclick=\"window.open(this.src);\" border=0 ".$dimension." />";
         if ( $rs_prod["reducere"] > 0 )
         {
             $pret = "<font style='text-decoration: line-through;'>".$rs_prod["pret"]."</font>&nbsp;&nbsp;".$rs_prod["pret"]*((100-$rs_prod["reducere"])/100);
@@ -234,16 +242,21 @@ if ( intval($mod) == 2 )
     //$nr = 1;
     while ($rs_produse = mysql_fetch_array($q_produse))
     {
-        $image = "&nbsp;";
-        $image = "<img src='../images/produse/no_foto.jpg' class='img_caseta_prod' alt='' />";
-        if ( file_exists("../images/produse/".$rs_produse["id"].".jpg") )
-        {
-            $image = "<img src='../images/produse/".$rs_produse["id"].".jpg' class='img_caseta_prod' alt='' />";
-        }
-        if ( file_exists("../images/produse/".$rs_produse["id"].".gif") )
-        {
-            $image = "<img src='../images/produse/".$rs_produse["id"].".gif' class='img_caseta_prod' alt='' />";
-        }
+        
+		$img = '../images/produse/no_foto.jpg';
+		if(file_exists("../images/produse/".$rs_produse["id"].".png"))
+			$img = "../images/produse/".$rs_produse["id"].".png";
+		if(file_exists("../images/produse/".$rs_produse["id"].".jpg"))
+			$img = "../images/produse/".$rs_produse["id"].".jpg";
+		if(file_exists("../images/produse/".$rs_produse["id"].".gif"))
+			$img = "../images/produse/".$rs_produse["id"].".gif";
+		$img_info = getimagesize($img);
+		
+		$dimension = "";
+		if ($img_info[1]>120) $dimension .= " height = 120 ";
+		if ($img_info[0]>160) $dimension .= " width = 160 ";
+		$image = "&nbsp;";
+        $image = "<img src='".$img."' class='img_caseta_prod' alt='' ".$dimension." />";
         if ( $rs_produse["reducere"] > 0 )
         {
             $pret = "<font style='text-decoration: line-through;'>".$rs_produse["pret"]."</font>&nbsp;&nbsp;".$rs_produse["pret"]*((100-$rs_produse["reducere"])/100);
@@ -264,7 +277,7 @@ if ( intval($mod) == 2 )
 			$class_tip_prod = "show";
 			$class_tip_prod1 = "hide";
 		}
-		$masuri = "Masura:";
+		$masuri = "M.:";
 		$masuri_arr = explode(",",$rs_produse["masuri"]);
 		$masuri .= "<select name='masura_".$rs_produse[0]."' id='masura_".$rs_produse[0]."'>";
 		foreach ($masuri_arr as $masura)
@@ -275,10 +288,10 @@ if ( intval($mod) == 2 )
         $table .= "
              <div class='caseta_prod'>
 				<div class='categorie_prod_top'>".$rs_produse["categorie"]."</div>
-                <div style='text-align:center;' title='".$rs_produse["nume"]."' onmouseover=\"this.style.cursor='pointer';\" onclick=\"top.document.getElementById('main_frame').src='ro/produse.php?mod=1&id_produs=".$rs_produse["id"]."';\">".$image."</div>
+                <div style='text-align:center; height: 120px; vertical-align:middle;' title='".$rs_produse["nume"]."' onmouseover=\"this.style.cursor='pointer';\" onclick=\"top.document.getElementById('main_frame').src='ro/produse.php?mod=1&id_produs=".$rs_produse["id"]."';\">".$image."</div>
                 <div class='nume_prod'>".$rs_produse["nume"]."</div>
                 <div class='pret_div'>pret <span class='pret'>".$pret."</span> Lei <input type='button' onmouseover=\"this.style.cursor='pointer';\" title='Detalii despre produs' class='detalii_prod' onclick=\"top.document.getElementById('main_frame').src='ro/produse.php?mod=1&id_produs=".$rs_produse["id"]."';\" /></div>
-                <div class='descript_prod'>".substr(trim($rs_produse["descriere"]),0,70)."...</div>
+                <div class='descript_prod'>".substr(trim($rs_produse["descriere"]),0,50)."...</div>
                 <div class='prod_in_cos ".$class_tip_prod."'>Cant.: <input type='text' class='input' name='cant_".$rs_produse[0]."' id='cant_".$rs_produse[0]."' value='0' style=\"width:20px;\" /> ".$masuri." <input type='button' title='Adauga in cos' class='add_to_cart' onmouseover=\"this.style.cursor='pointer';\" onclick=\"if (document.getElementById('cant_".$rs_produse[0]."').value>0) {top.document.getElementById('cos_frame').src='cos.php?adauga_prod=1&cant_prod='+document.getElementById('cant_".$rs_produse[0]."').value+'&pret_prod=".$pret_ron."&id_prod=".$rs_produse[0]."&masura_prod='+document.getElementById('masura_".$rs_produse[0]."').options[document.getElementById('masura_".$rs_produse[0]."').selectedIndex].value;} else {alert('Nu ati completat cantitatea dorita ! ')};\" /></div>
 				<div class='comanda_acum ".$class_tip_prod1."' onmouseover=\"this.style.cursor='pointer';\" title='Acest produs se aduce doar la comanda!' onclick=\"top.document.getElementById('main_frame').src='ro/produse.php?mod=1&id_produs=".$rs_produse[0]."';\"></div>
              </div>

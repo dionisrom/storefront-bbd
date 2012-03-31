@@ -21,7 +21,7 @@ if( !empty($_POST["pagina"]) && !empty($_POST["operation"]) )
 			$return["msg"] = "Preluare continutului pentru fisierul ".$rs[0]." s-a efectuat cu succes!";
 			$rs = mysql_fetch_array($q);
 			$return["denumire"]=$rs[0];
-			$return["continut"]=nl2br($rs[1]);
+			$return["continut"]= html_entity_decode($rs[1]);
 		}
 	}
 	if($_POST["operation"] == "putcontent")
@@ -31,7 +31,7 @@ if( !empty($_POST["pagina"]) && !empty($_POST["operation"]) )
 		else
 			//$continut = mysql_real_escape_string($_POST["continut"]);
 			$continut = $_POST['continut'];
-		$str = "UPDATE files SET content = '".$continut."' WHERE id_file = ".$_POST["pagina"];
+		$str = "UPDATE files SET content = '".htmlentities($continut)."' WHERE id_file = ".$_POST["pagina"];
 		$q = mysql_query($str);
 		if (!$q)
 		{
@@ -48,8 +48,20 @@ if( !empty($_POST["pagina"]) && !empty($_POST["operation"]) )
 			$rs = mysql_fetch_array($q);
 			// write file
 			$myFile = $rs[0].".html";
+			$script = '
+				<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
+				<script type="text/javascript">// <![CDATA[
+				jQuery(window).load(function(){
+								var db1 = jQuery("html").height();
+								var docHeight = db1;
+								jQuery("#main_frame",window.parent.document).height(docHeight +50);
+								jQuery("#body",window.parent.document).height(docHeight +60);
+							})
+				// ]]></script>
+				';
+			if(file_exists($myFile)) unlink($myFile);
 			$fh = fopen($myFile, 'w') or die("Nu pot deschide fisierul");
-			fwrite($fh, $_POST["continut"]);
+			fwrite($fh, stripslashes($continut).$script);
 			fclose($fh);
 			$return["msg"] .= " Continutul a fost scris in fisierul corespunzator!";
 		}
