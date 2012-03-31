@@ -41,9 +41,6 @@ if ( intval($mod) == 1 )
 		if(file_exists("../images/produse/".$rs_prod["id"].".gif"))
 			$img = "../images/produse/".$rs_prod["id"].".gif";
 		$img_info = getimagesize($img);
-		//$dimension = "";
-		//if ($img_info[1]>160) $dimension .= " height = 160 ";
-		//if ($img_info[0]>250) $dimension .= " width = 250 ";
 		
         $imagine = "<img src='".$img."' title='Apasati pentru a mari imaginea !' onclick=\"window.open(this.src);\" border=0 class='img_produs' />";
         if ( $rs_prod["reducere"] > 0 )
