@@ -50,14 +50,15 @@ if( !empty($_POST["pagina"]) && !empty($_POST["operation"]) )
 			$myFile = $rs[0].".html";
 			$script = '
 				<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
-				<script type="text/javascript">// <![CDATA[
-				jQuery(window).load(function(){
-								var db1 = jQuery("html").height();
-								var docHeight = db1;
-								jQuery("#main_frame",window.parent.document).height(docHeight +50);
-								jQuery("#body",window.parent.document).height(docHeight +60);
-							})
-				// ]]></script>
+				<script type="text/javascript">
+					jQuery(window).load(function()
+					{
+						var db1 = jQuery("html").height();
+						var docHeight = db1;
+						jQuery("#main_frame",window.parent.document).height(docHeight +50);
+						jQuery("#body",window.parent.document).height(docHeight +60);
+					})
+				</script>
 				';
 			if(file_exists($myFile)) unlink($myFile);
 			$fh = fopen($myFile, 'w') or die("Nu pot deschide fisierul");

@@ -41,11 +41,11 @@ if ( intval($mod) == 1 )
 		if(file_exists("../images/produse/".$rs_prod["id"].".gif"))
 			$img = "../images/produse/".$rs_prod["id"].".gif";
 		$img_info = getimagesize($img);
-		$dimension = "";
-		if ($img_info[1]>160) $dimension .= " height = 160 ";
-		if ($img_info[0]>250) $dimension .= " width = 250 ";
+		//$dimension = "";
+		//if ($img_info[1]>160) $dimension .= " height = 160 ";
+		//if ($img_info[0]>250) $dimension .= " width = 250 ";
 		
-        $imagine = "<img src='".$img."' title='Apasati pentru a mari imaginea !' onclick=\"window.open(this.src);\" border=0 ".$dimension." />";
+        $imagine = "<img src='".$img."' title='Apasati pentru a mari imaginea !' onclick=\"window.open(this.src);\" border=0 class='img_produs' />";
         if ( $rs_prod["reducere"] > 0 )
         {
             $pret = "<font style='text-decoration: line-through;'>".$rs_prod["pret"]."</font>&nbsp;&nbsp;".$rs_prod["pret"]*((100-$rs_prod["reducere"])/100);
@@ -250,13 +250,9 @@ if ( intval($mod) == 2 )
 			$img = "../images/produse/".$rs_produse["id"].".jpg";
 		if(file_exists("../images/produse/".$rs_produse["id"].".gif"))
 			$img = "../images/produse/".$rs_produse["id"].".gif";
-		$img_info = getimagesize($img);
-		
-		$dimension = "";
-		if ($img_info[1]>120) $dimension .= " height = 120 ";
-		if ($img_info[0]>160) $dimension .= " width = 160 ";
+
 		$image = "&nbsp;";
-        $image = "<img src='".$img."' class='img_caseta_prod' alt='' ".$dimension." />";
+        $image = "<img src='".$img."' class='img_caseta_prod' alt='' />";
         if ( $rs_produse["reducere"] > 0 )
         {
             $pret = "<font style='text-decoration: line-through;'>".$rs_produse["pret"]."</font>&nbsp;&nbsp;".$rs_produse["pret"]*((100-$rs_produse["reducere"])/100);

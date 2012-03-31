@@ -3,7 +3,8 @@ session_start();
 include("../inc/global.php");
 if ( isset($_REQUEST["salvez"]) && $_REQUEST["salvez"] == "da" && ( $_SESSION["tipusr"] == 1 || $_SESSION["tipusr"] == 2 ) )
 {
-    $masuri =array();
+    include_once "../inc/create_thumb.php";
+	$masuri =array();
 	if (isset($_REQUEST['masuri_tip1'])) $masuri = $_REQUEST['masuri_tip1'];
     if (isset($_REQUEST['masuri_tip2'])) $masuri = $_REQUEST['masuri_tip2'];
     if (isset($_REQUEST['masuri_tip3'])) $masuri = $_REQUEST['masuri_tip3'];
@@ -28,19 +29,27 @@ if ( isset($_REQUEST["salvez"]) && $_REQUEST["salvez"] == "da" && ( $_SESSION["t
 	$mesaj = "";
 	if ( (($_FILES["poza"]["type"] == "image/png" || $_FILES["poza"]["type"] == "image/gif") || ($_FILES["poza"]["type"] == "image/jpeg") ) && ($_FILES["poza"]["size"] < 50000) && ($_FILES["poza"]["error"] == 0) )
 	{
-		$target_path = "../images/produse/";
+		$target_path = "../images/produse/mari/";
+		$target_path_thumb = "../images/produse/";
 		$ext=substr(basename( $_FILES['poza']['name']),(strlen(basename( $_FILES['poza']['name']))-4));
 		$target_path .= $lastid.$ext;
-		
+		$target_path_thumb .= $lastid.$ext;
 		if (file_exists($target_path) )
 	    {
 	    	$mesaj = "Fisierul cu denumirea <b></i>".$lastid.$ext."</i></b> exista deja.";
 	    }
 	    else
 	    {
-			if(move_uploaded_file($_FILES['poza']['tmp_name'], $target_path)) {
-			    $mesaj = "Poza produsului a fost uploadata cu succes.";
-			} else{
+			if(move_uploaded_file($_FILES["poza"]['tmp_name'], $target_path))
+			{
+				$thumb = make_thumb($target_path, $target_path_thumb, WIDTH, HEIGHT);
+				if($thumb)
+				{
+					$mesaj = "Poza produsului a fost uploadata cu succes.";
+				}
+			} 
+			else
+			{
 			    $mesaj = "A aparut o eroare la uploadarea fisierului ce contine poza produsului!";
 			}
 		}
